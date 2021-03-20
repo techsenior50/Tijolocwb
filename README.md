@@ -1,2 +1,2 @@
 # Tijolocwb
-Esse repositório conterá todas as informações pertinentes ao projeto Tijolocwb. Será dividido em pastas contendo imagens, documentação, links, cursos relacionados e os programas desenvolvidos.
+Esse repositório contém todas as informações pertinentes ao projeto Tijolocwb. Está dividido em pastas contendo documentação, programas desenvolvidos, links e cursos relacionados.
