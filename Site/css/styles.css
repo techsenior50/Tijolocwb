@@ -1,0 +1,212 @@
+body {
+	font-family: 'Helvetica', Sans-Serif;
+}
+
+header {						  /* Tijolo */
+	background: #FFFAFA;
+	padding: 20px 0;
+}
+
+/* .logo{
+	padding: 0 1%;
+  }
+
+.logo img {
+	display: block;
+	width: 200px;
+}
+*/
+
+.caixa {
+	background: white;
+	position: fixed; /* era como estava antes */  
+	font-size: 20px;
+	width: 100%;  /* era como estava antes */
+	top: 0; 
+	left: 0;
+	z-index: 10;
+}
+
+.caixa:hover {                    /* Tijolo */
+	color: black;
+	text-decoration: underline;
+}
+
+/* .logo,
+.barra-nav,
+.menu-principal {
+    display: inline-block;
+    vertical-align: middle;
+} - responsivo Emília */
+
+.capitalize {						/*Faz o texto ficar apenas com a 1ª LETRA MAIÚSCULA*/
+    text-transform: capitalize;
+    color: black;
+    font-size: 20px;
+    font-weight: normal;			/*Tirar o negrito*/
+    margin: 15px; /*Espaço entre as opções do Menu*/
+}
+
+.capitalize:hover {
+	color: #FF4500;
+} 
+
+.li-cor:hover {
+	color: #FF4500;
+	text-decoration: underline;
+	font-size: 20px;
+	transition: 0.2s;
+}
+
+.cardapioHome {
+	width: 80%;
+	position: relative;
+	height: 180px;			/*Define a altura da div em pixels;*/						  
+	margin: 10px; /*Margens do container - diminuí o espaço em relação ao slider */
+	margin-left: 10%;
+	color: #696969;
+	font-size: 36px;
+	font-weight: bold;
+	font-family: helvetica;
+	background: #ED582966;
+    background-size: cover; /*Assim cobre a tela toda com a cor que definirmos*/
+    display: flex;
+  	justify-content: center;
+  	align-items: center;
+ }
+
+.quemSomosHome {
+	width: 80%;
+	position: relative;	
+	height: 180px;			/*Define a altura da div em pixels;*/						  
+	margin: 1px; /*Margens do container*/
+	margin-left: 10%;
+	color: #696969;
+	font-size: 36px;
+	font-weight: bold;
+	font-family: helvetica;
+	background: #ED5829BA;
+    background-size: cover; /*Assim cobre a tela toda com a cor que definirmos*/
+    display: flex;
+  	justify-content: center;
+  	align-items: center;
+
+}
+
+.contatoHome {
+	/*width: 600px; 		/*Define a largura da div em pixels, mas vamos usar background-size: cover*/
+	height: 180px;			/*Define a altura da div em pixels;*/						  
+	color: #696969;
+	font-size: 36px;
+	font-weight: bold;
+	font-family: helvetica;
+	margin: 1px 0 0; /*Margens do container*/
+	background: #ED5829;
+    background-size: cover; /*Assim cobre a tela toda com a cor que definirmos*/
+    display: flex;
+  	justify-content: center;
+  	align-items: center;
+
+}
+
+.button:hover button {
+	color: #FF4500;
+	text-decoration: unset; 
+	font-size: 28px;
+	font-weight: bolder;
+}
+
+.rede-social img {
+	opacity: 1.0;
+    filter: alpha(opacity=100);       
+ }
+
+.rede-social img:hover {
+	opacity: 0.4;
+    filter: alpha(opacity=40);
+           
+}
+
+.cesta-compras img:hover {
+	-webkit-transform: scale(1.9);
+  -moz-transform: scale(1.9);
+  -o-transform: scale(1.9);
+  -ms-transform: scale(1.9);
+  transform: scale(1.9);
+}
+
+
+footer {
+    display: flex;
+    /*border-top: 2px solid #6a0032; */
+    border-top: 2px solid #B96E4E;
+	background-color: #B96E4E;
+  	color: #FFFFFF;
+	width: 80%;
+    height: 100%;
+	margin: 10px;
+	margin-left: 10%;
+    flex-wrap: wrap;
+    position: relative;
+    justify-content: center;
+    padding: 20px 0;
+}
+
+
+footer > div {
+    flex: 1 1 auto;
+    margin: 10px 20px;
+}
+
+.footer-1, .footer-3 {
+	font-size: 15px;
+    box-sizing: border-box;
+    border: 2px solid #FFFFFF;
+    border-radius: 10px;
+	text-align: center;
+	width: calc((100% - 120px)/ 3);
+	padding: 7px;
+}
+
+
+.footer-2 {
+	font-size: 12px;
+	text-align: center;
+	padding-top: 40px;
+	width: calc((100% - 120px) / 3);
+}
+
+@media screen and (max-width: 480px) { 
+  
+            .footer-1, 
+            .footer-2, 
+            .footer-3 { 
+                width: auto; 
+            } 
+        }
+
+
+nav {
+	position: absolute;
+	top: 110px;
+	right: 0;
+}
+
+nav li {
+	display: inline;
+	margin: 0 0 0 15px;
+}
+
+nav a {
+	text-transform: uppercase;
+	color: #000000;
+	font-weight: bold;
+	font-size: 22px;
+	text-decoration: none;
+}
+
+nav a:hover {
+	color: #C78C19;
+	text-decoration: underline;
+}
+

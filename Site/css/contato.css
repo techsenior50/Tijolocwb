@@ -1,0 +1,76 @@
+
+@media screen and (max-width: 480px) { 
+            .panel-Modelo,
+            .mapa,
+            .containerContato, 
+            .containerContato1{ 
+                width: 100%; 
+            } 
+        }
+
+
+.containerContato {
+    display: inline-block;
+  
+    margin-top:8%;
+    margin-bottom: 5%;
+    vertical-align: top;
+    margin-right: 5%;
+    
+}
+.containerContato1 {
+   display: inline-block;
+   
+   margin-top:5%;
+   margin-bottom: 5%;
+   vertical-align: top;
+}
+
+
+.panel-Modelo {
+    text-align: center;
+    display: inline-block;
+    width: 80%;
+    vertical-align: top;
+    margin-left: 10%;
+    background: linear-gradient(to bottom, rgba(0.1,0.1,0.1,0.1) 0%,rgba(0.6,0.6,0.6,0.6) 80%),url(../img/contato-fundo.jpg) no-repeat ;
+    background-size: cover;
+}
+
+.panel-Modelo .title {
+    color :#ffffff;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.0em;
+    margin-bottom: 7%;
+}
+.panel-Modelo .paragrafoContato {
+    color :#ffffff;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.0em;
+    margin-bottom: 4%;
+}
+.panel-Modelo .Modelo-description {
+    font-family: 'Montserrat', sans-serif;
+    color :#ffffff;
+    font-size: 1em;
+}
+
+.mapa {
+    padding: 2em 0;
+    margin-right: 10%;
+}
+.mapa-conteudo {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.whats {
+  position: relative;
+  vertical-align: middle;
+  background-size:cover;
+}
+.email {
+  position: relative;  
+  vertical-align: middle;
+  background-size:cover;
+}

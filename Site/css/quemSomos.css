@@ -1,0 +1,45 @@
+@media screen and (max-width: 500px) { 
+  .blocoQuemSomos,
+  .preparo
+  .texto{
+  width: 100%; 
+  font-size: 0.5em;
+  margin: 0 0 0 0;
+  } 
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.blocoQuemSomos{
+   display: inline-block;
+   margin-top:8%;
+   margin-bottom: 5%;
+   vertical-align: top;
+   margin-right: 10%; 
+   margin-left: 20%;
+   width: 80%;
+	 
+}
+
+
+.preparo{
+  width: 500px;
+	float: left;
+	margin: 50px 50px 70px 200px;
+	
+}
+.texto{
+  width:480px;
+  float: left;
+  margin: 250px 50px 0 50px;
+  padding: 15px;
+  background-color: #FF8C63;
+}
+.texto p {
+	color :#000000;
+  font-family: montserrat;
+  font-size: 1.2em;
+  margin-bottom: 4%;
+ }
