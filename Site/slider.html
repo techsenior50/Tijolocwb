@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tijolo</title>
+    <link rel="stylesheet" href="css/reset.css">
+	<link rel="stylesheet" href="css/styles.css">
+	<link rel="stylesheet" href="css/slider.css">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">		
+
+</head>
+<body>
+  <div class="slideshow-container">
+
+    <!-- Imagens com width 100% -->
+    <div class="meusSlides fade">
+      <img src="img/img1.jpg" style="width:100%">
+      <div class="texto1">
+        <h1 style="font-size:4vw">Faça seu</h1>
+        <h1 style="font-size:4vw">pedido</h1>
+      </div>
+    </div>
+  
+    <div class="meusSlides fade">
+      <img src="img/img2.jpg" style="width:100%">
+      <div class="text-block">
+        <h2 style="font-size:2.0vw">Prato do dia</h2>
+		<br>
+        <h4 style="font-size:1.5vw">Sanduíche de Pastrami</h4>
+        <h4 style="font-size:1.5vw">com pita chips e pão de</h4>
+        <h4 style="font-size:1.5vw">fermentação natural</h4>
+      </div>
+    </div>
+  
+    <div class="meusSlides fade">
+      <img src="img/img3.jpg" style="width:100%">
+      <div class="text-block">
+        <h2 style="font-size:2.0vw">Promoções da semana</h2>
+		<br>
+        <h4 style="font-size:1.5vw">Quarta - Cerveja e Bocaditos</h4>
+        <h4 style="font-size:1.5vw">Quinta - Taça em dobro</h4>
+        <h4 style="font-size:1.5vw">Sexta - Espumante em dobro</h4>
+      </div>
+    </div>
+  
+    <!-- Botões anterior e próximo -->
+    <a class="ant" onclick="plusSlides(-1)">&#10094;</a>
+    <a class="prox" onclick="plusSlides(1)">&#10095;</a>
+	</div>
+	<br>  
+  	<!-- Círculos para variar as imagens -->
+	<div style="text-align:center">
+    	<span class="dot" onclick="currentSlide(1)"></span>
+    	<span class="dot" onclick="currentSlide(2)"></span>
+    	<span class="dot" onclick="currentSlide(3)"></span>
+  	</div>
+  	<script src="js/sliderManual.js"></script>
+  	<script src="js/sliderAutomatico.js"></script>
+</body>
+</html>
