@@ -1,7 +1,8 @@
 .titulo-cardapio {
 	text-align: center;
-	font-size: 3em;
-	padding-top: 50px;
+	font-size: 2.5em;
+	padding-top: 15px;
+	padding-bottom: 10px;
 	font-weight: bold;
 	color: #8B0000;
 }
@@ -26,30 +27,13 @@
 	box-sizing: border-box;
 }
 
-/*.cardapio li {
-	display: inline-block;
-	text-align: center;
-	width: 30%;
-	vertical-align: top;
-	margin: 1% 1.5%;
-	padding: 30px 20px;
-	box-sizing: border-box;
-}*/
-
-
 .cardapio li:hover p {
 	font-size: 1.1em;
 	color: #1010AA;
 }
 
-/*.cardapio li:active {
-	border-color: #088C19;
-}
-*/
-
 .cardapio li img {
 	width: 90%;
-	/*border: 2px solid #ddd;*/
 }
 
 .cardapio li img:hover {

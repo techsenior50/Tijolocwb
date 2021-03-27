@@ -1,4 +1,4 @@
-* {box-sizing:border-box}
+* {box-sizing: border-box}
 
 /* Slideshow container */
 .slideshow-container {
@@ -7,7 +7,7 @@
   position: relative;
   margin: auto;
   overflow: hidden;
-  z-index: -1
+  z-index: -1;
 }
 
 /* Esconder as imagens por default */
@@ -44,10 +44,10 @@
 
 /* Bloco com Texto - imagem 1 */
 .texto1 {
-  font-family: 'Helvetica', 'Montserrat', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   position: absolute;
-  bottom: 40%;
-  left: 40%;
+  bottom: 35%;
+  left: 35%;
   background-color: none;
   opacity: none;
   color: white;
@@ -61,8 +61,8 @@
 .text-block {
   font-family: 'Helvetica', 'Montserrat', sans-serif;
   position: absolute;
-  bottom: 40%;
-  left: 40%;
+  bottom: 35%;
+  left: 35%;
   background-color: white;
   opacity: 0.6;
   color: black;
@@ -103,4 +103,10 @@
 @keyframes fade {
   from {opacity: .4}
   to {opacity: 1}
+}
+
+@media screen and (max-width: 480px){
+  .slideshow-container {
+      width: 100%;
+  }
 }
