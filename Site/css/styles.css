@@ -61,9 +61,9 @@ header {						  /* Tijolo */
 
 footer {
     display: flex;
-    border-top: 2px solid #B96E4E;
-	background-color: #B96E4E;
-  	color: #FFFFFF;
+    border-top: 2px solid #00526B;
+	background-color: #007F96; /*#00526B - o mesmo azul um pouco mais escuro*/ /*#007F96- cor da letra na parede*/ /*#1D4874 - cor da letra na parede*/ /*#B96E4E - cor da letra do logo*/ /*#8B0000 - cor das letras do cardapio no nosso site*/ /*#C96F66 cor rosado da letra encontrado no instagram*/ /*#948787 cor mais clara da letra do logo em preto*/ /*#4C3535 cor mais escura da letra do logo em preto*/
+  	color: #000000;
 	width: 80%;
     height: 100%;
 	margin: 10px;
@@ -71,19 +71,20 @@ footer {
     flex-wrap: wrap;
     position: relative;
     justify-content: center;
-    padding: 20px 0;
+    padding: 5px 0;
 }
 
 
 footer > div {
     flex: 1 1 auto;
     margin: 10px 20px;
+
 }
 
 .footer-1, .footer-3 {
 	font-size: 0.80em;
     box-sizing: border-box;
-    border: 2px solid #FFFFFF;
+    border: 2px solid #00526B;
     border-radius: 10px;
 	text-align: center;
 	width: calc((100% - 120px)/ 3);
