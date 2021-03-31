@@ -25,6 +25,8 @@ body {
   padding: 0 4px;
   text-align: center;
   margin:2%;
+  background-color: #000000;
+  opacity:0.4;
 }
 .quadro1 {
   flex: 50%;
