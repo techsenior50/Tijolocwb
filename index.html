@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Tijolo</title>
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/estilo.css">
+		<link rel="stylesheet" href="css/styles.css">
+		<link rel="stylesheet" href="css/slider.css">
+		<link rel="stylesheet" href="css/scrolltop.css">
+		<link rel="stylesheet" href="css/cardapio.css">
+		<link rel="stylesheet" href="css/quemSomos.css">
+		<link rel="stylesheet" href="css/contato.css">
+		<link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">		
+	</head>
+
+	<body>
+		<header class="menu-fixo" style="width: 100%; top: 0; left: 0;">
+			
+			<div>
+
+			<input type="checkbox" id="bt_menu">
+			<label style="float: right; margin-top: 32px; margin-right: 50px;" for="bt_menu">&#9776;</label>		
+			<h1><img src="img/logo.svg" id="logo" style="background-color: white; max-width:150px; top: 0; left: 0;"></h1>
+			
+							
+			<nav class="menu">
+		
+				
+						<ul>
+							<li><a href="#blocoMenu" target="" class="capitalize" class="li-cor">Home</a></li>         
+							<li><a href="#blocoCardapio" target="" class="capitalize" class="li-cor">Cardápio</a></li>	  	
+							<li><a href="#blocoQuemSomos" target="" class="capitalize" class="li-cor">Quem Somos</a></li>  
+							<li><a href="#blocoContato" target="" class="capitalize" class="li-cor">Contato</a></li>
+							<li><a href="https://www.facebook.com/tijolocwb" class="rede-social" id="ajuste"><h1><img src="img/facebook.png" style="
+							max-width: 18px; margin-top: 15px; margin-left: -105px;"></h1></a></li>
+							<li><a href="https://www.instagram.com/tijolocwb" class="rede-social" id="ajuste1"><h1><img src="img/instagram.png" style="max-width:18px; margin-top: 15px; margin-left: -370px;"></h1></a></li>
+							<li><a href="#" class="button" id="ajuste2"><button style="background-color: DarkRed; border-radius: 6px; padding: 5px;
+							cursor:	pointer; color: white; border: none; font-size: 14px; margin-top: 15px; margin-left: -460px;">LOGIN</button></a></li>
+							<li><a href="#" class="cesta-compras" id="ajuste3"><h1><img src="img/cesta.png" style="max-width:18px; margin-top: 15px;margin-left: -530px;"></h1></a></li>
+						</ul>
+
+			</nav>
+			</div>
+
+			</header>
+
+	<!-- Botão voltar para o topo -->
+	<div id="voltarTopo">
+		<a href="#" id="subir"><img src="img/seta03.svg"></a>
+	</div>
+
+	<!-- Slideshow container -->
+	<!-- <iframe src="slider.html" width="100%" height="800" scrolling="no"></iframe> -->
+
+
+	<div id="blocoMenu" class="slideshow-container">
+		<!-- Imagens com width 100% -->
+		<div class="meusSlides fade">
+		  <img src="img/img1.jpg" style="width:100%">
+		  <div class="texto1">
+			<h1>Faça seu</h1>
+			<h1>pedido</h1>
+		  </div>
+		</div>
+  
+		<div class="meusSlides fade">
+		  <img src="img/img2.jpg" style="width:100%">
+		  <div class="text-block">
+			<h2 style="font-size:2.0vw">Prato do dia</h2>
+			<br>
+			<h4 style="font-size:1.5vw">Sanduíche de Pastrami</h4>
+			<h4 style="font-size:1.5vw">com pita chips e pão de</h4>
+			<h4 style="font-size:1.5vw">fermentação natural</h4>
+		  </div>
+		</div>
+	  
+		<div class="meusSlides fade">
+		  <img src="img/img3.jpg" style="width:100%">
+		  <div class="text-block">
+			<h2 style="font-size:1.8vw">Promoções da semana</h2>
+			<br>
+			<h4 style="font-size:1.2vw">Quarta - Cerveja e Bocaditos</h4>
+			<h4 style="font-size:1.2vw">Quinta - Taça em dobro</h4>
+			<h4 style="font-size:1.2vw">Sexta - Espumante em dobro</h4>
+		  </div>
+		</div>
+	</div>
+	<br>
+		  <!-- Círculos para variar as imagens -->
+		<div style="text-align:center">
+			<span class="dot"></span>
+			<span class="dot"></span>
+			<span class="dot"></span>
+	  	</div>
+	
+	<!-- Página Cardápio -->
+	<!-- <iframe id="blocoCardapio" src="cardapio.html" width="100%" height="880" frameborder="0" scrolling="no"></iframe> -->
+	
+	<section id="blocoCardapio" class="painel-cardapio">
+		<div class="containerCardapio">
+			<div class="titulo-cardapio">
+				<h2>Pratos principais</h2>
+			</div>
+			<ul class="cardapio">
+				<li class="prato">
+					<img src="img/batata rustica_1.jpg">
+					<p class="cardapio-descricao">Batatas rústicas - R$ 25,00</p>
+				</li>
+				<li class="prato">
+					<img src="img/petiscos_quarteto01.jpg">
+					<p class="cardapio-descricao">Pastas + pão - R$ 18,00</p>
+				</li>
+				<li class="prato">
+					<img src="img/sanduiche pastrami.jpg">
+					<p class="cardapio-descricao">Sanduíche Pastrami - R$ 35,00</p>
+				</li>
+				<li class="prato">
+					<img src="img/bruschetta.jpg">
+					<p class="cardapio-descricao">Bruschetta - R$ 25,00</p>
+				</li>
+				<li class="prato">
+					<img src="img/petiscos_quarteto02.jpg">
+					<p class="cardapio-descricao">Quarteto - R$ 18,00</p>
+				</li>
+				<li class="prato">
+					<img src="img/bruschetta01.jpg">
+					<p class="cardapio-descricao">Bruschetta - R$ 35,00</p>
+				</li>
+			</ul>
+		</div>
+	</section> 
+
+	<!-- Página Quem Somos -->
+	<h2 id="blocoQuemSomos" class="tituloQuemSomos">Quem Somos</h2>
+	<iframe src="quemSomos.html" width="100%" height="630" frameborder="0" scrolling="no"></iframe>
+	
+	<!-- Página Contato -->
+	<h2 id="blocoContato" class="tituloContato">Contato</h2>
+	<iframe src="contato.html" width="100%" height="600"></iframe>
+
+	<iframe src="footer.html" width="100%"></iframe>
+
+	<!-- referências dos arquivos JavaScript --> 
+	<script src="js/jquery.js"></script>
+	<script src="js/scrollbloco.js"></script>
+	<script src="js/scrolltop.js"></script>
+	<script src="js/sliderAutomatico.js"></script>	
+	</body>
+</html>
