@@ -5,6 +5,6 @@ $('nav a').click(function(posicao){
     menuHeight = $('header').innerHeight();
 
     $('html,body').animate({
-        scrollTop: targetOffset - menuHeight - 95
+        scrollTop: targetOffset - menuHeight - 65
     }, 700);
 });
