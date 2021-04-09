@@ -1,0 +1,158 @@
+body {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  
+.div_sacola{
+    display: flex;
+    flex-wrap: wrap;
+    height: 100%;
+    width: 700px;
+    padding-top: .125em;
+    border-top: .125em solid #000;
+    border-bottom: .125em solid #000;
+    vertical-align: middle;
+    margin: 0.5em; 
+}
+
+.div_sacolaTitulo {
+    width: 100%;
+    text-align: center;
+	font-size: 2.5em;
+	padding-top: 15px;
+	padding-bottom: 10px;
+	font-weight: bold;
+	color: #8B0000;
+    height: 70px;
+}
+
+.div_sacolaListaItens{
+    position: static;
+    width: 100%;
+}
+
+.ul_sacolaItens {
+    font-size: 12px;
+   /* margin-top: 70px;*/
+    padding: 0 35px 0 ;
+/*    text-align: right;*/
+    width: auto;
+    height: auto;
+    position: relative; /* porque a posição dele pode mudar */
+    /*float: left;*/
+    /*bottom: 14px;*/ /* para que fique alinhado ao menu dele */
+    clear: right; /*para nada navegar do lado direito dele */
+    list-style-type: none;
+    border-top: .125em solid #000;
+
+}
+
+.ul_sacolaItens li {
+    display: block;
+    align-items: center;
+    align-content: center;
+
+}
+
+.subtitulo {
+    font-size: 1.2em;
+    font-weight: bold;
+    border-bottom: .025em solid #000;
+}
+.ul_sacolaItem {
+    display: flex;
+    list-style-type: none;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.ul_sacolaItem li {
+    display: inline-block;
+	width: 20%;
+	margin: 0 5px 16px 0;
+	padding: 5px;
+}
+
+.img_sacolaItem {
+    height: 100px;
+    width: 100px;
+    line-height: 10px;
+}
+
+.prato{
+    text-align: center;
+}
+
+.preco {
+text-align: right;
+}
+
+.qtde2 {
+    border: .125em solid #000;
+    width: 90%;
+    margin-right: 10px;
+    padding: 5px 0 5px 0;
+    text-align: center;
+}
+.qtde2 li{
+    width: 30%;
+    display: inline;
+    margin: 0 5px 0 0;
+    font-size: 1.2em;
+}
+
+.div_sacolaFinalizarCompra {
+    width: 700px;
+    text-align: right;
+}
+/*
+.caixa_qtde{
+    border: #000000;
+    margin: 20px 30px;
+    padding: 20px 30px;
+}
+
+.buttonMais, .buttonMenos, .qtde {
+    font-size: 1.5em;
+    padding: 30px 20px;
+    border: #FFFFFF;
+}
+
+.sacola-abrir,
+.sacola-fechar {
+    background: none;
+    border: 0;
+    outline: 0;
+    -webkit-appearance: none;
+    font-size: 1.6em;
+    text-indent: -999em;
+}
+
+
+.sacola-abrir {
+    height: 0;
+    width:.75em;
+    padding-top:.125em;
+    border-top: .375em double #000;
+    border-bottom: .125em solid #000;
+    vertical-align: middle;
+    margin: 0.5em;    
+}
+*/
+/*
+.sacola-fechar {
+    position: relative; *//*realtivo ao elemento pai*/
+ /*   height: 1em;
+    width: 1em;
+}
+.sacole-fechar:before {
+    content: '\00D7';
+    position: absolute;
+    top: 0;
+    left: 0;
+    text-indent: 0;
+}
+*/
