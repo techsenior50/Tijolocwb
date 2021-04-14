@@ -1,49 +1,115 @@
 <!DOCTYPE html>
+
 <html lang="pt-br">
 	<head>
 		<meta charset = "UTF-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-		<title>Tijolo - Cardapio</title>
+		<meta name="viewport" content="width=device-width">
+		<title>TijoloCWB - Cardapio</title>
+
 		<link rel="stylesheet" href="css/reset.css">
-		<link rel="stylesheet" href="css/styles.css">
 		<link rel="stylesheet" href="css/cardapio.css">
 		<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
 	</head>
 
 	<body>
-		<section class="painel-cardapio">
+		<!--<header>
+			<div class="caixa">
+				<h1>
+					<img src="img/logotijolo.png">
+				</h1>
+
+				<nav>
+					<ul>
+						<li><a href="index.html">HOME</a></li>
+						<li><a href="cardapio.html">CARDÁPIO</a></li>
+						<li><a href="quemSomos.html">QUEM SOMOS</a></li>
+						<li><a href="contato.html">CONTATO</a></li>
+					</ul>
+				</nav>
+			</div>
+		</header> -->
+
+		<section id="blocoCardapio" class="painelCardapio">
 			<div class="containerCardapio">
-				<div class="titulo-cardapio">
+				<div class="tituloCardapio">
 					<h2>Pratos principais</h2>
 				</div>
 				<ul class="cardapio">
 					<li class="prato">
-						<img src="img/batata rustica_1.jpg">
-						<p class="cardapio-descricao">Batatas rústicas - R$ 25,00</p>
+						<div class="containerPrato">
+							<a href="cardapioDescricao.html#pastasPao"><img src="img/quarteto_transparente.png"></a>
+							<div class="contentBotao">
+								<a href="cardapioDescricao.html#pastasPao"><button class="botaoPrato"><img src="img/cesta.png" alt="Cesta"></button></a>
+							</div>
+							<div class="contentPrato">
+								<p class="cardapioNome">Pastas + pão - R$25,00</p>
+		   					</div>
+						</div>
 					</li>
+
 					<li class="prato">
-						<img src="img/petiscos_quarteto01.jpg">
-						<p class="cardapio-descricao">Pastas + pão - R$ 18,00</p>
+						<div class="containerPrato">
+							<a href="cardapioDescricao.html#pastrami"><img src="img/pastrami_transparente.png"></a>
+							<div class="contentBotao">
+								<a href="cardapioDescricao.html#pastrami"><button class="botaoPrato"><img src="img/cesta.png" alt="Cesta"></button></a>
+								
+							</div>
+							<div class="contentPrato">
+								<p class="cardapioNome">Sanduíches - R$14,00 a R$35,00</p>
+							</div>
+						</div>
 					</li>
+
 					<li class="prato">
-						<img src="img/sanduiche pastrami.jpg">
-						<p class="cardapio-descricao">Sanduíche Pastrami - R$ 35,00</p>
+						<div class="containerPrato">
+							<a href="cardapioDescricao.html#bruscheta"><img src="img/bruschetta_transparente.png"></a>
+							<div class="contentBotao">
+								<button class="botaoPrato"><img src="img/cesta.png" alt="Cesta"></button>
+							</div>
+							<div class="contentPrato">
+								<p class="cardapioNome">Bruschettas - R$28,00</p>
+							</div>
+						</div>
 					</li>
+
 					<li class="prato">
-						<img src="img/bruschetta.jpg">
-						<p class="cardapio-descricao">Bruschetta - R$ 25,00</p>
+						<div class="containerPrato">
+							<a href="cardapioDescricao.html/#mixQueijos"><img src="img/queijos.jpg"></a>
+							<div class="contentBotao">
+								<button class="botaoPrato"><img src="img/cesta.png" alt="Cesta"></button>
+							</div>
+							<div class="contentPrato">
+								<p class="cardapioNome">Mix de queijos - R$50,00</p>
+							</div>
+						</div>
 					</li>
+
 					<li class="prato">
-						<img src="img/petiscos_quarteto02.jpg">
-						<p class="cardapio-descricao">Quarteto - R$ 18,00</p>
+						<div class="containerPrato">
+							<a href="cardapioDescricao.html#batatasRusticas"><img src="img/batatas-rusticas_transparente.png"></a>
+							<div class="contentBotao">
+								<button class="botaoPrato"><img src="img/cesta.png" alt="Cesta"></button>
+							</div>
+							<div class="contentPrato">
+								<p class="cardapioNome">Batatas rústicas - R$25,00</p>
+							</div>
+						</div>
 					</li>
+
 					<li class="prato">
-						<img src="img/bruschetta01.jpg">
-						<p class="cardapio-descricao">Bruschetta - R$ 35,00</p>
+						<div class="containerPrato">
+							<a href="cardapioDescricao.html#pastrami1"><img src="img/pastrami_transparente.png"></a>
+							<div class="contentBotao">
+								<button class="botaoPrato"><img src="img/cesta.png" alt="Cesta"></button>
+							</div>
+							<div class="contentPrato">
+								<p class="cardapioNome">Sanduíche Pastrami - R$35,00</p>
+							</div>
+						</div>
 					</li>
 				</ul>
 			</div>
 		</section>
+
 	</body>
 </html>

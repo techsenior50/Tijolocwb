@@ -1,4 +1,8 @@
-.titulo-cardapio {
+body{
+	font-family: "Montserrat", sans-sans-serif;
+}
+
+.tituloCardapio {
 	text-align: center;
 	font-size: 2.5em;
 	padding-top: 15px;
@@ -7,37 +11,67 @@
 	color: #8B0000;
 }
 
-.containerCardapio {
-	width: 90%;
-	margin: 10px auto;
+.containerCardapio{
+    width: 96%;
+    margin: 10px auto;
 }
 
-.painel-cardapio .cardapio {
-	text-align: center;
+/*.painelCardapio .cardapio {*/
+.painelCardapio {
+    text-align: center;
 }
 
-.painel-cardapio .prato {
-	display: inline-block;
+.prato {
+    display: inline-block;
 	width: 30%;
 	margin: 0 10px 16px 0;
 	padding: 5px;
+}
+
+.contentBotao {
+    position: absolute;
+	top: 10%;
+	/* os príxmos dois atributos centralizam o texto dentro da imagem*/
+    left: 85%;
+    transform: translate(-50%, -50%);
+	/*background: rgb(255, 255, 255); /* Fallback color */
+    /*background: rgba(240, 240, 240, 0.7); /* Black background with 0.5*/
+ }
+
+.contentPrato {
+    position: absolute;
+	bottom: 0px;
+	/* os príxmos dois atributos centralizam o texto dentro da imagem*/
+    left: 50%;
+    transform: translate(-50%, -50%);
+	/*background: rgb(255, 255, 255); /* Fallback color */
+    background: rgba(240, 240, 240, 0.7); /* Black background with 0.5*/
+ }
+
+.containerPrato{
+	position: relative;
+	background-color: rgb(240, 240, 240);
 }
 
 .cardapio li {
 	box-sizing: border-box;
 }
 
-.cardapio li:hover p {
-	font-size: 1.1em;
+.cardapio li:hover {
 	color: #1010AA;
 }
 
 .cardapio li img {
 	width: 90%;
+	background-color: rgb(240, 240, 240);
 }
 
-.cardapio li img:hover {
-  box-shadow: 0 0 2px 1px rgba(16, 16, 180, 0.5);
+/*.cardapio li img:hover {
+	box-shadow: 0 0 2px 1px rgba(16, 16, 180, 0.5);
+}
+*/
+.containerPrato:hover {
+	box-shadow: 0 0 2px 1px rgba(16, 16, 180, 0.5);
 }
 
 .cardapio h2 {
@@ -45,12 +79,13 @@
 	font-weight: bold;
 }
 
-.cardapio-descricao {
-	font-size: 1.1em;
+/* Esta propriedade faz com que o texto não seja cortado em mais de uma linha dentro da figura*/
+.cardapioNome {
+	white-space: nowrap;
 }
 
-@media (max-width: 480px) {
- 	.painel-cardapio .prato {
-       max-width: 100%;
+@media (max-width: 980px) {
+ 	.painelCardapio .prato {
+		 width: 100%;
    }
 }

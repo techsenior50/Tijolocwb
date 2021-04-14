@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+
+<html lang="pt-br">
+	<head>
+		<meta charset = "UTF-8">
+		<meta name="viewport" content="width=device-width">
+		<title>TijoloCWB - Cardapio</title>
+
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/cardapioDescricao.css">
+		<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+	</head>
+
+	<body>
+		<!--<header>
+			<div class="caixa">
+				<h1>
+					<img src="img/logotijolo.png">
+				</h1>
+
+				<nav>
+					<ul>
+						<li><a href="index.html">HOME</a></li>
+						<li><a href="cardapio.html">CARDÁPIO</a></li>
+						<li><a href="quemSomos.html">QUEM SOMOS</a></li>
+						<li><a href="contato.html">CONTATO</a></li>
+					</ul>
+				</nav>
+			</div>
+		</header> -->
+
+		<section class="painelCardapioDescricao">
+			<div class="containerCardapioDescricao">
+				<div class="tituloCardapioDescricao">
+					<h2>Cardápio</h2>
+				</div>
+				<div>
+					<ul>
+						<li id = "pastasPao" class="pratoDescricao">
+							<img class="cardapioDescricaoImg" src="img/quarteto_transparente.png" alt="Pastas mais pão">
+
+							<div class="cardapioPrato">
+								<p class="nomeDoPrato">Pastas + pão - R$25,00</p>
+								<p class="descricaoDoPrato">Pão de fermentação lenta ou pitachips + duas pastas à sua escolha:</p>
+	
+								<label class="adicionalDoPrato"><input class="cbPrato" type="checkbox"> Homus que não é homus</label>
+								<p class="descricaoDoPrato">Pasta de grão de bico com alho caramelizado</p>
+								<label class="adicionalDoPrato"><input class="cbPrato" type="checkbox"> Tijolo</label>
+								<p class="descricaoDoPrato">Molho composto por vermelhos assados e tostados</p>
+								<label class="adicionalDoPrato"><input class="cbPrato" type="checkbox"> Carpaccio de abobrinha</label>
+								<p class="descricaoDoPrato">Filetes de abobrinha marinada no limão</p>
+								<label class="adicionalDoPrato"><input class="cbPrato" type="checkbox"> Caponata</label>
+								<p class="descricaoDoPrato">Clássica caponata com toque desconstruído</p>
+	
+								<p class="adicionalDoPrato">Opções de pães:</p>
+								<label class="descricaoDoPrato"><input class="cbPrato" type="checkbox"> Pão adicional + R$8,00</label><br>
+								<label class="descricaoDoPrato"><input class="cbPrato" type="checkbox"> Pitabread + R$7,00</label>
+
+								<br>
+								<button> - </button>
+								<input id="qtde" type="number" maxlength="1" readonly value="1">
+								<button> + </button>
+								<button class="botaoPrato"><img src="img/cesta.png" alt="Cesta"></button>
+							</div>
+						</li>
+
+						<li id="pastrami" class="pratoDescricao">
+							<img class="cardapioDescricaoImg" src="img/pastrami_transparente.png">
+
+							<div class="cardapioPrato">
+								<p class="nomeDoPrato">Sanduiches</p>
+								<p class="descricaoDoPrato">Acompanha batata rústica</p>
+								<p class="adicionalDoPrato">Pasta grão de bico + broto de lentilha + cogumelos + babyleaf</p>
+
+								<div>
+									<input type="radio" id="grande" name="nome" class="cbPrato" >
+									<label for="grande" class="selecaoDoPrato">Grande - R$ 26,00</label>
+								</div>
+								<div>
+									<input type="radio" id="pequeno" name="nome" class="cbPrato" >
+									<label for="pequeno" class="selecaoDoPrato">Pequeno - R$ 16,00</label>
+								</div>
+
+								<p class="adicionalDoPrato">Pastrami + lascas de emmental + repolho roxo + creme de castanha + babyleaf</p>
+								<div>
+									<input type="radio" id="grande" name="nome" class="cbPrato" >
+									<label for="grande" class="selecaoDoPrato">Grande - R$30,00</label>
+								</div>
+								<div>
+									<input type="radio" id="pequeno" name="nome" class="cbPrato" >
+									<label for="pequeno" class="selecaoDoPrato">Pequeno - R$18,00</label>
+								</div>
+
+								<p class="adicionalDoPrato">Caprese - creme de castanha de caju + pesto + tomate cereja</p>
+								
+								<div>
+									<input type="radio" id="pequeno" name="nome" class="cbPrato" >
+									<label for="grande" class="selecaoDoPrato">Grande - R$28,00</label><br>
+								</div>
+								<div>
+									<input type="radio" id="pequeno" name="nome" class="cbPrato" >
+									<label for="pequeno" class="selecaoDoPrato">Pequeno - R$14,00</label>
+								</div>
+
+								<p class="adicionalDoPrato">Opções de pães:</p>
+								<label class="descricaoDoPrato"><input class="cbPrato" type="checkbox"> Pão de fermentação lenta</label>
+
+								<br>
+								<button> - </button>
+								<input id="qtde" type="number" maxlength="1" readonly value="1">
+								<button> + </button>
+								<button class="botaoPrato"><img src="img/cesta.png" alt="Cesta"></button>
+							</div>
+						</li>
+
+						<li id="bruscheta" class="pratoDescricao">
+							<img class="cardapioDescricaoImg" src="img/bruschetta_transparente.png">
+
+							<div class="cardapioPrato">
+								<p class="nomeDoPrato">Bruschettas - R$28,00</p>
+								<p class="descricaoDoPrato">Duas fatias de pão de fermentação lenta</p>
+								<label class="adicionalDoPrato_1"><input class="cbPrato" type="checkbox"> Cebola caramelizada com shimeji</label><br>
+								<label class="adicionalDoPrato_1"><input class="cbPrato" type="checkbox"> Tomate com manjericão</label>
+
+								<br>
+								<button> - </button>
+								<input id="qtde" type="number" maxlength="1" readonly value="1">
+								<button> + </button>
+								<button class="botaoPrato"><img src="img/cesta.png" alt="Cesta"></button>
+							</div>
+						</li>
+
+						<li id="mixQueijos" class="pratoDescricao">
+							<img class="cardapioDescricaoImg" src="img/queijos.jpg">
+
+							<div class="cardapioPrato">							
+								<p class="nomeDoPrato">Mix de queijos - R$50,00</p>
+								<p class="descricaoDoPrato">Três queijos combinados com geleia e melado</p>
+								<p class="descricaoDoPrato">(consultar queijos do dia)</p>
+
+								<button> - </button>
+								<input id="qtde" type="number" maxlength="1" readonly value="1">
+								<button> + </button>
+								<button class="botaoPrato"><img src="img/cesta.png" alt="Cesta"></button>
+							</div>
+						</li>
+
+						<li id="batatasRusticas" class="pratoDescricao">
+							<img class="cardapioDescricaoImg" src="img/batatas-rusticas_transparente.png">
+
+							<div class="cardapioPrato">
+								<p class="nomeDoPrato">Batatas rústicas - R$25,00</p>
+								<p class="descricaoDoPrato">Batatas diversas assadas com páprica e açafrão da terra + duas pastas à sua escolha:</p>
+
+								<label class="adicionalDoPrato"><input class="cbPrato" type="checkbox"> Homus que não é homus</label>
+								<p class="descricaoDoPrato">Pasta de grão de bico com alho caramelizado</p>
+								<label class="adicionalDoPrato"><input class="cbPrato" type="checkbox"> Tijolo</label>
+								<p class="descricaoDoPrato">Molho composto por vermelhos assados e tostados</p>
+								<label class="adicionalDoPrato"><input class="cbPrato" type="checkbox"> Carpaccio de abobrinha</label>
+								<p class="descricaoDoPrato">Filetes de abobrinha marinada no limão</p>
+								<label class="adicionalDoPrato"><input class="cbPrato" type="checkbox"> Caponata</label>
+								<p class="descricaoDoPrato">Clássica caponata com toque desconstruído</p>
+
+								<button> - </button>
+								<input id="qtde" type="number" maxlength="1" readonly value="1">
+								<button> + </button>
+								<button class="botaoPrato"><img src="img/cesta.png" alt="Cesta"></button>
+							</div>
+						</li>
+
+						<li id="pastasPao1" class="pratoDescricao">
+							<img class="cardapioDescricaoImg" src="img/quarteto_transparente.png">
+
+							<div class="cardapioPrato">
+								<p class="nomeDoPrato">Pastas + pão - R$18,00</p>
+
+								<button> - </button>
+								<input id="qtde" type="number" maxlength="1" readonly value="1">
+								<button> + </button>
+								<button class="botaoPrato"><img src="img/cesta.png" alt="Cesta"></button>
+							</div>
+						</li>
+
+						<li id="pastrami1" class="pratoDescricao">
+							<img class="cardapioDescricaoImg" src="img/pastrami_transparente.png">
+
+							<div class="cardapioPrato">
+								<p class="nomeDoPrato">Sanduíche Pastrami - R$35,00</p>
+
+								<button> - </button>
+								<input id="qtde" type="number" maxlength="1" readonly value="1">
+								<button> + </button>
+								<button class="botaoPrato"><img src="img/cesta.png" alt="Cesta"></button>
+							</div>
+						</li>
+
+						<li id="quarteto" class="pratoDescricao">
+							<img class="cardapioDescricaoImg" src="img/quarteto_transparente.png">
+
+							<div class="cardapioPrato">
+								<p class="nomeDoPrato">Quarteto - R$18,00</p>
+
+								<button> - </button>
+								<input id="qtde" type="number" maxlength="1" readonly value="1">
+								<button> + </button>
+								<button class="botaoPrato"><img src="img/cesta.png" alt="Cesta"></button>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</section>
+
+	</body>
+</html>

@@ -1,0 +1,117 @@
+body{
+	font-family: "Montserrat", sans-sans-serif;
+}
+
+.tituloCardapioDescricao {
+	text-align: center;
+	font-size: 3em;
+	padding-top: 50px;
+	font-weight: bold;
+	color: #8B0000;
+}
+
+.containerCardapioDescricao{
+	width: 96%;
+	margin: auto;
+}
+
+.painelCardapioDescricao .cardapioDescricao {
+	text-align: center;
+}
+
+.painelCardapioDescricao {
+	display: inline-block;
+	width: auto;
+	/*margin: 3%;*/
+	padding: 5px;
+	line-height: normal;
+}
+
+.pratoDescricao {
+	display: inline-block;
+	width: auto;
+	margin: 1em 1em;
+	padding: 5px;
+	line-height: normal;
+	background-color: rgb(240, 240, 240);
+}
+
+.cardapioDescricaoImg {
+	width: calc((80%/2) - 26px);
+	float: left;
+	margin: 0 20px 20px 0;
+	background-color: rgb(240, 240, 240);
+}
+
+.cardapioDescricao h2 {
+	font-size: 2em;
+	font-weight: bold;
+}
+
+.cardapioPrato{
+	display: flow-root;
+}
+
+.nomeDoPrato{
+	font-weight: bold;
+	font-size: 1.2em;
+	margin: 0 0 0 0;
+}
+
+.descricaoDoPrato .selecaoDoPrato {
+	font-size: 1em;
+	margin: 0 0 0 1em;
+}
+
+.adicionalDoPrato{
+	font-weight: bold;
+	margin: 1em 0 0 0;
+}
+
+.cbPrato {
+	margin: 1em 0 0 0;
+}
+
+.botaoPrato {
+    position: relative;
+	margin-top: 1em;
+	margin-left: 3em;
+	vertical-align: middle;
+ }
+
+ #qtde{
+	 width: 1.5em;
+	 /*aqui o padding desloca o número um pouco à esquerda*/
+	 padding-left: 1em;
+	}
+
+@media (max-width: 480px) {
+ 	.painelCardapioDescricao {
+    	width: auto;
+   }
+   .cardapioDescricaoImg {
+		width: 80%;
+		float: center;
+		margin-left: 10%;;
+	}
+	.descricaoDoPrato {
+		margin: 0 0 1em 5%;
+	}
+	.selecaoDoPrato {
+		margin: 0 0 1em 5%;
+		/*font-size: 0.8em;*/
+		font-size: 1em;
+	}
+	.adicionalDoPrato{
+		margin: 1em 0 0 5%;
+	}
+	.adicionalDoPrato_1{
+		margin: 1em 0 0 5%;
+	}
+	.nomeDoPrato{
+		margin: 1em 0 0 5%;
+	}
+	.cardapioPrato{
+		display: inline;
+	}
+}
