@@ -1673,9 +1673,11 @@ Sizzle.escape = function( sel ) {
 	return ( sel + "" ).replace( rcssescape, fcssescape );
 };
 
+
 Sizzle.error = function( msg ) {
 	throw new Error( "Syntax error, unrecognized expression: " + msg );
 };
+
 
 /**
  * Document sorting and removing duplicates

@@ -34,14 +34,23 @@
 							max-width: 18px; margin-top: 15px; margin-left: -105px;"></h1></a></li>
 							<li><a href="https://www.instagram.com/tijolocwb" class="rede-social" id="ajuste1"><h1><img src="img/instagram.png" style="max-width:18px; margin-top: 15px; margin-left: -370px;"></h1></a></li>
 							<li><a href="#" class="button" id="ajuste2"><button style="background-color: DarkRed; border-radius: 6px; padding: 5px;
-							cursor:	pointer; color: white; border: none; font-size: 14px; margin-top: 15px; margin-left: -460px;">LOGIN</button></a></li>
-							<li><a href="sacola.html" class="cesta-compras" id="ajuste3"><h1><img src="img/cesta.png" style="max-width:18px; margin-top: 15px;margin-left: -530px;"></h1></a></li>
+							cursor:	pointer; color: white; border: none; font-size: 14px; margin-top: 11px; margin-left: -460px;">LOGIN</button></a></li>
+							<li>
+								<button id="btn_sacola" class="sacola-abrir">
+									<img src="img/cesta.png">
+								</button>
+							</li>
 						</ul>
 
 			</nav>
 			</div>
 
 		</header>
+
+	<!-- Sacola-compras -->
+	<iframe id="frameSacola" class="frameSacola-invisivel" src="sacola.html" width="50%" height="100%" frameborder="1" scrolling="yes" ></iframe>
+
+
 	<br id="blocoMenu">
 	<!-- Botão voltar para o topo -->
 	<div id="voltarTopo">
@@ -141,5 +150,6 @@
 	<script src="js/scrollbloco.js"></script>
 	<script src="js/scrolltop.js"></script>
 	<script src="js/sliderAutomatico.js"></script>	
+	<script src="js/sacola.js"></script>
 	</body>
 </html>

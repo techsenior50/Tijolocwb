@@ -86,6 +86,11 @@ body {
     text-align: center;
 }
 
+.descricao {
+    text-align: left;
+    margin: 0 0 16px 0;
+}
+
 .preco {
 text-align: right;
 }

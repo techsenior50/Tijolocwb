@@ -87,7 +87,29 @@ header {						  /* Tijolo */
            
 }
 
-.cesta-compras img:hover {
+
+#btn_sacola {
+	display: inline-block;
+	height: auto;
+    width: auto;
+    padding: 0;
+    margin: 0;
+    vertical-align: top;
+	border-style: none;
+	margin-left: -230px;
+	margin-top: 30px;
+	max-width:30px;
+	
+}
+
+#btn_sacola img {
+    display: block;
+    height: 1em;  
+    width: 1em;
+}
+
+
+#btn_sacola img:hover {
   -webkit-transform: scale(1.9);
   -moz-transform: scale(1.9);
   -o-transform: scale(1.9);
@@ -120,6 +142,28 @@ label[for="bt_menu"] {     /* Tracinhos do menu quando responsivo - INICIO */
 label[for="bt_menu"] {
 	display: none;		
 }						    /* Tracinhos do menu quando responsivo - FIM */
+
+
+
+.frameSacola-visivel { /* mostra a sacola */
+	position: absolute;
+	display: block;
+	margin-top: 100px;
+	margin-left: 800px;   /* Essa posição mostra o menu */
+	height: 100%;
+	transition: all 0.5s;
+	z-index: 1;
+	background-color: rgb(253, 193, 169);
+}
+.frameSacola-invisivel { /* Esconde a sacola */
+	position: relative;
+	display: none;
+	margin-top: 100px;
+	margin-left: 800px;   /* Essa posição mostra o menu */
+	height: 100%;
+	transition: all 0.5s;
+	z-index: 1;
+}
 
 @media(max-width: 952px) {  /* Comportamento quando responsivo - INICIO */
 	label[for="bt_menu"] {
