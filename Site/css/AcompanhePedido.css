@@ -1,0 +1,272 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.AcPedido{
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 2px;
+  width: 80%;
+  margin-left:10%; 
+  margin-top: 2%;
+  margin-bottom: 2%;
+  vertical-align: top;
+}
+
+/* Create os quadros */
+.AcPedidoCab{
+    flex: 100%;
+    max-width: 100%; 
+    margin:1%;
+}
+.quadroPedido {
+  flex: 35%;
+  max-width: 35%;
+  margin:1%;
+ }
+.quadroPedido1 {
+  flex: 55%;
+  max-width: 55%;
+  margin:1%;
+}
+.quadroPedidoDesc {
+    flex: 98%;
+    max-width: 98%;
+    border:solid;
+    border-left-color: #8B0000;
+    border-left-width: 0.2em;
+    border-top-color:#00000096 ;
+    border-top-width: 0.1em;
+    border-bottom-color:#00000096 ;
+    border-bottom-width: 0.1em;
+    border-right-color:#00000096 ;
+    border-right-width: 0.1em;
+    margin:2%;
+    max-height: 250px;
+    text-align: center;
+    /* overflow-x: hidden;
+    overflow-y: scroll;
+    white-space: nowrap; */
+    
+  }
+  .quadroPedidoAcomp {
+    flex: 18%;
+    max-width: 18%;
+    margin:0%;
+    vertical-align: bottom;
+    display:inline-block;
+}
+/* .AcquadroAgradecimento {
+  
+  vertical-align: middle;
+  border:solid;
+  border-width: 0.1em;
+  border-color: #8B0000;
+  color :#8B0000;
+  font-size: 0.9em;
+  margin-top:6%;
+  padding: 5%;
+  text-align: center;
+} */
+.paragrafoPedido {
+    color :#000000;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.8em;
+    line-height: 2em;
+    margin-left: 5%;
+    text-align: left;
+ }
+ .paragrafoPedido1 {
+  color :#000000;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.7em;
+  margin-bottom: 1%; 
+  text-align: center;    
+}
+ .titleAcPedido {
+    color :#8B0000;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9em;
+    margin: 1%;
+    text-align: left;
+}
+.titleAcPratos {
+    color :#8B0000;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.7em;
+    margin: 1%;
+    text-align: left;
+}
+.titleAcPedido1 {
+    color :#8B0000;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1em;
+    margin: 1%;
+    font-Weight:bold;
+    text-align: left;
+}
+.titleAcPedidoC{
+    color :#8B0000;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9em;
+    margin: 30%;
+    text-align: CENTER;
+    font-Weight:bold;
+}
+.titleAcPedidoC1{
+    color :#8B0000;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9em;
+    margin: 20%;
+    text-align: CENTER;
+    font-Weight:bold;
+}
+.titleAcPedidoEntrega {
+    color :#ffffff;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9em;
+    margin: 1%;
+    font-Weight:bold;
+    text-align: center;
+    background-color: #8B0000;
+    bORDER-RADIUS: 5px;
+    max-width: 35%;
+}
+.AcPedidoFig {
+    position: relative;
+    vertical-align: bottom;
+    background-size:cover;
+    object-fit:cover;
+    width:100%;
+    margin:2%;
+}
+.AcPedidoFig1 {
+    position: relative;
+    vertical-align: bottom;
+    background-size:cover;
+    object-fit:cover;
+    width:65%;
+    margin:0%;
+    margin-bottom: 5%;
+}
+  .AcPedidoFig2 {
+    position: relative;
+    vertical-align: bottom;
+    background-size:cover;
+    object-fit:cover;
+    width:100%;
+    margin:2%;
+    margin-bottom: 0%;
+}
+.AcPedidoFigG {
+    position: relative;
+    vertical-align: bottom;
+    background-size:cover;
+    object-fit:cover;
+    width:120%;
+}
+.AcPedidoCon {
+    position: relative;
+    vertical-align: bottom;
+    background-size:cover;
+    object-fit:cover;
+    width:100%;
+    margin:0%;
+    margin-bottom: 5%;
+}  
+  
+  
+
+
+/* Responsive layout  */
+@media screen and (max-width: 835px) {
+    .quadroPedido {
+        flex: 100%;
+        max-width: 100%;
+        font-size: 1em; 
+        margin-top:5%;
+        vertical-align: bottom;
+    }
+    .quadroPedido1 { 
+        flex: 100%;
+        max-width: 100%;
+        font-size: 1em; 
+        vertical-align: bottom;
+    }
+    .paragrafoPedido{
+        font-size:0.7em;
+        text-align: left;
+    }
+    .titleAcPedidoC{
+        flex: 100%;
+        max-width: 100%;
+        Margin-top:30%;
+        Margin-left:5%;
+        font-size:1em;
+    }
+    .titleAcPedidoC1{
+        flex: 100%;
+        max-width: 100%;
+        Margin-top:40%;
+        Margin-left:5%;
+        font-size:1em;
+    }
+    .quadroPedidoAcomp{
+        flex:15%;
+        min-width: 15%;
+    }
+    /* .AcPedidoFig1{
+        width:50%; 
+        vertical-align: bottom;
+    }
+    .AcPedidoFig2{
+        width:90%; 
+        vertical-align: bottom;
+    }
+    .AcPedidoFig{
+        width:100%; 
+        vertical-align: bottom;
+    }
+    .AcPedidoFigG{
+        width:120%; 
+        vertical-align: bottom; 
+    }*/
+    
+}
+@media screen and (max-width: 502px) {
+    .quadroPedido {
+        flex: 100%;
+        max-width: 100%;
+        font-size: 0.7em; 
+        margin-top:5%;
+    }
+    .quadroPedido1 { 
+        flex: 100%;
+        max-width: 100%;
+        font-size: 0.7em; 
+    }
+    .paragrafoPedido{
+        font-size:1em;
+        Margin-left:5%;
+        text-align: left;
+    }
+    .titleAcPedidoC{
+        Margin-top:40%;
+        Margin-left:5%;
+        font-size:1em;
+    }
+    .titleAcPedidoC1{
+        Margin-top:40%;
+        Margin-left:5%;
+        font-size:1em;
+    }
+    /* .paragrafoPedido1{
+        font-size:0.3em;
+    } */
+ 
+}
