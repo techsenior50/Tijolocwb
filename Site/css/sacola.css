@@ -8,9 +8,9 @@ body {
     display: flex;
     flex-wrap: wrap;
     height: 100%;
-    width: 700px;
+    width: 100%;
     padding-top: .125em;
-    border-top: .125em solid #000;
+   /* border-top: .125em solid #000;*/
     border-bottom: .125em solid #000;
     vertical-align: middle;
     margin: 0.5em; 
@@ -19,9 +19,10 @@ body {
 .div_sacolaTitulo {
     width: 100%;
     text-align: center;
-	font-size: 2.5em;
+	font-size: 1.5em;
 	padding-top: 15px;
 	padding-bottom: 10px;
+    padding-left: 0;
 	font-weight: bold;
 	color: #8B0000;
     height: 70px;
@@ -35,7 +36,7 @@ body {
 .ul_sacolaItens {
     font-size: 12px;
    /* margin-top: 70px;*/
-    padding: 0 35px 0 ;
+    padding: 0 30px 0 ;
 /*    text-align: right;*/
     width: auto;
     height: auto;
@@ -72,46 +73,103 @@ body {
 .ul_sacolaItem li {
     display: inline-block;
 	width: 20%;
-	margin: 0 5px 16px 0;
+	margin: 0 3px 16px 0;
 	padding: 5px;
 }
 
 .img_sacolaItem {
-    height: 100px;
-    width: 100px;
+    height: 80px;
+    width: 80px;
     line-height: 10px;
 }
 
-.prato{
+.ul_sacolaItem li .prato{
     text-align: center;
 }
 
-.descricao {
+.ul_sacolaItem li .descricao {
     text-align: left;
     margin: 0 0 16px 0;
 }
 
-.preco {
+.ul_sacolaItem li .preco {
 text-align: right;
 }
 
-.qtde2 {
+.ul_sacolaItem li .qtde2 {
     border: .125em solid #000;
     width: 90%;
     margin-right: 10px;
     padding: 5px 0 5px 0;
     text-align: center;
 }
-.qtde2 li{
+.ul_sacolaItem li .qtde2 li{
     width: 30%;
     display: inline;
     margin: 0 5px 0 0;
     font-size: 1.2em;
 }
 
-.div_sacolaFinalizarCompra {
-    width: 700px;
+.div_sacolaTotal{
+    width: 100%;
+}
+
+.ul_sacolaTotal {
+    display: flex;
+    list-style-type: none;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+
+}
+
+
+.ul_sacolaTotal li,.ul_sacolaTotal2 li {
+    display: inline-block;
+	width: 20%;
+	margin: 0 3px 16px 0;
+	padding: 5px;
+}
+
+.ul_sacolaTotal li .descricao, .ul_sacolaTotal2 li .descricao{
+    text-align: left;
+    margin: 0 0 16px 0;
+}
+
+.ul_sacolaTotal li .valor, .ul_sacolaTotal2 li .valor{
     text-align: right;
+}
+
+.div_botoesCompra {
+    width: 100%;
+    text-align: right;
+    margin-top: 10px;
+}
+.ul_sacolaTotal2 {
+    display: flex;
+    list-style-type: none;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 16px;
+
+}
+.ul_botoesCompra {
+    display: flex;
+    list-style-type: none;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.ul_botoesCompra li {
+    display: inline-block;
+	width: 35%;
+	margin: 0 3px 16px 0;
+	padding: 5px;
 }
 /*
 .caixa_qtde{

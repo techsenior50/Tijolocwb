@@ -149,11 +149,11 @@ label[for="bt_menu"] {
 	position: absolute;
 	display: block;
 	margin-top: 100px;
-	margin-left: 800px;   /* Essa posição mostra o menu */
+	margin-left: 900px;   /* Essa posição mostra o menu */
 	height: 100%;
 	transition: all 0.5s;
 	z-index: 1;
-	background-color: rgb(253, 193, 169);
+	background-color: rgb(253, 251, 250);
 }
 .frameSacola-invisivel { /* Esconde a sacola */
 	position: relative;
