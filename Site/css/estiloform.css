@@ -1,0 +1,176 @@
+html {
+    margin-left: 150px;    
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    margin-right: -120px;
+    margin-left: 86px;    
+}
+
+input {
+    width: 200px;
+    height: 25px;
+    border-width: thin;
+    border-radius: 3px;
+    border-style:solid;
+    border-color:dimgray;
+    margin-top: 3px;
+}
+
+.conta{    
+    margin-bottom: 30px;
+}
+
+.field {
+    font-weight: bold;
+}
+
+.label {
+    font-size: 12px;
+}
+
+.control{
+    margin-bottom: 30px;
+}
+
+.inputcep {
+    width: 120px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight:800;
+}
+
+.inputend {
+    width: 470px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight:800;
+}
+
+.inputnum {
+    width: 69px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight:800;
+}
+
+.inputcompl {
+    width: 385px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight:800;
+}
+
+.inputbairro {
+    margin-top: -3px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight:800;
+}
+
+.inputponto {
+    width: 470px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight:800;
+}
+
+.inputestado {
+    width:69px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight:800;
+}
+
+.inputcidade {
+    width: 385px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight:800;
+}
+
+.inputnome {
+    width: 470px;
+    margin-top: -3px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight:800;
+}
+
+.inputemail {
+    width: 470px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight:800;
+}
+
+.inputfone {
+    font-family: 'Montserrat', sans-serif;
+    font-weight:800;
+}
+
+.button {
+    font-family: 'Montserrat';
+    font-size: 16px;
+    font-weight: bold;
+    height: 35px;
+    border-radius: 3px;
+    background: darkred;
+    color: white;
+    border: none;
+    
+}
+
+.inputnome:hover, .inputemail:hover,
+.inputend:hover, .inputnum:hover, 
+.inputcompl:hover, .inputponto:hover,
+.inputestado:hover, .inputcep:hover, 
+.inputcidade:hover, .inputbairro:hover,
+.inputfone:hover {
+    /*background:rgb(208, 218, 236); */
+    background: rgb(248, 219, 182);  
+}
+
+#fieldcep {
+    margin-top: -5px;    
+}
+
+#fieldend {
+    margin-top: -25px;        
+}
+
+#fieldnum {
+    margin-top: -20px;        
+}
+
+#fieldcompl {
+    float: right;
+    margin-top: -81px;
+    margin-right: 847px;     
+}
+
+#fieldponto {   
+    margin-top: -25px;           
+}
+
+#fieldestado {
+    margin-top: -25px;    
+}
+
+#fieldcidade {
+    float: right;
+    margin-top: -81px;
+    margin-right: 847px;
+}
+
+#fieldbairro {
+    margin-top: -25px;   
+}
+
+#fieldnome {
+    margin-top: -25px;
+}
+
+#fieldemail {
+    margin-top: -25px;    
+}
+
+#fieldfone {    
+    margin-top: -25px;    
+}
+
+#button {
+    margin-top: 50px;
+    margin-left: 400px;
+}
