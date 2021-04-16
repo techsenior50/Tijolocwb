@@ -1,0 +1,163 @@
+* {
+    box-sizing: border-box;
+  }
+  
+body {
+    margin: 0;
+    font-family: 'Helvetica', sans-serif;
+  }
+
+
+.registrar {
+    font-size: 30px;
+    font-weight: bold;
+    margin-left: 10%;  
+    vertical-align: top;
+}
+
+.titulo-h2 {
+    font-size: 20px;
+}
+.registros {
+    display: flex;
+    flex-wrap: wrap;
+    width: 90%;
+    margin-left: 10%;  
+    vertical-align: top;
+}
+
+.registro1 {
+    flex: 40%;
+    max-width: 40%;
+    padding: 0 4px;
+
+}
+
+.registro2 {
+    flex: 40%;
+    max-width: 40%;
+    padding: 0% 4%;
+}
+
+.registro {
+position: absolute;
+width: 456px;
+height: 54px;
+left: 60px;
+top: 397px;
+background: #2962FF;
+border-radius: 10px;
+}
+
+.botao-facebook {
+    display: inline-block;
+    padding: 12px 100px;
+    margin: 7px;
+    background-color: #2962ff;
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px black;
+    text-decoration: none;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+}
+
+.botao-google {
+    display: inline-block;
+    padding: 12px 110px;
+    margin: 7px;
+    background-color: #201dd8;
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px black;
+    text-decoration: none;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+}
+
+.botao-apple {
+    display: inline-block;
+    padding: 12px 116px;
+    margin: 7px;
+    background-color: #000000;
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px #000000;
+    text-decoration: none;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    
+}
+
+.campo {
+    margin-bottom: 16px;
+}
+
+.campo-entrada {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 20px;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+
+.input-fone {
+    display: flex;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 18px;
+    padding: 0px;
+    border-radius: 5px;
+}
+
+.campo-numero {
+    display: flex;
+}
+
+.campo-entrada1 {
+    width: 30%;
+    font-size: 18px;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.codigo-pais {
+    margin: 10px;
+    padding: 0;
+    border: 0;
+    font-size: 18px;
+}
+
+.campo-entrada2 {
+    /*box-sizing: border-box; */
+    width: 70%;
+    font-size: 18px;
+    padding: 5px;
+    border-radius: 5px;
+    /*box-shadow: 1px 1px 5px #48A2A6; */ 
+}
+
+.checkbox {
+    margin: 20px 0;
+}
+
+
+.botao-inscrever {
+    display: inline-block;
+    padding: 15px 30px;
+    margin: 10px;
+    margin-left: 30%;
+    background-color: #2962ff;
+    border-radius: 8px;
+    box-shadow: 1px 1px 5px black;
+    text-decoration: none;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+}
