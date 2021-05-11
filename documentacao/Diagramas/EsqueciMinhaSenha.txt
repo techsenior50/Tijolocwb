@@ -1,0 +1,73 @@
+@startuml
+skinparam sequenceMessageAlign direction
+skinparam roundcorner 10
+skinparam responseMessageBelowArrow true
+
+title "<&person> Esqueci minha senha"
+
+actor Cliente as cliente
+participant "esqueciSenha.html" as paginaEsqueciMinhaSenha <<Formulário de Esqueci Minha Senha>>
+participant "esqueciSenha.js" as jsEsqueciMinhaSenha <<Lógica do Formulário>>
+participant "senha-api.js" as controller <<(C,#ADD1B2) Controlador>>
+participant "senha-service.js" as service <<(S,#ADD1B2) Serviço>>
+participant "senha-sql.js" as repository <<(R,#ADD1B2) Repositório>>
+database "MySQL" as dbms
+
+box "Telas: Front-end - HTML e JS" #Azure
+	participant paginaEsqueciMinhaSenha
+	participant jsEsqueciMinhaSenha
+end box
+
+box "Lógica: Back-end - Servidor Node.JS" #LightGreen
+	participant controller
+	participant service
+	participant repository
+end box
+
+box "Persistência: Banco de Dados" #SkyBlue
+	participant dbms
+end box
+
+' -------------------------------------------------------
+' Antes de informar perda da senha: Estamos no Front
+' -------------------------------------------------------
+cliente -> paginaEsqueciMinhaSenha : Visita a Página
+
+paginaEsqueciMinhaSenha -> paginaEsqueciMinhaSenha : Informa o E-mail
+
+paginaEsqueciMinhaSenha -> jsEsqueciMinhaSenha : Clica em "Confirmar"\n(evento ""onSubmit"")
+
+' -------------------------------------------------------
+
+group Jornadas do Usuário [<color:green>Caminho Feliz</color>]
+
+    jsEsqueciMinhaSenha -> jsEsqueciMinhaSenha : Valida o e-mail
+    activate jsEsqueciMinhaSenha
+    jsEsqueciMinhaSenha -> controller : <&check> **Válido:**\n""{ email }""
+    note left: Permite o evento ""onSubmit""\ndo formulário acontecer
+    deactivate jsEsqueciMinhaSenha
+
+    activate controller
+    controller -> service : ""clienteService.validar(emailCliente)""
+    activate service
+    
+    service -> service : Valida email
+
+    service -> repository : <&check> **Válido:**\n""clienteRepository.valida(emailCliente)""
+    activate repository
+
+    repository -> dbms : ""SELECT * FROM usuario WHERE email = ...""
+    activate dbms
+    repository <- dbms : Usuario [id=123, nome=..., email=...]
+    deactivate dbms
+
+    service <- repository : Usuário validado no BD\n""{ id, nome, email }""
+    deactivate repository
+
+    controller <- service : Sucesso:\n""{ id, nome, email }""
+    note left: Note que não mandamos\ntudo que está no banco\npara a tela ;)
+    deactivate service
+
+
+end
+@enduml
