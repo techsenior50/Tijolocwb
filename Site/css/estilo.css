@@ -37,7 +37,7 @@ header {						  /* Tijolo */
 	width: 155px;  /* Interfere na largura do menu criando espaço para o "Quem Somos", mas empurra os ícones pra direita */
 	height: 90px;
 	float: left;
-	background-color: white; /* inseri aqui o background */	 
+	background-color: white; /* inserí aqui o background */	 
 }
 
 .menu a {
@@ -110,7 +110,7 @@ label[for="bt_menu"] {     /* Tracinhos do menu quando responsivo - INICIO */
 	font-size: 26px;
 	cursor: pointer;
 	width: 25px;
-	height: 25px;
+	height: 25px;	
 }
 
 #bt_menu {
@@ -121,9 +121,13 @@ label[for="bt_menu"] {
 	display: none;		
 }						    /* Tracinhos do menu quando responsivo - FIM */
 
-@media(max-width: 952px) {  /* Comportamento quando responsivo - INICIO */
+@media(max-width: 1200px) {  /* Comportamento quando responsivo - INICIO */
 	label[for="bt_menu"] {
 	display: block;
+	bottom:1em;
+	right:1em;
+	width: 8%;
+	height:10%;
 	}
 
 	#bt_menu:checked ~ .menu ul { /* Esconde e mostra o menu ao clicar */
@@ -149,16 +153,16 @@ label[for="bt_menu"] {
 		
 	}
 
-	.menu ul{               /* Posiciona menu abaixo da logo quando responsivo - INICIO */
+	.menu ul {               /* Posiciona menu abaixo da logo quando responsivo - INICIO */
 		top: 100px;
 		right: -150px;      /* Posição associado ao esconde e mostra menu do checked - Essa posição esconde o menu */
 		text-align: center;
-		display: inline-grid;
+		display: inline-grid;		
 	}						/* Posiciona menu abaixo da logo quando responsivo - FIM */
 
 	.menu ul li {
-		height: 60px;		
-	}	
+		height: 60px;					
+	}
 
 	.menu ul li a {
 		width: 100%;
@@ -166,8 +170,8 @@ label[for="bt_menu"] {
 		float: none;		
 		display: block;
 		padding: 29.5px;
-		margin-top: 0.2px;
-		margin-left: -36px; /* Posição do menu vertical */
+		margin-top: 0.2px;		
+		margin-left: 16px; /* Posição do menu vertical */		
 		font-size: 16px;
 		font-weight: bold;		
 		background-color: BlanchedAlmond;					
@@ -181,7 +185,7 @@ label[for="bt_menu"] {
 	.menu a:hover {
 		background: #CD8C95;
 		color: white;
-	}
+	}	
 	
 	#ajuste a {
 		margin-bottom: 30px;
@@ -190,25 +194,25 @@ label[for="bt_menu"] {
 	#ajuste img {				/* Posição dos elementos do MENU VERTICAL - INÍCIO */
 		position: relative;
 		top: -23px;
-		right: -50px;
+		right: -10px;
 	}
 
 	#ajuste1 img {
 		position: relative;
 		top: -22px;
-		right: -184px;								
+		right: -146px;								
 	}
 
 	#ajuste2 button {
 		position: relative;
 		top: -27px;
-		right: -228px;								
+		right: -130px;										
 	}
 
 	#ajuste3 img {
 		position: relative;
-		top: -22px;
-		right: -262px;				
+		top: -26px;
+		right: -98px;				
 	}						   /* Posição dos elementos do MENU VERTICAL - FIM */
 
 }                              /* Comportamento quando responsivo - FIM */

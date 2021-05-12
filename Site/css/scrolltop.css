@@ -8,9 +8,11 @@
 
 @media screen and (max-width: 920px) {
 	#subir {
+		top: 600px;
 		bottom:1em;
 		right:1em;
-		width: 10%;
+		width: 8%;
 		height:10%;
+		right: 40px;
 	}
 }

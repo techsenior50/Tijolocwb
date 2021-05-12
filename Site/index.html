@@ -17,11 +17,11 @@
 	</head>
 
 	<body>
-		<header class="menu-fixo" style="width: 100%; top: 0; left: 0;">		
+		<header class="menu-fixo" style="width: 100%; top: 0; left: -44px;">		
 			<div>
 
 			<input type="checkbox" id="bt_menu">
-			<label style="float: right; margin-top: 32px; margin-right: 50px;" for="bt_menu">&#9776;</label>		
+			<label style="float: right; margin-top: 20px; margin-right: 50px;" for="bt_menu">&#9776;</label>		
 			<h1><img src="img/logo.svg" id="logo" style="background-color: white; max-width:150px; top: 0; left: 0;"></h1>
 								
 			<nav class="menu">		
@@ -30,12 +30,10 @@
 							<li><a href="#blocoCardapio" target="" class="capitalize" class="li-cor">Cardápio</a></li>	  	
 							<li><a href="#blocoQuemSomos" target="" class="capitalize" class="li-cor">Quem Somos</a></li>  
 							<li><a href="#blocoContato" target="" class="capitalize" class="li-cor">Contato</a></li>
-							<li><a href="https://www.facebook.com/tijolocwb" class="rede-social" id="ajuste"><h1><img src="img/facebook.png" style="
-							max-width: 18px; margin-top: 15px; margin-left: -105px;"></h1></a></li>
-							<li><a href="https://www.instagram.com/tijolocwb" class="rede-social" id="ajuste1"><h1><img src="img/instagram.png" style="max-width:18px; margin-top: 15px; margin-left: -370px;"></h1></a></li>
-							<li><a href="#" class="button" id="ajuste2"><button style="background-color: DarkRed; border-radius: 6px; padding: 5px;
-							cursor:	pointer; color: white; border: none; font-size: 14px; margin-top: 15px; margin-left: -460px;">LOGIN</button></a></li>
-							<li><a href="#" class="cesta-compras" id="ajuste3"><h1><img src="img/cesta.png" style="max-width:18px; margin-top: 15px;margin-left: -530px;"></h1></a></li>
+							<li><a href="https://www.facebook.com/tijolocwb" class="rede-social" id="ajuste"><h1><img src="img/facebook.png" style="max-width: 18px; margin-top: 15px; margin-left: -35px;"></h1></a></li>
+							<li><a href="https://www.instagram.com/tijolocwb" class="rede-social" id="ajuste1"><h1><img src="img/instagram.png" style="max-width:18px; margin-top: 17px; margin-left: -300px;"></h1></a></li>
+							<li><a href="#" class="button" id="ajuste2"><button style="background-color: DarkRed; border-radius: 6px; padding: 5px;	cursor:	pointer; color: white; border: none; font-size: 14px; margin-top: 15px; margin-left: -260px;">LOGIN</button></a></li>
+							<li><a href="#" class="cesta-compras" id="ajuste3"><h1><img src="img/cesta.png" style="max-width:18px; margin-top: 15px;margin-left: -195px;"></h1></a></li>
 						</ul>
 
 			</nav>
@@ -92,39 +90,106 @@
 	<!-- Página Cardápio -->
 	<!-- <iframe id="blocoCardapio" src="cardapio.html" width="100%" height="880" frameborder="0" scrolling="no"></iframe> -->
 	
-	<section id="blocoCardapio" class="painel-cardapio">
+	<section id="blocoCardapio" class="painelCardapio">
 		<div class="containerCardapio">
-			<div class="titulo-cardapio">
+			<div class="tituloCardapio">
 				<h2>Pratos principais</h2>
 			</div>
 			<ul class="cardapio">
 				<li class="prato">
-					<img src="img/batata rustica_1.jpg">
-					<p class="cardapio-descricao">Batatas rústicas - R$ 25,00</p>
+					<div class="containerPrato">
+						<a href="cardapioDescricao.html#pastasPao"><img src="img/quarteto_transparente.png"></a>
+						<div class="detalhes">
+							<a href="cardapioDescricao.html#pastasPao">
+								<div class="texto">Ver detalhes</div>
+							</a>
+						</div>
+						<div class="contentBotao">
+							<a href="cardapioDescricao.html#pastasPao"><button class="botaoPrato"><img src="img/cesta.png" alt="Cesta"></button></a>
+						</div>
+						<div class="contentPrato">
+							<p class="cardapioNome">Pastas + pão - R$25,00</p>
+						   </div>
+					</div>
 				</li>
+
 				<li class="prato">
-					<img src="img/petiscos_quarteto01.jpg">
-					<p class="cardapio-descricao">Pastas + pão - R$ 18,00</p>
+					<div class="containerPrato">
+						<a href="cardapioDescricao.html#pastrami"><img src="img/pastrami_transparente.png"></a>
+						<div class="detalhes">
+							<a href="cardapioDescricao.html#pastrami"><div class="texto">Ver detalhes</div></a>
+						</div>
+						<div class="contentBotao">
+							<a href="cardapioDescricao.html#pastrami"><button class="botaoPrato"><img src="img/cesta.png" alt="Cesta"></button></a>
+						</div>
+						<div class="contentPrato">
+							<p class="cardapioNome">Sanduíches - R$14,00 a R$35,00</p>
+						</div>
+					</div>
 				</li>
+
 				<li class="prato">
-					<img src="img/sanduiche pastrami.jpg">
-					<p class="cardapio-descricao">Sanduíche Pastrami - R$ 35,00</p>
+					<div class="containerPrato">
+						<a href="cardapioDescricao.html#bruscheta"><img src="img/bruschetta_transparente.png"></a>
+						<div class="detalhes">
+							<a href="cardapioDescricao.html#bruscheta"><div class="texto">Ver detalhes</div></a>
+						</div>
+						<div class="contentBotao">
+							<button class="botaoPrato"><img src="img/cesta.png" alt="Cesta"></button>
+						</div>
+						<div class="contentPrato">
+							<p class="cardapioNome">Bruschettas - R$28,00</p>
+						</div>
+					</div>
 				</li>
+
 				<li class="prato">
-					<img src="img/bruschetta.jpg">
-					<p class="cardapio-descricao">Bruschetta - R$ 25,00</p>
+					<div class="containerPrato">
+						<a href="cardapioDescricao.html#mixQueijos"><img src="img/queijos.jpg"></a>
+						<div class="detalhes">
+							<a href="cardapioDescricao.html#mixQueijos"><div class="texto">Ver detalhes</div></a>
+						</div>
+						<div class="contentBotao">
+							<button class="botaoPrato"><img src="img/cesta.png" alt="Cesta"></button>
+						</div>
+						<div class="contentPrato">
+							<p class="cardapioNome">Mix de queijos - R$50,00</p>
+						</div>
+					</div>
 				</li>
+
 				<li class="prato">
-					<img src="img/petiscos_quarteto02.jpg">
-					<p class="cardapio-descricao">Quarteto - R$ 18,00</p>
+					<div class="containerPrato">
+						<a href="cardapioDescricao.html#batatasRusticas"><img src="img/batatas-rusticas_transparente.png"></a>
+						<div class="detalhes">
+							<a href="cardapioDescricao.html#batatasRusticas"><div class="texto">Ver detalhes</div></a>
+						</div>
+						<div class="contentBotao">
+							<button class="botaoPrato"><img src="img/cesta.png" alt="Cesta"></button>
+						</div>
+						<div class="contentPrato">
+							<p class="cardapioNome">Batatas rústicas - R$25,00</p>
+						</div>
+					</div>
 				</li>
+
 				<li class="prato">
-					<img src="img/bruschetta01.jpg">
-					<p class="cardapio-descricao">Bruschetta - R$ 35,00</p>
+					<div class="containerPrato">
+						<a href="cardapioDescricao.html#pastrami1"><img src="img/pastrami_transparente.png"></a>
+						<div class="detalhes">
+							<a href="cardapioDescricao.html#pastrami1"><div class="texto">Ver detalhes</div></a>
+						</div>
+						<div class="contentBotao">
+							<button class="botaoPrato"><img src="img/cesta.png" alt="Cesta"></button>
+						</div>
+						<div class="contentPrato">
+							<p class="cardapioNome">Sanduíche Pastrami - R$35,00</p>
+						</div>
+					</div>
 				</li>
 			</ul>
 		</div>
-	</section> 
+	</section>
 
 	<!-- Página Quem Somos -->
 	<h2 id="blocoQuemSomos" class="tituloQuemSomos">Quem Somos</h2>
