@@ -1,0 +1,119 @@
+@startuml
+skinparam sequenceMessageAlign direction
+skinparam roundcorner 10
+skinparam responseMessageBelowArrow true
+skinparam white true
+
+title *<&person> AGENDAMENTO*
+
+actor Cliente as cliente
+participant "agendamento.html" as paginaAgendamento <<Após o Login>>
+participant "reserva.html" as paginaReserva <<Reserva>>
+participant "reserva.js" as jsReserva <<Lógica da Reserva>>
+participant "resumo-reserva.html" as paginaResumoReserva <<Após Reservar>>
+participant "usuario-api.js" as controller <<(C,#ADD1B2) Controlador>>
+participant "usuario-service.js" as service <<(S,#ADD1B2) Serviço>>
+participant "usuario-sql.js" as repository <<(R,#ADD1B2) Repositório>>
+database "MySQL" as dbms
+
+' -------------------------------------------------------
+
+box "Telas: Front-end - HTML e JS" #Azure
+      participant "agendamento.html" as paginaAgendamento <<Após o login>>
+      participant "reserva.html" as paginaReserva <<Reserva>>
+      participant "reserva.js" as jsReserva <<Lógica da Reserva>>
+      participant "resumo-reserva.html" as paginaResumoReserva <<Após Reservar>>
+      	
+end box
+      
+box "Lógica: Back-end - Servidor Node.JS" #LightGreen
+	participant controller
+	participant service
+	participant repository
+end box
+
+box "Persistência: Banco de Dados" #SkyBlue
+	participant dbms
+end box
+
+cliente -> paginaAgendamento: Visita a página
+paginaAgendamento -> paginaAgendamento: Escolhe Reservar
+paginaAgendamento -> paginaReserva: Clica em "Reservar"\n(evento ""onScroll"")
+paginaReserva -> paginaReserva: Escolhe o ambiente,\ndia,horário e insere nº pessoas
+paginaReserva -> jsReserva: Clica em "Agendar"\n(evento ""onSubmit"")
+
+' -------------------------------------------------------
+
+group Jornadas do Usuário [<color:green>Caminho Feliz</color>]
+
+jsReserva -> jsReserva : Valida os dados
+activate jsReserva
+jsReserva -> controller :  <&check> *Válido:*\n""{ambiente, data, hora e nº de convidados}""
+deactivate jsReserva
+
+note left: Permite o evento ""onSubmit""\nda reserva acontecer
+
+activate controller
+controller -> service: ""clienteService.reservar(dadosReserva)""
+
+activate service
+service -> service : Valida os dados
+service -> repository: <&check> *Válido:*\n""clienteRepository.reservar(dadosCliente)""
+
+activate repository
+repository -> dbms : ""INSERT INTO ... VALUES ...""
+note right: Sempre usar\n//Prepared Statements//!
+activate dbms
+dbms -> repository : Reserva realizada com sucesso
+dbms <- repository : ""SELECT * FROM usuario WHERE email = ...""
+dbms -> repository : Usuario [id=123, nome=..., email=...]
+deactivate dbms
+
+repository -> service : Reserva cadastrada no BD\n""{ id, nome, email, telefone, \nativo, dia, horário, ambiente, \nnº de convidados, dataReserva }""
+deactivate repository
+
+service -> controller : Sucesso:\n""{ id, nome, email, telefone, \nativo, dia, horário, ambiente, \nnº de convidados, dataReserva }""
+
+deactivate service
+
+create paginaResumoReserva
+paginaResumoReserva <- controller : <color:green><&check> *Sucesso*</color>:\n""{ id, nome, ativo, dataCadastro }""
+deactivate controller
+
+' -------------------------------------------------------
+
+else <color:red>Tratamento de Erros</color>: Erros na Reserva
+    autonumber
+    jsReserva -> jsReserva : Valida os dados
+    jsReserva -> paginaReserva : <color:red><&ban> *Inválido:*</color>\nInforma os erros ao Cliente
+
+else <color:red>Tratamento de Erros</color>: Erros no Servidor
+    autonumber
+    jsReserva -> jsReserva : Valida os dados
+
+    activate jsReserva
+        jsReserva -> controller : <&check> *Válido:*\n""{ ambiente, data, hora e nº de convidados }""
+        note left: Permite o evento ""onSubmit""\ndo formulário acontecer
+    deactivate jsReserva
+
+    controller -> service : clienteService.reservar(dadosReserva)
+
+    activate service
+    service -> dbms : Valida os dados
+    service <- dbms : Informações para efetuar a validação
+    service -> service : Executa validação
+    service -> controller : *Inválido*
+    destroy service
+    controller -> paginaReserva : <color:red><&warning> *Erro:*</color>\n"Ambiente, dia ou horário indisponível! Por favor, tente novamente."
+
+end
+@enduml
+
+
+
+
+
+
+
+
+
