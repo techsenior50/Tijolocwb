@@ -1,0 +1,104 @@
+@startuml
+skinparam sequenceMessageAlign direction
+skinparam roundcorner 10
+skinparam responseMessageBelowArrow true
+
+
+ 
+skinparam sequenceMessageAlign direction
+skinparam roundcorner 10
+skinparam responseMessageBelowArrow true
+ 
+title "<&person> Acompanhe meu Pedido"
+ 
+actor Cliente as cliente
+participant "AcompanheMeuPedido.html" as paginaAcompanheMeuPedido <<Mostra status do pedido>>
+participant "AcompanheMeuPedido.js" as jsAcompanheMeuPedido <<Lógica do AcompanheMeuPedido>>
+participant "pedido-api.js" as controller <<(C,#ADD1B2) Controlador>>
+participant "pedido-service.js" as service <<(S,#ADD1B2) Serviço>>
+participant "pedido-sql.js" as repository <<(R,#ADD1B2) Repositório>>
+database "MySQL" as dbms
+ 
+box "Telas: Front-end - HTML e JS" #Azure
+	participant paginaAcompanheMeuPedido
+	participant jsAcompanheMeuPedido
+end box
+ 
+box "Lógica: Back-end - Servidor Node.JS" #LightGreen
+	participant controller
+	participant service
+	participant repository
+end box
+ 
+box "Persistência: Banco de Dados" #SkyBlue
+	participant dbms
+end box
+ 
+' -------------------------------------------------------
+' Antes do Acompanhe meu pedido: Estamos no Front
+' -------------------------------------------------------
+cliente -> paginaAcompanheMeuPedido : Visita a Página
+ 
+paginaAcompanheMeuPedido -> paginaAcompanheMeuPedido : Valida dados
+ 
+
+ 
+' -------------------------------------------------------
+ 
+group Jornadas Acompanhe meu pedido [<color:green>Caminho Feliz</color>]
+ 
+    jsAcompanheMeuPedido -> jsAcompanheMeuPedido : Valida os dados
+    activate jsAcompanheMeuPedido
+    jsAcompanheMeuPedido -> controller : <&check> **Válido:**\n""{ dados do pedido }""
+    note left: Permite o evento ""onSubmit""\ndo formulário acontecer
+    deactivate jsAcompanheMeuPedido
+ 
+    activate controller
+    controller -> service : ""pedidoService.AcompanheMeuPedido(dadosPedido)""
+    activate service
+ 
+    service -> service : Valida os dados
+ 
+    service -> repository : <&check> **Válido:**\n""pedidoRepository.validar(dadosPedido)""
+    activate repository
+ 
+    repository -> dbms : ""SELECT * FROM pedido WHERE pedido = ...""
+    activate dbms
+    repository <- dbms : Pedido [pedido=123, nome=..., quantidade=..., preco=...]
+    deactivate dbms 
+
+    service <- repository : Pedido validado no BD\n""{ pedido, nome, quantidade, preco }""
+    deactivate repository
+ 
+    controller <- service : Sucesso:\n""{ pedido, nome, quantidade, preco}""
+    note left: Note que não mandamos\ntudo que está no banco\npara a tela ;)
+    deactivate service
+    controller->jsAcompanheMeuPedido
+    deactivate controller
+    jsAcompanheMeuPedido->paginaAcompanheMeuPedido:Dados do Status do pedido { pedido, nome, quantidade, preco}
+     note left:Exibr dados na Tela Acompanhe Meu Pedido:status do pedido ;)
+' -------------------------------------------------------
+ 
+else <color:red>Tratamento de Erros</color>: Erros no Formulário
+    autonumber
+    jsAcompanheMeuPedido -> jsAcompanheMeuPedido : Valida os dados
+    jsAcompanheMeuPedido -> paginaAcompanheMeuPedido : <color:red><&ban> **Inválido:**</color>\nInforma os erros ao Cliente
+ 
+' -------------------------------------------------------
+ 
+else <color:red>Tratamento de Erros</color>: Erros no Servidor
+    autonumber
+    jsAcompanheMeuPedido -> jsAcompanheMeuPedido : Valida os dados
+    activate jsAcompanheMeuPedido
+        jsAcompanheMeuPedido -> controller : <&check> **Válido:**\n""{ nome, email, senha, telefone }""
+        note left: Permite o evento ""onSubmit""\ndo formulário acontecer
+    deactivate jsAcompanheMeuPedido
+ 
+    controller -> service : pedidoService.validar(dadosPedido)
+    activate service
+    service -> service : Valida os dados
+    service -> controller : **Inválido**
+    destroy service
+    controller -> paginaAcompanheMeuPedido : <color:red><&warning> **Erro:**</color>\n"Dados inválidos! Por favor, corrija e tente novamente."
+end
+@enduml

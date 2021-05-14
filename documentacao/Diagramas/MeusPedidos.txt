@@ -1,0 +1,139 @@
+@startuml
+skinparam sequenceMessageAlign direction
+skinparam roundcorner 10
+skinparam responseMessageBelowArrow true
+ 
+title "<&person> Meus pedidos"
+ 
+actor Cliente as cliente
+participant "meusPedidos.html" as paginaMeusPedidos <<Mostra Meus Pedidos>>
+participant "meusPedidos.js" as jsMeusPedidos <<Lógica do Meus Pedidos>>
+participant "AcompanheMeuPedido.html" as paginaAcompanheMeuPedido <<Mostra Acompanhe Meu Pedido>>
+participant "AcompanheMeuPedido.js" as jsAcompanheMeuPedido <<Lógica do AcompanheMeuPedido>>
+participant "pedidos-api.js" as controller <<(C,#ADD1B2) Controlador>>
+participant "pedidos-service.js" as service <<(S,#ADD1B2) Serviço>>
+participant "pedidos-sql.js" as repository <<(R,#ADD1B2) Repositório>>
+
+database "MySQL" as dbms
+ 
+box "Telas: Front-end - HTML e JS" #Azure
+	participant paginaMeusPedidos
+	participant jsMeusPedidos
+        participant paginaAcompanheMeuPedido
+        participant jsAcompanheMeuPedido
+	
+end box
+ 
+box "Lógica: Back-end - Servidor Node.JS" #LightGreen
+	participant controller
+	participant service
+	participant repository
+end box
+ 
+box "Persistência: Banco de Dados" #SkyBlue
+	participant dbms
+end box
+
+ 
+' -------------------------------------------------------
+' Antes da requisição de cadastro: Estamos no Front
+' -------------------------------------------------------
+cliente -> paginaMeusPedidos : Visita a Página
+
+paginaMeusPedidos -> jsMeusPedidos : Exibe todos os pedidos do cliente
+
+
+'********************************************************************************
+' Jornada meus pedidos
+'********************************************************************************
+group Jornadas do Meus Pedidos [<color:green>Caminho Feliz</color>]
+
+
+' Valida dados
+
+    jsMeusPedidos -> jsMeusPedidos : Valida dados
+
+'busca numero de pedidos do cliente
+
+    activate jsMeusPedidos
+    jsMeusPedidos -> controller : <&check> **Válido:**\n""{ Busca quantidade de pedidos do cliente }""
+    activate controller
+    controller -> service : ""pedidoService.qtdpedido(dadoscliente)""
+    activate service
+    service -> service : Valida os dados
+    service -> repository : <&check> **Válido:**\n""pedidoRepository.qtdpedido(dadoscliente)""
+    activate repository
+    repository -> dbms : ""SELECT * FROM cliente WHERE qtdpedido = ...""
+    activate dbms
+    repository <- dbms : Pedido [qtdpedido]
+    deactivate dbms
+    service <- repository : Quantidade de pedidos do cliente"{ qtdpedido }""
+    deactivate repository
+    controller <- service : Sucesso:\n""{ qtdpedido}""
+    deactivate service
+    jsMeusPedidos <- controller : <&check> **Válido:**\n""{ quantpedido}""
+
+
+
+
+'busca pedido do cliente enquanto tiver pedido
+
+
+    activate jsMeusPedidos
+    jsMeusPedidos -> controller : <&check> **Válido:**\n""{ Buscar dados do pedido }""
+    note left: Enquanto tiver pedido exibir o pedido;)
+    activate controller
+    controller -> service : ""pedidoService.dadosdopedido(numped,datapedido,numitens,itens,qtds,preços,frete,nomecliente,tipoentrega)""
+    activate service
+    service -> service : Valida os dados
+    service -> repository : <&check> **Válido:**\n""pedidoRepository.qtdpedido(dadospedido)""
+    activate repository
+    repository -> dbms : ""SELECT * FROM cliente WHERE dadospedido = ...""
+    activate dbms
+    repository <- dbms : Pedido [dadospedido]
+    deactivate dbms
+    service <- repository : Dados do pedido"{dadospedido }""
+    deactivate repository
+    controller <- service : Sucesso:\n""{ dadospedido}""
+    deactivate service
+    jsMeusPedidos <- controller : <&check> **Válido:**\n""{ dadospedido}""
+
+
+    deactivate controller
+
+
+    jsMeusPedidos->paginaMeusPedidos
+     note left:Exibr pedido ;)
+
+
+    cliente -> paginaMeusPedidos : Seleciona pedido para acompanhar
+   
+    paginaMeusPedidos -> paginaAcompanheMeuPedido : Clica em "Confirmar"\n(evento ""onSubmit"")
+    deactivate jsMeusPedidos
+    note right:Vai para rotina Acompanhar o pedido ;)
+
+' -------------------------------------------------------
+ 
+else <color:red>Tratamento de Erros</color>: Erros no Formulário
+    autonumber
+    jsMeusPedidos -> jsMeusPedidos : Valida os dados
+    jsMeusPedidos -> paginaMeusPedidos : <color:red><&ban> **Inválido:**</color>\nInforma os erros ao Cliente
+ 
+' -------------------------------------------------------
+ 
+else <color:red>Tratamento de Erros</color>: Erros no Servidor
+    autonumber
+    jsMeusPedidos -> jsMeusPedidos : Valida os dados
+    activate jsAcompanheMeuPedido
+        jsMeusPedidos-> controller : <&check> **Válido:**\n""{ nome, email, senha, telefone }""
+        note left: Permite o evento ""onSubmit""\ndo formulário acontecer
+    deactivate jsMeusPedidos
+ 
+    controller -> service : pedidoService.validar(dadosPedido)
+    activate service
+    service -> service : Valida os dados
+    service -> controller : **Inválido**
+    destroy service
+    controller -> paginaMeusPedidos : <color:red><&warning> **Erro:**</color>\n"Dados inválidos! Por favor, corrija e tente novamente."
+end
+@enduml
