@@ -1,0 +1,97 @@
+@startuml
+skinparam sequenceMessageAlign direction
+skinparam roundcorner 10
+skinparam responseMessageBelowArrow true
+
+title "<&person> Cardápio"
+
+actor Cliente as cliente
+participant "cardapioDescricao.html" as paginaCardapio <<Lista de produtos>>
+
+participant "requisitaCardapio.js" as jsRequisitaCardapio <<Cardapio>>
+participant "cardapio-api.js" as controller <<(C,#ADD1B2) Controlador>>
+participant "cardapio-service.js" as service <<(S,#ADD1B2) Serviço>>
+participant "cardapio-sql.js" as repository <<(R,#ADD1B2) Repositório>>
+database "MySQL" as dbms
+
+box "Telas: Front-end - HTML e JS" #Azure
+	participant paginaCardapio
+    participant jsRequisitaCardapio
+end box
+
+box "Lógica: Back-end - Servidor Node.JS" #LightGreen
+	participant controller
+	participant service
+	participant repository
+end box
+
+box "Persistência: Banco de Dados" #SkyBlue
+	participant dbms
+end box
+
+' -------------------------------------------------------
+' Antes da validação do Cardapio: Estamos no Front
+' -------------------------------------------------------
+cliente -> paginaCardapio : Visita a página do cardápio
+
+paginaCardapio -> jsRequisitaCardapio : Clica em "Obter Cardápio"\n(evento ""onclick"")
+
+' -------------------------------------------------------
+
+group Jornadas do Usuário [<color:green>Caminho Feliz</color>]
+
+    jsRequisitaCardapio -> controller : ""{ data }"" : Solicita cardápio do dia
+    note left: Evento ""onclick""\nda página principal
+
+    activate controller
+    controller -> service : ""cardapioService.buscaCardapioDoDia(data)""
+    activate service
+
+    service -> repository : ""cardapioRepository.buscaCardapio(data)""
+
+    activate repository
+
+    repository -> dbms : ""GET DATA ... DATE ...""
+    note right: Sempre usar\n//Prepared Statements//!
+    activate dbms
+    repository <- dbms : Cardápio encontrado com sucesso
+    repository -> dbms : ""SELECT * FROM data ...""
+    repository <- dbms : Dados do cardápio [prato1, prato2, ...]
+    deactivate dbms
+
+    service <- repository : Cardápio do dia "data"\n""{ pratos do dia ... }""
+    deactivate repository
+
+    controller <- service : Sucesso:\n""{ lista dos produtos }""
+    note left: Lista de todos\nos produtos\noferecidos ;)
+    deactivate service
+
+    paginaCardapio <- controller : <color:green><&check> **Sucesso**</color>:\n""{ id, nome, ativo, dataCadastro }""
+    deactivate controller
+
+' -------------------------------------------------------
+
+' else <color:red>Tratamento de Erros</color>: Erros no Formulário
+'     autonumber
+'     jsLoginEmail -> jsLoginEmail : Valida os dados
+'     jsLoginEmail -> paginaLogin : <color:red><&ban> **Inválido:**</color>\nInforma os erros ao Cliente
+
+' -------------------------------------------------------
+
+' else <color:red>Tratamento de Erros</color>: Erros no Servidor
+'     autonumber
+'     jsLoginEmail -> jsLoginEmail : Valida os dados
+'     activate jsLoginEmail
+'         jsLoginEmail -> controller : <&check> **Válido:**\n""{ email }""
+'         note left: Permite o evento ""onSubmit""\ndo formulário acontecer
+'     deactivate jsLoginEmail
+' 
+'     controller -> service : clienteService.validaLogin(loginCliente)
+'     activate service
+'     service -> service : Valida os dados
+'     service -> controller : **Inválido**
+'     destroy service
+'     controller -> paginaLogin : <color:red><&warning> **Erro:**</color>\n"Dados inválidos! Por favor, corrija e tente novamente."
+
+end
+@enduml
