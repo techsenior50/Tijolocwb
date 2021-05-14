@@ -1,0 +1,124 @@
+@startuml
+skinparam sequenceMessageAlign direction
+skinparam roundcorner 10
+skinparam responseMessageBelowArrow true
+
+title "<&person> Registro de Login do usuário"
+
+actor Cliente as cliente
+participant "login.html" as paginaLogin <<Formulário de Login>>
+participant "loginFacebook.js" as jsLoginFacebook <<Login Facebook>>
+participant "loginGoogle.js" as jsLoginGoogle <<Login Google>>
+participant "loginApple.js" as jsLoginApple <<Login Apple>>
+participant "loginEmail.js" as jsLoginEmail <<Login E-mail>>
+participant "login-api.js" as controller <<(C,#ADD1B2) Controlador>>
+participant "login-service.js" as service <<(S,#ADD1B2) Serviço>>
+participant "login-sql.js" as repository <<(R,#ADD1B2) Repositório>>
+database "MySQL" as dbms
+
+box "Telas: Front-end - HTML e JS" #Azure
+	participant paginaLogin
+	participant jsLoginFacebook
+        participant jsLoginGoogle
+        participant jsLoginApple
+        participant jsLoginEmail
+end box
+
+box "Lógica: Back-end - Servidor Node.JS" #LightGreen
+	participant controller
+	participant service
+	participant repository
+end box
+
+box "Persistência: Banco de Dados" #SkyBlue
+	participant dbms
+end box
+
+' -------------------------------------------------------
+' Antes da validação do Login: Estamos no Front
+' -------------------------------------------------------
+cliente -> paginaLogin : Visita a página de Login
+
+paginaLogin -> paginaLogin : Seleciona a forma de login
+
+paginaLogin -> jsLoginFacebook : Clica em "Login Facebook"\n(evento ""onSubmit"")
+paginaLogin -> jsLoginGoogle : Clica em "Login Google"\n(evento ""onSubmit"")
+paginaLogin -> jsLoginApple : Clica em "Login Apple"\n(evento ""onSubmit"")
+paginaLogin -> jsLoginEmail : Clica em "Login Email"\n(evento ""onSubmit"")
+
+' -------------------------------------------------------
+
+group Jornadas do Usuário [<color:green>Caminho Feliz</color>]
+
+    jsLoginFacebook -> jsLoginFacebook : Valida login Facebook
+    activate jsLoginFacebook
+    jsLoginFacebook -> controller : <&check> **Válido:**\n""{ loginFacebook }""
+    note left: Evento ""onSubmit""\ndo Facebook acontece
+    deactivate jsLoginFacebook
+
+    jsLoginGoogle -> jsLoginGoogle : Valida login Google
+    activate jsLoginGoogle
+    jsLoginGoogle -> controller : <&check> **Válido:**\n""{ loginGoogle }""
+    note left: Evento ""onSubmit""\ndo Google acontece
+    deactivate jsLoginGoogle
+
+    jsLoginApple -> jsLoginApple : Valida login Apple
+    activate jsLoginApple
+    jsLoginApple -> controller : <&check> **Válido:**\n""{ loginApple }""
+    note left: Evento ""onSubmit""\nda Apple acontece
+    deactivate jsLoginApple
+
+    jsLoginEmail -> jsLoginEmail : Valida login Email
+    activate jsLoginEmail
+    jsLoginEmail -> controller : <&check> **Válido:**\n""{ loginEmail }""
+    note left: Evento ""onSubmit""\ndo Email acontece
+    deactivate jsLoginEmail
+
+
+    activate controller
+    controller -> service : ""clienteService.validaLogin(loginCliente)""
+    activate service
+    
+    service -> service : Valida login Cliente
+
+    service -> repository : <&check> **Válido:**\n""clienteRepository.validaLogin(loginCliente)""
+    activate repository
+
+    repository -> dbms : ""SELECT * FROM usuario WHERE loginCliente = ...""
+    activate dbms
+    repository <- dbms : Usuario [id=123, nome=..., email=...]
+    deactivate dbms
+
+    service <- repository : Usuário validado no BD\n""{ id, nome, email }""
+    deactivate repository
+
+    controller <- service : Sucesso:\n""{ id, nome, email }""
+    note left: Retorna Sucesso\npara a tela ;)
+    deactivate service
+
+' -------------------------------------------------------
+
+else <color:red>Tratamento de Erros</color>: Erros no Formulário
+    autonumber
+    jsLoginEmail -> jsLoginEmail : Valida os dados
+    jsLoginEmail -> paginaLogin : <color:red><&ban> **Inválido:**</color>\nInforma os erros ao Cliente
+
+' -------------------------------------------------------
+
+else <color:red>Tratamento de Erros</color>: Erros no Servidor
+    autonumber
+    jsLoginEmail -> jsLoginEmail : Valida os dados
+    activate jsLoginEmail
+        jsLoginEmail -> controller : <&check> **Válido:**\n""{ email }""
+        note left: Permite o evento ""onSubmit""\ndo formulário acontecer
+    deactivate jsLoginEmail
+
+    controller -> service : clienteService.validaLogin(loginCliente)
+    activate service
+    service -> service : Valida os dados
+    service -> controller : **Inválido**
+    destroy service
+    controller -> paginaLogin : <color:red><&warning> **Erro:**</color>\n"Dados inválidos! Por favor, corrija e tente novamente."
+
+end
+@enduml

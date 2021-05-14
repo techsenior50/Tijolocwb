@@ -1,0 +1,104 @@
+@startuml
+skinparam sequenceMessageAlign direction
+skinparam roundcorner 10
+skinparam responseMessageBelowArrow true
+
+title "<&person> Confirmação da Compra / Pagamento"
+
+actor Cliente as cliente
+participant "confirmaCompra.html" as paginaConfirmaCompra <<Formulário de Confirma Compra/Pagamento>>
+participant "compraconfirmada.html" as paginaCompraConfirmada <<Após a Confirmação>>
+participant "confirmaCompra.js" as jsConfirmaCompra <<Lógica do Formulário>>
+participant "confirmaCompra-api.js" as controller <<(C,#ADD1B2) Controlador>>
+participant "confirmaCompra-service.js" as service <<(S,#ADD1B2) Serviço>>
+participant "confirmaCompra-sql.js" as repository <<(R,#ADD1B2) Repositório>>
+database "MySQL" as dbms
+
+box "Telas: Front-end - HTML e JS" #Azure
+	participant paginaConfirmaCompra
+	participant jsConfirmaCompra
+        participant paginaCompraConfirmada
+end box
+
+box "Lógica: Back-end - Servidor Node.JS" #LightGreen
+	participant controller
+	participant service
+	participant repository
+end box
+
+box "Persistência: Banco de Dados" #SkyBlue
+	participant dbms
+end box
+
+' -------------------------------------------------------
+' Antes da validação da Compra Confirmada: Estamos no Front
+' -------------------------------------------------------
+cliente -> paginaConfirmaCompra : Veio da Página Pagamento
+
+paginaConfirmaCompra -> paginaConfirmaCompra : Mostra os dados para confirmar a compra
+
+paginaConfirmaCompra -> jsConfirmaCompra : Clica em "Confirmar"\n(evento ""onSubmit"")
+
+
+' -------------------------------------------------------
+
+group Jornadas Confirma Compra / Pagamento [<color:green>Caminho Feliz</color>]
+
+    jsConfirmaCompra -> jsConfirmaCompra : Valida os dados
+    activate jsConfirmaCompra
+    jsConfirmaCompra -> controller : <&check> **Válido:**\n""{ pedido }""
+    note left: Permite o evento ""onSubmit""\ndo formulário acontecer
+    deactivate jsConfirmaCompra
+
+    activate controller
+    controller -> service : ""pedidoService.confirmaCompra(dadosPedido)""
+    activate service
+
+    service -> service : Valida os dados
+
+    service -> repository : <&check> **Válido:**\n""pedidoRepository.validar(dadosPedido)""
+    activate repository
+   
+    repository -> dbms : ""INSERT INTO ... VALUES ...""
+    activate dbms
+    repository <- dbms : Pedido inserido com sucesso
+    repository -> dbms : ""SELECT * FROM pedido WHERE pedido = ...""
+    repository <- dbms : Pedido [pedido=123, nome=..., endereco=..., quantidade=..., valorunitario=..., valorfrete=..., valortotal=...]
+    deactivate dbms
+
+    service <- repository : Pedido validado no BD\n""{ pedido, nome, endereco, quantidade, valorunitario, valorfrete, valortotal }""
+    deactivate repository
+
+    controller <- service : Sucesso:\n""{ pedido, nome, endereco, quantidade, valorunitario, valorfrete, valortotal }""
+    note left: Pedido realizado\ncom sucesso ;)
+    deactivate service
+    create paginaCompraConfirmada
+    paginaCompraConfirmada <- controller : <color:green><&check> **Sucesso**</color>:\n""{ pedido, nome, endereco, quantidade, valorunitario, valorfrete, valortotal }""
+    deactivate controller
+
+' -------------------------------------------------------
+
+else <color:red>Tratamento de Erros</color>: Erros no Formulário
+    autonumber
+    jsConfirmaCompra -> jsConfirmaCompra : Valida os dados
+    jsConfirmaCompra -> paginaConfirmaCompra : <color:red><&ban> **Inválido:**</color>\nInforma os erros do Pedido
+
+' -------------------------------------------------------
+
+else <color:red>Tratamento de Erros</color>: Erros no Servidor
+    autonumber
+    jsConfirmaCompra -> jsConfirmaCompra : Valida os dados
+    activate jsConfirmaCompra
+        jsConfirmaCompra -> controller : <&check> **Válido:**\n""{ pedido, nome, endereco, quantidade, valorunitario, valorfrete, valortotal }""
+        note left: Permite o evento ""onSubmit""\ndo formulário acontecer
+    deactivate jsConfirmaCompra
+
+    controller -> service : pedidoService.confirmaCompra(dadosPedido)
+    activate service
+    service -> service : Valida os dados
+    service -> controller : **Inválido**
+    destroy service
+    controller -> paginaConfirmaCompra : <color:red><&warning> **Erro:**</color>\n"Dados inválidos! Por favor, corrija e tente novamente."
+
+end
+@enduml

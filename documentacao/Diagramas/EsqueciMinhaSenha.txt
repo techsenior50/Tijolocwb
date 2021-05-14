@@ -6,7 +6,7 @@ skinparam responseMessageBelowArrow true
 title "<&person> Esqueci minha senha"
 
 actor Cliente as cliente
-participant "esqueciSenha.html" as paginaEsqueciMinhaSenha <<Formulário de Esqueci Minha Senha>>
+participant "esqueciSenha.html" as paginaEsqueciMinhaSenha <<Formulário Esqueci Minha Senha>>
 participant "esqueciSenha.js" as jsEsqueciMinhaSenha <<Lógica do Formulário>>
 participant "senha-api.js" as controller <<(C,#ADD1B2) Controlador>>
 participant "senha-service.js" as service <<(S,#ADD1B2) Serviço>>
@@ -29,11 +29,13 @@ box "Persistência: Banco de Dados" #SkyBlue
 end box
 
 ' -------------------------------------------------------
-' Antes de informar perda da senha: Estamos no Front
+' Validar Email para trocar senha: Estamos no Front
 ' -------------------------------------------------------
 cliente -> paginaEsqueciMinhaSenha : Visita a Página
 
 paginaEsqueciMinhaSenha -> paginaEsqueciMinhaSenha : Informa o E-mail
+
+paginaEsqueciMinhaSenha -> paginaEsqueciMinhaSenha : Informa a nova Senha
 
 paginaEsqueciMinhaSenha -> jsEsqueciMinhaSenha : Clica em "Confirmar"\n(evento ""onSubmit"")
 
@@ -41,32 +43,58 @@ paginaEsqueciMinhaSenha -> jsEsqueciMinhaSenha : Clica em "Confirmar"\n(evento "
 
 group Jornadas do Usuário [<color:green>Caminho Feliz</color>]
 
-    jsEsqueciMinhaSenha -> jsEsqueciMinhaSenha : Valida o e-mail
+    jsEsqueciMinhaSenha -> jsEsqueciMinhaSenha : Valida o e-mail e a nova Senha
     activate jsEsqueciMinhaSenha
-    jsEsqueciMinhaSenha -> controller : <&check> **Válido:**\n""{ email }""
+    jsEsqueciMinhaSenha -> controller : <&check> **Válido:**\n""{ email, senha }""
     note left: Permite o evento ""onSubmit""\ndo formulário acontecer
     deactivate jsEsqueciMinhaSenha
 
     activate controller
-    controller -> service : ""clienteService.validar(emailCliente)""
+    controller -> service : ""clienteService.validar(emailCliente,senhaCliente)""
     activate service
     
-    service -> service : Valida email
+    service -> service : Valida email e nova senha
 
-    service -> repository : <&check> **Válido:**\n""clienteRepository.valida(emailCliente)""
+    service -> repository : <&check> **Válido:**\n""clienteRepository.valida(emailCliente,senha)""
     activate repository
 
     repository -> dbms : ""SELECT * FROM usuario WHERE email = ...""
+    repository -> dmbs : ""UPDATE usuario""
     activate dbms
-    repository <- dbms : Usuario [id=123, nome=..., email=...]
+    repository <- dbms : Usuario [email=..., senha=...]
     deactivate dbms
 
-    service <- repository : Usuário validado no BD\n""{ id, nome, email }""
+    service <- repository : Usuário atualizado no BD\n""{ email, senha }""
     deactivate repository
 
-    controller <- service : Sucesso:\n""{ id, nome, email }""
-    note left: Note que não mandamos\ntudo que está no banco\npara a tela ;)
+    controller <- service : Sucesso:\n""{ nome, email }""
+    note left: Email e nova senha\n validada ;)
     deactivate service
+    deactivate controller
+
+' -------------------------------------------------------
+
+else <color:red>Tratamento de Erros</color>: Erros no Formulário
+    autonumber
+    jsEsqueciMinhaSenha -> jsEsqueciMinhaSenha : Valida os dados
+    jsEsqueciMinhaSenha -> paginaEsqueciMinhaSenha : <color:red><&ban> **Inválido:**</color>\nInforma os erros ao Cliente
+
+' -------------------------------------------------------
+
+else <color:red>Tratamento de Erros</color>: Erros no Servidor
+    autonumber
+    jsEsqueciMinhaSenha -> jsEsqueciMinhaSenha : Valida os dados
+    activate jsEsqueciMinhaSenha
+        jsEsqueciMinhaSenha -> controller : <&check> **Válido:**\n""{ email, senha }""
+        note left: Permite o evento ""onSubmit""\ndo formulário acontecer
+    deactivate jsEsqueciMinhaSenha
+
+    controller -> service : clienteService.validar(emailCliente,senha)
+    activate service
+    service -> service : Valida os dados
+    service -> controller : **Inválido**
+    destroy service
+    controller -> paginaEsqueciMinhaSenha : <color:red><&warning> **Erro:**</color>\n"Dados inválidos! Por favor, corrija e tente novamente."
 
 
 end

@@ -1,0 +1,103 @@
+@startuml
+skinparam sequenceMessageAlign direction
+skinparam roundcorner 10
+skinparam responseMessageBelowArrow true
+
+title "<&person> Cadastro de um Novo Usuário"
+
+actor Cliente as cliente
+participant "cadastro.html" as paginaCadastro <<Formulário de Cadastro>>
+participant "boas-vindas.html" as paginaBoasVindas <<Após o Cadastro>>
+participant "cadastro.js" as jsCadastro <<Lógica do Formulário>>
+participant "usuario-api.js" as controller <<(C,#ADD1B2) Controlador>>
+participant "usuario-service.js" as service <<(S,#ADD1B2) Serviço>>
+participant "usuario-sql.js" as repository <<(R,#ADD1B2) Repositório>>
+database "MySQL" as dbms
+
+box "Telas: Front-end - HTML e JS" #Azure
+	participant paginaCadastro
+	participant jsCadastro
+	participant paginaBoasVindas
+end box
+
+box "Lógica: Back-end - Servidor Node.JS" #LightGreen
+	participant controller
+	participant service
+	participant repository
+end box
+
+box "Persistência: Banco de Dados" #SkyBlue
+	participant dbms
+end box
+
+' -------------------------------------------------------
+' Antes da requisição de cadastro: Estamos no Front
+' -------------------------------------------------------
+cliente -> paginaCadastro : Visita a Página
+
+paginaCadastro -> paginaCadastro : Preenche o Formulário
+
+paginaCadastro -> jsCadastro : Clica em "Cadastrar"\n(evento ""onSubmit"")
+
+' -------------------------------------------------------
+
+group Jornadas do Usuário [<color:green>Caminho Feliz</color>]
+
+    jsCadastro -> jsCadastro : Valida os dados
+    activate jsCadastro
+    jsCadastro -> controller : <&check> **Válido:**\n""{ nome, email, senha, telefone }""
+    note left: Permite o evento ""onSubmit""\ndo formulário acontecer
+    deactivate jsCadastro
+
+    activate controller
+    controller -> service : ""clienteService.cadastrar(dadosCliente)""
+    activate service
+
+    service -> service : Valida os dados
+
+    service -> repository : <&check> **Válido:**\n""clienteRepository.inserir(dadosCliente)""
+    activate repository
+
+    repository -> dbms : ""INSERT INTO ... VALUES ...""
+    note right: Sempre usar\n//Prepared Statements//!
+    activate dbms
+    repository <- dbms : Usuário inserido com sucesso
+    repository -> dbms : ""SELECT * FROM usuario WHERE email = ...""
+    repository <- dbms : Usuario [id=123, nome=..., email=...]
+    deactivate dbms
+
+    service <- repository : Usuário cadastrado no BD\n""{ id, nome, email, telefone, ativo, dataCadastro }""
+    deactivate repository
+
+    controller <- service : Sucesso:\n""{ id, nome, ativo, dataCadastro }""
+    note left: Note que não mandamos\ntudo que está no banco\npara a tela ;)
+    deactivate service
+    create paginaBoasVindas
+    paginaBoasVindas <- controller : <color:green><&check> **Sucesso**</color>:\n""{ id, nome, ativo, dataCadastro }""
+    deactivate controller
+
+' -------------------------------------------------------
+
+else <color:red>Tratamento de Erros</color>: Erros no Formulário
+    autonumber
+    jsCadastro -> jsCadastro : Valida os dados
+    jsCadastro -> paginaCadastro : <color:red><&ban> **Inválido:**</color>\nInforma os erros ao Cliente
+
+' -------------------------------------------------------
+
+else <color:red>Tratamento de Erros</color>: Erros no Servidor
+    autonumber
+    jsCadastro -> jsCadastro : Valida os dados
+    activate jsCadastro
+        jsCadastro -> controller : <&check> **Válido:**\n""{ nome, email, senha, telefone }""
+        note left: Permite o evento ""onSubmit""\ndo formulário acontecer
+    deactivate jsCadastro
+
+    controller -> service : clienteService.cadastrar(dadosCliente)
+    activate service
+    service -> service : Valida os dados
+    service -> controller : **Inválido**
+    destroy service
+    controller -> paginaCadastro : <color:red><&warning> **Erro:**</color>\n"Dados inválidos! Por favor, corrija e tente novamente."
+end
+@enduml
