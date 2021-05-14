@@ -1,0 +1,78 @@
+@startuml
+skinparam sequenceMessageAlign direction
+skinparam roundcorner 10
+skinparam responseMessageBelowArrow true
+skinparam white true
+
+title **<&person> INSERE OU EXCLUI ITENS DO CARRINHO**
+
+actor Cliente as cliente
+participant "menu.html" as paginaCardapio <<Cardápio>>
+participant "carrinho.html" as carrinho <<Carrinho>>
+participant "item-controller.js" as controller <<(C,#ADD1B2) Controlador>>
+participant "item-service.js" as service <<(S,#ADD1B2) Serviço>>
+participant "item-sql.js" as repository <<(R,#ADD1B2) Repositório>>
+database "MySQL" as dbms
+
+box "Telas: Front-end - HTML e JS" #Azure
+participant "menu.html" as paginaCardapio <<Cardápio>>
+participant "carrinho.html" as carrinho <<Carrinho>>	
+end box
+
+box "Lógica: Back-end - Servidor Node.JS" #LightGreen	
+	participant controller
+        participant service
+	participant repository
+end box
+
+box "Persistência: Banco de Dados" #SkyBlue
+	participant dbms
+end box
+
+cliente -> paginaCardapio : Visita a página
+paginaCardapio -> paginaCardapio : Seleciona item e quantidade
+paginaCardapio -> carrinho : Clica em colocar no carrinho
+
+group Jornadas do Usuário - Caminho Feliz
+
+carrinho -> controller : Envia item para Controlador
+
+activate controller
+
+controller -> service : Envia para Serviço
+
+activate service
+
+service -> repository : Calcula (item x valor unitário) + frete e Insere no repositório
+
+activate repository
+
+activate dbms
+
+repository -> dbms : Insere item, valor unitário, valor calculdo e frete no banco de dados
+dbms -> repository : Item, valor unitário, valor calculado e frete inseridos com sucesso
+
+repository -> service : Item, valor unitário, valor calculado e frete gravados no BD
+service -> carrinho : <color:green><&check> **Sucesso**</color>:\n ""Itens salvos em seu carrinho""
+
+paginaCardapio -> carrinho : Exclui/Insere novos itens
+carrinho -> controller : Envia item para Controlador
+controller -> service : Envia para Serviço
+service -> repository : Calcula (item x valor unitário) + frete e Insere/Exclui do repositório
+
+repository -> dbms : Insere/Exclui item, valor unitário, valor calculdo e frete no banco de dados
+dbms -> repository : Item, valor unitário, valor calculado e frete Inseridos/Excluídos com sucesso
+
+repository -> service : Item, valor unitário, valor calculado e frete Inseridos/Excluídos gravados no BD
+service -> carrinho : <color:green><&check> **Sucesso**</color>:\n ""Itens salvos em seu carrinho""
+
+deactivate service
+
+deactivate repository
+
+deactivate controller
+
+deactivate dbms
+
+end
+@enduml
