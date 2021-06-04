@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        function cadastrar() {
+            $.post('/cadastroProduto/', {
+                categoriaProduto: $('#categoriaProduto').val(),
+                nomeProduto: $('#nomeProduto').val(),
+                descricaoProduto: $('#descricaoProduto').val(),
+                precoProduto: $('#precoProduto').val(),
+                statusProduto: $('#statusProduto').val(),
+                imagemProduto: $('#imagemProduto').val()
+            }, (retorno) => {
+    
+                    $('#categoriaProduto').val('');
+                    $('#nomeProduto').val('');
+                    $('#descricaoProduto').val('');
+                    $('#precoProduto').val('');
+                    $('#statusProduto').val('');
+                    $('#imagemProduto').val('');
+
+                    $("#resposta").html('O produto foi cadastrado com sucesso!');
+                });
+        return false;
+        }
+    </script>
+    <script>
+        /* function cadastrarStatus(auxStatusProduto) {
+            if (auxStatusProduto) {
+                statusProduto = "true"
+            } else {
+                statusProduto = "false"
+            }
+        } return statusProduto; */
+    </script>
+
+</head>
+
+<body>
+
+    <h1 class="titulo-form">Cadastro de Produtos - Tijolo</h1>
+    <div id="resposta" ></div>
+    <form method="post" onsubmit="return cadastrar()">
+        <div class="linha-form">
+            <label for="categoriaProduto">Categoria :</label>
+            <select id="categoriaProduto">
+                <option value="">Selecione...</option>
+                <option value="Salgado">Salgado</option>
+                <option value="Doce">Doce</option>
+                <option value="Bebida">Bebida</option>
+                <option value="Acessorios">Acessorios</option>
+            </select>
+        </div>
+
+        <div class="linha-form">
+            <label for="nomeProduto">Nome :</label>
+            <input id="nomeProduto" type="text" required="required" />
+        </div>
+
+        <div class="linha-form">
+            <label for="descricaoProduto">Descrição :</label>
+            <textarea id="descricaoProduto" style="width:400px" required="required"></textarea>
+        </div>
+
+        <div class="linha-form">
+            <label for="precoProduto">Preço :</label>
+            <input id="precoProduto" type="number" step=".01" required="required" />
+        </div>
+        
+
+<!--         <div class="linha-form" onsubmit="return cadastrarStatus(auxStatusProduto)"> -->
+
+
+        <div class="linha-form">
+            <label>Status :</label>
+            <fieldset style="width:380px" >						
+                <label for="statusProduto"> <input type="radio" name="statusProduto" value="true" id="statusProduto"> Ativo</label>
+                <label for="statusProduto"> <input type="radio" name="statusProduto" value="false" id="statusProduto"> Inativo</label>
+            </fieldset>
+        </div>
+
+        <div class="linha-form">
+            <label for="imagemProduto">Imagem :</label>
+            <input class="enderecoImagem" placeholder="informe o endereço http da imagem" style="width:400px" type="url" required="required" id="imagemProduto">
+        </div>
+
+        <div class="linha-form">
+            <input style="font-size: 16px; font-family: Arial" type="reset" />
+            <input style="font-size: 16px; font-family: Arial" type="submit" />
+        </div>
+
+    </form>
+
+</body>
+
+</html>

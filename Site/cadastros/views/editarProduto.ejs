@@ -1,0 +1,58 @@
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="/css/style.css">
+    </head>
+
+<body>
+    <h1 class="titulo-form">Atualizar Produtos - Tijolo</h1>
+    <form method="post">
+        <div class="linha-form">
+            <label for="categoriaProduto">Categoria :</label>
+            <select name="categoriaProduto">
+                <option value="Salgado" <%= produto.categoriaProduto=='Salgado' ? "selected" : "" %> >Salgado</option>
+                <option value="Doce" <%= produto.categoriaProduto=='Doce' ? "selected" : "" %> >Doce</option>
+                <option value="Bebida" <%= produto.categoriaProduto=='Bebida' ? "selected" : "" %> >Bebida</option>
+                <option value="Acessorios" <%= produto.categoriaProduto=='Acessorios' ? "selected" : "" %> >Acessorios</option>
+            </select>
+        </div>
+
+        <div class="linha-form">
+            <label for="nomeProduto">Nome :</label>
+            <input name="nomeProduto" value="<%= produto.nomeProduto %>" type="text" style="width:400px" required="required" />
+        </div>
+
+        <div class="linha-form">
+            <label for="descricaoProduto">Descrição :</label>
+            <input name="descricaoProduto" value="<%= produto.descricaoProduto %>" type="text" style="width:400px" required="required"></input>
+        </div>
+
+        <div class="linha-form">
+            <label for="precoProduto">Preço :</label>
+            <input name="precoProduto" value="<%= produto.precoProduto %>" type="number" step=".01" required="required" />
+        </div>
+    
+        <div class="linha-form">
+            <label for="statusProduto">Status :</label>
+            <select name="statusProduto">
+                <option value="true" <%= produto.statusProduto=='true' ? "selected" : "" %> >Ativo</option>
+                <option value="false" <%= produto.statusProduto=='false' ? "selected" : "" %> >Inativo</option>
+            </select>
+        </div>
+
+        <div class="linha-form">
+            <label for="imagemProduto">Imagem :</label>
+            <input name="imagemProduto" value="<%= produto.imagemProduto %>" type="url" style="width:400px" required="required"></input>
+        </div>
+
+        <div class="linha-form">
+            <input style="font-size: 16px; font-family: Arial" type="reset" />
+            <input style="font-size: 16px; font-family: Arial" type="submit" />
+        </div>
+
+    </form>
+
+</body>
+
+</html>
