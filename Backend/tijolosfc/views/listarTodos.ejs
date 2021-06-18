@@ -30,9 +30,14 @@
     
       <td><a href="/detalhesProduto?id=<%= produtos[i]._id %>"> <img src="images/detalhes.jpg" title="Ver"/></a>
           <a href="/editarProduto?id=<%= produtos[i]._id %>"> <img src="images/edicao.jpg" title="Editar"/></a>
-          <a href="javascript:confirm('Tem certeza que deseja excluir?') ?
+          
+          <form method="delete" action="/produto">
+            <input type="hidden" name="idProduto" value="<%= produtos[i]._id %>" />
+            <input type="submit" value="Excluir" />
+          </form>
+          <!-- <a href="javascript:confirm('Tem certeza que deseja excluir?') ?
           window.location='/excluirProduto?id=<%= produtos[i]._id %>' : void(0)"> 
-          <img src="images/delete.jpg" title="Excluir"/></a>
+          <img src="images/delete.jpg" title="Excluir"/></a> -->
       </td>
     </tr>
       

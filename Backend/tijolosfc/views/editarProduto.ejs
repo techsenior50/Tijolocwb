@@ -8,6 +8,8 @@
 <body>
     <h1 class="titulo-form">Atualizar Produtos - Tijolo</h1>
     <form method="post">
+        <input type="hidden" name="idProduto" value="<%= produto._id %>" />
+        
         <div class="linha-form">
             <label for="categoriaProduto">Categoria :</label>
             <select name="categoriaProduto">
@@ -34,11 +36,16 @@
         </div>
     
         <div class="linha-form">
-            <label for="ativoProduto">Situação :</label>
-            <select name="ativoProduto">
+            <label>Situação :</label>
+            <input type="checkbox" id="ativoProduto_true" name="ativoProduto" value="true" <%= produto.ativoProduto ? "checked" : "" %> />
+            <span for="ativoProduto_true">Ativo</span>
+            <!-- <br/>
+            <input type="radio" id="ativoProduto_false" name="ativoProduto" value="false" <%= produto.ativoProduto ? "checked" : "" %> />
+            <span for="ativoProduto_false">Inativo</span> -->
+            <!-- <select name="ativoProduto">
                 <option value="true" <%= produto.ativoProduto=='true' ? "selected" : "" %> >Ativo</option>
                 <option value="false" <%= produto.ativoProduto=='false' ? "selected" : "" %> >Inativo</option>
-            </select>
+            </select> -->
         </div>
 
         <div class="linha-form">

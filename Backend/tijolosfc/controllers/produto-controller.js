@@ -28,14 +28,21 @@ class ProdutoController{
     
 
     async alterar(req, res) {
-        await this.produtoService.alterar(req.body);
-        res.send("Alterado com sucesso");
+        const id = res.body.idProduto;
+
+        const produtoExistente = await this.produtoService.buscarId(id);
+
+        if (produtoExistente != null) {
+            await this.produtoService.alterar(req.body);
+            res.send("Alterado com sucesso");
+        }
+        else {
+            res.send("Produto não encontrado");
+        }
     }
 
     async buscarTodos(req, res) {
-        const ordernacao = req.params.ordernar
-        console.log('ordernacao =', ordernacao)
-        const produtos = await this.produtoService.buscarTodos({ ordem: ordenacao }); //preciso colocar this.produtoService porque é uma propriedade, mas esse this pode dar conflito, pois ele varia de acordo com o escopo. Quando um método get chama essa função ele pode entender que esse this é de quem chamou e não é do produtoController. Para que não ocorra essa confusão e dê erro "Cannot read property 'produtoService' of undefined, quando chamo a função, preciso passar de que this se trata especificamente que no caso é do produtoController"
+        const produtos = await this.produtoService.buscarTodos(); //preciso colocar this.produtoService porque é uma propriedade, mas esse this pode dar conflito, pois ele varia de acordo com o escopo. Quando um método get chama essa função ele pode entender que esse this é de quem chamou e não é do produtoController. Para que não ocorra essa confusão e dê erro "Cannot read property 'produtoService' of undefined, quando chamo a função, preciso passar de que this se trata especificamente que no caso é do produtoController"
         //Se eu não utilizar o this e eu criar uma instancia com new produtoService.buscarTodos(), eu não preciso na chamada da função colocar o bind(this), pois não haverá confusão com a referência.
         
         // console.log(produtos);

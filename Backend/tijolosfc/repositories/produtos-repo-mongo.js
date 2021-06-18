@@ -29,6 +29,7 @@ class ProdutoRepositoryMongo{
     }
 
     alterar(produto){
+        produto.precoProduto = Math.max(1, produto.precoProduto); // <- transforma em número
         const query = {nomeProduto: produto.nomeProduto};
         this.model.findOneAndUpdate(query, produto).exec();
     }

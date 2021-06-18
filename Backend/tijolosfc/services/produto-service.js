@@ -11,6 +11,10 @@ class ProdutoService{
     //vou criar os métodos do CRUD
 
     adicionar(produto){
+        if (typeof produto.ativoProduto !== 'boolean') {
+            produto.ativoProduto = false
+        }
+
         this.produtoRepository.adicionar(produto)
     }
 
@@ -21,6 +25,10 @@ class ProdutoService{
     }
 
     alterar(produto){
+        if (typeof produto.ativoProduto !== 'boolean') {
+            produto.ativoProduto = false
+        }
+
         this.produtoRepository.alterar(produto);
 
     }
