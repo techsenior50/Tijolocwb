@@ -5,12 +5,14 @@ const express = require('express');
 var router = express.Router(); //estou extraindo de dentro do express o Router
 const ProdutoController = require('../controllers/produto-controller');
 const produto = require('../models/produto-model');
+const ProdutoRepositoryMongo = require('../repositories/produtos-repo-mongo');
 
 //criando uma classe, transformando a rota em um objeto:
 class ProdutoRoutes{
     constructor() { //o que eu devo colocar como propriedades do meu objeto, o que os chamadores poderão alterar.
         this.produtoController = new ProdutoController(); //transformei a minha constante em uma propriedade.
         this.router = express.Router();
+        this.repo = new ProdutoRepositoryMongo();
         this.loadRoutes();
     }
 
@@ -25,10 +27,18 @@ class ProdutoRoutes{
         });
 
         this.router.get('/listarTodos', (req, res, next) => {
-          produto.find({}, (erro, dados) => {
-            res.render('listarTodos', {produtos: dados});
-          });
+          this.repo.buscarTodos()
+            .then((dados) => {
+              res.render('listarTodos', {produtos: dados});
+            })
+            .catch((erro) => {
+              res.render('erro', {erro: erro});
+            });
         });
+
+        this.router.get("/listarTodos2",
+          this.produtoController.buscarTodos.bind(this.produtoController)
+        );
         
         /* GET Página Cadastro */
         this.router.get('/cadastroProduto', (req, res, next) => {
@@ -80,9 +90,6 @@ class ProdutoRoutes{
 
 
         this.router.get("/produto", this.produtoController.buscarTodos.bind(this.produtoController)); //aqui eu estou informando qual o this que deve ser utilizado para não pegar qualquer this.
-     
-        
-        this.router.get("/listarTodos", this.produtoController.buscarTodos.bind(this.produtoController));
 
         this.router.post("/produto", this.produtoController.adicionar.bind(this.produtoController)); 
 
