@@ -20,49 +20,8 @@ class ProdutoRoutes{
     //aqui eu coloco o método carregador de rotas, apenas para ficar mais organizado, dividido as responsabilidades, então no constructor eu inicializo as propriedades
     loadRoutes() {
 
-
-        /* GET home page. */
-        this.router.get('/', function (req, res, next) {
-            res.render('index', { title: 'Express' });
-        });
-
-        this.router.get('/listarTodos', (req, res, next) => {
-          this.repo.buscarTodos()
-            .then((dados) => {
-              res.render('listarTodos', {produtos: dados});
-            })
-            .catch((erro) => {
-              res.render('erro', {erro: erro});
-            });
-        });
-
-        this.router.get("/listarTodos2",
-          this.produtoController.buscarTodos.bind(this.produtoController)
-        );
-        
-        /* GET Página Cadastro */
-        this.router.get('/cadastroProduto', (req, res, next) => {
-          res.render('cadastroProduto');
-        })
-
-        this.router.post('/cadastroProduto', (req, res, next) => {
-          produto.create(req.body, (erro, produto) => {
-            if (erro) {
-              res.send('Houve um erro: ' + erro);
-            }
-            else {
-              res.render('cadastroProdutoSucesso', { u: produto });
-              //res.send(produto.titulo + ' Cadastrado com id ' + produto._id)
-            }
-          })
-        })
-
-        this.router.get('/cadastroProduto', function(req,res,next) {
-          /* a linha de baixo do comando é igual ao de cima mais compactado
-          router.get('/cadastro', (req, res, next) => { } */
-          res.write('cadastroProduto');
-          res.end();
-        });
+/* Essa parte até antes dos comentários do Rafael,
+está a codificação do que eu fiz. Eu não tirei porque ainda está funcionando - Vera */
 
         this.router.get('/detalhesProduto', (req, res, next) => {
           produto.findOne({_id: req.query.id}, (erro, dado) => {
@@ -96,9 +55,6 @@ class ProdutoRoutes{
         });
 
 
-
-
-
         /* ********************* */
 
         // Missão do Back-end: Fazer esses endpoints funcionarem!
@@ -109,20 +65,22 @@ class ProdutoRoutes{
 
         // GET /produto/novo
         // Tela para criar um novo produto (faz POST para /produto)
-        this.router.get("/produto/novo", this.produtoController.buscarTodos.bind(this.produtoController)); //aqui eu estou informando qual o this que deve ser utilizado para não pegar qualquer this.
+        this.router.get("/produto/novo", (req, res, next) => {
+          res.render('cadastroProduto');
+        })
+
+        // POST /produto
+        // Cadastrar novo produto (NÃO pode receber um id!)
+        this.router.post("/produto", this.produtoController.adicionar.bind(this.produtoController));
 
         // GET /produto/{id} <- Desafio!
         // Tela de edição de um produto
         // Por exemplo: GET /produto/60cb4d1042f21a4584ed3a42
         // (Path Parameters)
-        this.router.get("/produto/{id}", this.produtoController.buscarTodos.bind(this.produtoController)); //aqui eu estou informando qual o this que deve ser utilizado para não pegar qualquer this.
+        this.router.get("/produto/{id}", this.produtoController.buscarTodos.bind(this.produtoController));
 
         // Se não conseguir, pode ser /produto/ver?id=60cb4d1042f21a4584ed3a42
         // this.router.get("/produto/ver", this.produtoController.buscarTodos.bind(this.produtoController)); //aqui eu estou informando qual o this que deve ser utilizado para não pegar qualquer this.
-
-        // POST /produto
-        // Cadastrar novo produto (NÃO pode receber um id!)
-        this.router.post("/produto", this.produtoController.adicionar.bind(this.produtoController)); 
 
         // PUT /produto
         // Alterar produto existente (DEVE receber um id!)

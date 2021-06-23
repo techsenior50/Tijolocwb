@@ -16,7 +16,8 @@ class ProdutoController{
         
         //res.send('chamou pelo meu método Post' + produto);
         //se eu quiser mostrar a mensagem como json:
-        res.json(produto);
+        //res.json(produto);
+        res.render('cadastroProdutoSucesso', { u: produto });
             
     }
     

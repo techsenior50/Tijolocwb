@@ -7,7 +7,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script>
         function cadastrar() {
-            $.post('/cadastroProduto/', {
+            $.post('/produto', {
                 categoriaProduto: $('#categoriaProduto').val(),
                 nomeProduto: $('#nomeProduto').val(),
                 descricaoProduto: $('#descricaoProduto').val(),
@@ -28,15 +28,6 @@
         return false;
         }
     </script>
-    <!--  <script>
-         function cadastrarStatus(auxStatusProduto) {
-            if (auxStatusProduto) {
-                ativoProduto = "true"
-            } else {
-                ativoProduto = "false"
-            }
-        } return ativoProduto;
-    </script> -->
 
 </head>
 
@@ -70,9 +61,6 @@
             <label for="precoProduto">Preço :</label>
             <input id="precoProduto" type="number" step=".01" required="required" />
         </div>
-        
-
-<!--         <div class="linha-form" onsubmit="return cadastrarStatus(auxStatusProduto)"> -->
 
 
         <div class="linha-form">
