@@ -1,4 +1,5 @@
 const Produto = require("../domain/produto-domain"); //representa o nosso modelo
+const { param } = require("../routes/produto-routes");
 
 const ProdutoService = require('../services/produto-service'); //representa o nosso service, regra de negócio
 
@@ -29,15 +30,21 @@ class ProdutoController{
     
 
     async alterar(req, res) {
-        const id = res.body.idProduto;
-
-        const produtoExistente = await this.produtoService.buscarId(id);
+        //const id = res.body.idProduto;
+        //const id = req.query.id;
+        const id = req.body.idProduto;
+        console.log('validando2 o id: ' + id);
+        const produtoExistente = await this.produtoService.buscarProduto(id);
 
         if (produtoExistente != null) {
-            await this.produtoService.alterar(req.body);
+            console.log("passou if");
+            await this.produtoService.alterar(id, req.body);
+            //await this.produtoService.alterar(req.body);
             res.send("Alterado com sucesso");
+ 
         }
         else {
+            console.log("entrou no else");
             res.send("Produto não encontrado");
         }
     }
@@ -49,6 +56,16 @@ class ProdutoController{
         // console.log(produtos);
         // res.json(produtos);
         res.render('listarTodos', { produtos });
+    }
+
+    async buscarProduto(req, res) {
+        //const produtos = await this.produtoService.buscarProduto(req.query.id); //preciso colocar this.produtoService porque é uma propriedade, mas esse this pode dar conflito, pois ele varia de acordo com o escopo. Quando um método get chama essa função ele pode entender que esse this é de quem chamou e não é do produtoController. Para que não ocorra essa confusão e dê erro "Cannot read property 'produtoService' of undefined, quando chamo a função, preciso passar de que this se trata especificamente que no caso é do produtoController"
+        const produtos = await this.produtoService.buscarProduto(req.id);
+        //Se eu não utilizar o this e eu criar uma instancia com new produtoService.buscarTodos(), eu não preciso na chamada da função colocar o bind(this), pois não haverá confusão com a referência.
+        
+        // console.log(produtos);
+        // res.json(produtos);
+        res.render('editarProduto', {produto: produtos});
     }
 }
 

@@ -28,10 +28,18 @@ class ProdutoRepositoryMongo{
     
     }
 
-    alterar(produto){
-        produto.precoProduto = Math.max(1, produto.precoProduto); // <- transforma em número
+    alterar(idProduto, produto){
+/*         produto.precoProduto = Math.max(1, produto.precoProduto); // <- transforma em número
         const query = {nomeProduto: produto.nomeProduto};
-        this.model.findOneAndUpdate(query, produto).exec();
+        this.model.findOneAndUpdate(query, produto).exec(); */
+
+/*         req.body.precoProduto = Math.max(1, req.body.precoProduto);
+        produto.findOneAndUpdate({_id: req.query.id}, req.body, (erro, dado) => {
+          res.send('Produto alterado com sucesso'); */
+
+          produto.precoProduto =Math.max(1, produto.precoProduto);
+          //const query = {_id: idProduto};
+          this.model.findeOneAndUpdate({_id: idProduto}, produto).exec();
     }
 
     buscar(nomeProduto){
@@ -45,6 +53,14 @@ class ProdutoRepositoryMongo{
     //    return promise; //retorno a promise que é uma json
         return this.model.find({}).lean().exec();
     }
+
+    buscarProduto(idProduto){
+        /* return this.model.find({}); não posso retornar diretamente o this.model.find(0 porque é uma query)*/
+     //    const query = this.model.find({}); //primeiro eu guardo a query em uma constante
+     //    const promise = query.lean().exec(); // executo a query e guardo em uma promise - eu posso usar com o sem o lean, sem o lean além dos campos, vai trazer mais um monte de propriedades que pode não me interessar.
+     //    return promise; //retorno a promise que é uma json
+         return this.model.findById(idProduto).lean().exec();
+     }
 }
 
 module.exports = ProdutoRepositoryMongo;

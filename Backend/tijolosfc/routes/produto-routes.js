@@ -29,7 +29,7 @@ está a codificação do que eu fiz. Eu não tirei porque ainda está funcionand
           });
         });
 
-        this.router.get('/editarProduto', (req, res, next) => {
+/*         this.router.get('/editarProduto', (req, res, next) => {
           produto.findOne({_id: req.query.id}, (erro, dado) => {
             res.render('editarProduto', {produto: dado});
           });
@@ -40,7 +40,7 @@ está a codificação do que eu fiz. Eu não tirei porque ainda está funcionand
           produto.findOneAndUpdate({_id: req.query.id}, req.body, (erro, dado) => {
             res.send('Produto alterado com sucesso');
           });
-        });
+        }); */
   
         this.router.get('/excluirProduto', (req, res, next) => {
           produto.findOneAndRemove({_id: req.query.id}, (erro, dado) => {
@@ -54,11 +54,23 @@ está a codificação do que eu fiz. Eu não tirei porque ainda está funcionand
           });
         });
 
-
-        /* ********************* */
+        /* ******************************************** */
+        /* ***************MISSÃO DADA PELO RAFAEL****** */
+        /* ******************************************** */
 
         // Missão do Back-end: Fazer esses endpoints funcionarem!
-
+         this.router.param('id', (req, res, next, id) => {
+          // faça a validação do 'name' aqui
+          // validação blah blah
+          // logar alguma coisa pra sabermos se funciona
+          console.log('validando o id: ' + id)
+        
+          // quando a validação acabar, salve o novo nome na requisição
+          req.id = id
+          //res.id = id
+          // vá para a próxima coisa a fazer
+          next()
+        }) 
         // GET /produto
         // Lista com todos os produtos
         this.router.get("/produto", this.produtoController.buscarTodos.bind(this.produtoController)); //aqui eu estou informando qual o this que deve ser utilizado para não pegar qualquer this.
@@ -77,14 +89,21 @@ está a codificação do que eu fiz. Eu não tirei porque ainda está funcionand
         // Tela de edição de um produto
         // Por exemplo: GET /produto/60cb4d1042f21a4584ed3a42
         // (Path Parameters)
-        this.router.get("/produto/{id}", this.produtoController.buscarTodos.bind(this.produtoController));
 
+        
+        //*********   MÉTODO GET DO EDITARPRODUTO - CHAMADA QUANDO DO LISTARTODOS CLICAMOS NO BOTÃO EDITAR ********
+        this.router.get("/produto/:id", this.produtoController.buscarProduto.bind(this.produtoController));
+        
+        //this.router.get("/produto/{id}", this.produtoController.buscarTodos.bind(this.produtoController));
+        //this.router.get("/produto/editarProduto", this.produtoController.buscarProduto.bind(this.produtoController));
         // Se não conseguir, pode ser /produto/ver?id=60cb4d1042f21a4584ed3a42
         // this.router.get("/produto/ver", this.produtoController.buscarTodos.bind(this.produtoController)); //aqui eu estou informando qual o this que deve ser utilizado para não pegar qualquer this.
 
+        //*********   MÉTODO PUT DO EDITARPRODUTO - CHAMADA PARA ALTERAR ********
         // PUT /produto
         // Alterar produto existente (DEVE receber um id!)
-        this.router.put("/produto", this.produtoController.alterar.bind(this.produtoController));
+        this.router.put("/produto/:id", this.produtoController.alterar.bind(this.produtoController));
+
 
         // DELETE /produto
         // Apagar um produto do banco (DEVE receber um id!)
