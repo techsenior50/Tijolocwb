@@ -23,12 +23,12 @@ class ProdutoService{
         this.produtoRepository.excluir(nomeProduto);
     }
 
-    alterar(produto){
+    alterar(idProduto, produto){
         if (typeof produto.ativoProduto !== 'boolean') {
             produto.ativoProduto = false
         }
 
-        this.produtoRepository.alterar(produto);
+        this.produtoRepository.alterar(idProduto, produto);
 
     }
     buscarProduto(idProduto){
