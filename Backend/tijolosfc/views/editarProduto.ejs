@@ -7,7 +7,8 @@
 
 <body>
     <h1 class="titulo-form">Atualizar Produtos - Tijolo</h1>
-    <form method="put">
+    <form action="/produto/<%= produto._id %>" method="post">
+        <input type="hidden" name="_method" value="put" />
         <input type="hidden" name="idProduto" value="<%= produto._id %>" />
         
         <div class="linha-form">

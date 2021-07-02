@@ -30,14 +30,10 @@ class ProdutoController{
     
 
     async alterar(req, res) {
-        //const id = res.body.idProduto;
-        //const id = req.query.id;
         const id = req.body.idProduto;
-        console.log('validando2 o id: ' + id);
         const produtoExistente = await this.produtoService.buscarProduto(id);
 
-        if (produtoExistente != null) {
-            console.log("passou if");
+        if (produtoExistente != null) { 
             await this.produtoService.alterar(id, req.body);
             //await this.produtoService.alterar(req.body);
             res.send("Alterado com sucesso");

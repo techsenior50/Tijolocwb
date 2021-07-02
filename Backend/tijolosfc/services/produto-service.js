@@ -24,11 +24,27 @@ class ProdutoService{
     }
 
     alterar(idProduto, produto){
-        if (typeof produto.ativoProduto !== 'boolean') {
+        if (typeof produto.ativoProduto !== 'undefined') {
+            produto.ativoProduto = produto.ativoProduto === "true"
+        }
+        else {
             produto.ativoProduto = false
         }
 
-        this.produtoRepository.alterar(idProduto, produto);
+        const errosDeValidacao = [];
+
+        if (typeof produto.nomeProduto !== 'string' || produto.nomeProduto.length === 0) {
+            // produto inválido! tá faltando o nome!
+            // Ação: Retornar um erro para a tela indicando que o nome está em branco
+            errosDeValidacao.push("Nome deve ser preenchido");
+        }
+
+        if (errosDeValidacao.length === 0) {
+            this.produtoRepository.alterar(idProduto, produto);
+        }
+        else {
+            // Manda para a tela a lista de erros de validação
+        }
 
     }
     buscarProduto(idProduto){

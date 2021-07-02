@@ -100,14 +100,13 @@ está a codificação do que eu fiz. Eu não tirei porque ainda está funcionand
         // this.router.get("/produto/ver", this.produtoController.buscarTodos.bind(this.produtoController)); //aqui eu estou informando qual o this que deve ser utilizado para não pegar qualquer this.
 
         //*********   MÉTODO PUT DO EDITARPRODUTO - CHAMADA PARA ALTERAR ********
-        // PUT /produto
+        // POST /produto/:id 
         // Alterar produto existente (DEVE receber um id!)
-        this.router.put("/produto/:id", this.produtoController.alterar.bind(this.produtoController));
+        this.router.post("/produto/:id", this.produtoController.alterar.bind(this.produtoController));
 
-
-        // DELETE /produto
+        // POST /produto/deletar
         // Apagar um produto do banco (DEVE receber um id!)
-        this.router.delete("/produto", this.produtoController.excluir.bind(this.produtoController)); //eu tive que colocar o this porque virou propriedade agora.
+        this.router.post("/produto/deletar", this.produtoController.excluir.bind(this.produtoController)); //eu tive que colocar o this porque virou propriedade agora.
 
         /* ********************* */
 

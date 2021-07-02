@@ -39,7 +39,7 @@ class ProdutoRepositoryMongo{
 
           produto.precoProduto =Math.max(1, produto.precoProduto);
           //const query = {_id: idProduto};
-          this.model.findeOneAndUpdate({_id: idProduto}, produto).exec();
+          this.model.findOneAndUpdate({_id: idProduto}, produto).exec();
           
     }
 

@@ -31,7 +31,7 @@
       <td><a href="/detalhesProduto?id=<%= produtos[i]._id %>"> <img src="images/detalhes.jpg" title="Ver"/></a>
           <a href="/produto/<%= produtos[i]._id %>"> <img src="images/edicao.jpg" title="Editar"/></a>
           <!-- <a href="/produto/editarProduto?id=<%= produtos[i]._id %>"> <img src="images/edicao.jpg" title="Editar"/></a> -->
-          <form method="delete" action="/produto">
+          <form method="post" action="/produto/deletar">
             <input type="hidden" name="idProduto" value="<%= produtos[i]._id %>" />
             <input type="submit" value="Excluir" />
           </form>
