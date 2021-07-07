@@ -23,11 +23,11 @@ class ProdutoRoutes{
 /* Essa parte até antes dos comentários do Rafael,
 está a codificação do que eu fiz. Eu não tirei porque ainda está funcionando - Vera */
 
-        this.router.get('/detalhesProduto', (req, res, next) => {
+/*         this.router.get('/detalhesProduto', (req, res, next) => {
           produto.findOne({_id: req.query.id}, (erro, dado) => {
             res.render('detalhesProduto', {produto: dado});
           });
-        });
+        }); */
 
 /*         this.router.get('/editarProduto', (req, res, next) => {
           produto.findOne({_id: req.query.id}, (erro, dado) => {
@@ -42,11 +42,11 @@ está a codificação do que eu fiz. Eu não tirei porque ainda está funcionand
           });
         }); */
   
-        this.router.get('/excluirProduto', (req, res, next) => {
+/*         this.router.get('/excluirProduto', (req, res, next) => {
           produto.findOneAndRemove({_id: req.query.id}, (erro, dado) => {
             res.send('Produto excluído com sucesso');
           });
-        });
+        }); */
 
         this.router.get('/detalhesProduto', (req, res, next) => {
           this.ProdutoController.findOne({_id: req.query.id}, (erro, dado) => {
@@ -102,11 +102,11 @@ está a codificação do que eu fiz. Eu não tirei porque ainda está funcionand
         //*********   MÉTODO PUT DO EDITARPRODUTO - CHAMADA PARA ALTERAR ********
         // POST /produto/:id 
         // Alterar produto existente (DEVE receber um id!)
-        this.router.post("/produto/:id", this.produtoController.alterar.bind(this.produtoController));
-
+       
         // POST /produto/deletar
         // Apagar um produto do banco (DEVE receber um id!)
         this.router.post("/produto/deletar", this.produtoController.excluir.bind(this.produtoController)); //eu tive que colocar o this porque virou propriedade agora.
+        this.router.post("/produto/:id", this.produtoController.alterar.bind(this.produtoController));
 
         /* ********************* */
 

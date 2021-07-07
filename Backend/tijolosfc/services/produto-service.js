@@ -17,34 +17,19 @@ class ProdutoService{
         this.produtoRepository.adicionar(produto)
     }
 
-    excluir(nomeProduto){
+    excluir(idProduto){
+        console.log(idProduto);
         //preciso primeiro localizar dentro do array
         // posso fazer de várias formas, posso usar o splice -> array.splice();
-        this.produtoRepository.excluir(nomeProduto);
+        return this.produtoRepository.excluir(idProduto);
     }
 
     alterar(idProduto, produto){
-        if (typeof produto.ativoProduto !== 'undefined') {
-            produto.ativoProduto = produto.ativoProduto === "true"
-        }
-        else {
+        if (typeof produto.ativoProduto !== 'boolean') {
             produto.ativoProduto = false
         }
 
-        const errosDeValidacao = [];
-
-        if (typeof produto.nomeProduto !== 'string' || produto.nomeProduto.length === 0) {
-            // produto inválido! tá faltando o nome!
-            // Ação: Retornar um erro para a tela indicando que o nome está em branco
-            errosDeValidacao.push("Nome deve ser preenchido");
-        }
-
-        if (errosDeValidacao.length === 0) {
-            this.produtoRepository.alterar(idProduto, produto);
-        }
-        else {
-            // Manda para a tela a lista de erros de validação
-        }
+        return this.produtoRepository.alterar(idProduto, produto);
 
     }
     buscarProduto(idProduto){

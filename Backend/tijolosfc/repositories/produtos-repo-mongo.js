@@ -23,8 +23,8 @@ class ProdutoRepositoryMongo{
 
     }
 
-    excluir(nomeProduto){
-        return this.model.deleteOne({nomeProduto}).exec(); //this.model.deleteOne({nomeProduto}) é uma query e vai retornar uma promise que vai executar. ({nomeProduto}) é o mesmo que ({nomeProduto: nomeProduto}) se eu quiser deletar um registro com chave composta é só incluir as outras chaves com "," exemplo, ({nomeProduto, precoProduto}) ou ({nomeProduto: nomeProduto, precoProduto: precoProduto: precoProduto}) Eu posso ou não retornar um o promise.
+    excluir(idProduto){
+        return this.model.findOneAndRemove({_id:idProduto}).exec(); //this.model.deleteOne({nomeProduto}) é uma query e vai retornar uma promise que vai executar. ({nomeProduto}) é o mesmo que ({nomeProduto: nomeProduto}) se eu quiser deletar um registro com chave composta é só incluir as outras chaves com "," exemplo, ({nomeProduto, precoProduto}) ou ({nomeProduto: nomeProduto, precoProduto: precoProduto: precoProduto}) Eu posso ou não retornar um o promise.
     
     }
 
@@ -39,7 +39,7 @@ class ProdutoRepositoryMongo{
 
           produto.precoProduto =Math.max(1, produto.precoProduto);
           //const query = {_id: idProduto};
-          this.model.findOneAndUpdate({_id: idProduto}, produto).exec();
+          return this.model.findOneAndUpdate({_id: idProduto}, produto);
           
     }
 

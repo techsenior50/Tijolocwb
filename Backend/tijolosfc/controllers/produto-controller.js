@@ -23,13 +23,18 @@ class ProdutoController{
     }
     
     async excluir(req, res) {
-        await this.produtoService.excluir(req.body.nomeProduto);
+        console.log("Entrou em deletar");
+        console.log(req.body.idProduto);
+        console.log(req.query.id);
+        await this.produtoService.excluir(req.body.idProduto);
         res.send('Excluído com sucesso');
         
     }
     
 
     async alterar(req, res) {
+        console.log("Entrou em alterar");
+        
         const id = req.body.idProduto;
         const produtoExistente = await this.produtoService.buscarProduto(id);
 
