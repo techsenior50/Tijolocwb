@@ -1,4 +1,4 @@
-//è o mesmo que o Controller - é a paerte que conversa com o HTTP com o front
+//É o mesmo que o Controller - é a parrte que conversa com o HTTP com o front
 //CRUD - Create, Retrieve, Update, Delete
 
 const express = require('express');
@@ -19,40 +19,6 @@ class ProdutoRoutes{
 
     //aqui eu coloco o método carregador de rotas, apenas para ficar mais organizado, dividido as responsabilidades, então no constructor eu inicializo as propriedades
     loadRoutes() {
-
-/* Essa parte até antes dos comentários do Rafael,
-está a codificação do que eu fiz. Eu não tirei porque ainda está funcionando - Vera */
-
-/*         this.router.get('/detalhesProduto', (req, res, next) => {
-          produto.findOne({_id: req.query.id}, (erro, dado) => {
-            res.render('detalhesProduto', {produto: dado});
-          });
-        }); */
-
-/*         this.router.get('/editarProduto', (req, res, next) => {
-          produto.findOne({_id: req.query.id}, (erro, dado) => {
-            res.render('editarProduto', {produto: dado});
-          });
-        });
-        
-        this.router.post('/editarProduto', (req, res, next) => {
-          req.body.precoProduto = Math.max(1, req.body.precoProduto);
-          produto.findOneAndUpdate({_id: req.query.id}, req.body, (erro, dado) => {
-            res.send('Produto alterado com sucesso');
-          });
-        }); */
-  
-/*         this.router.get('/excluirProduto', (req, res, next) => {
-          produto.findOneAndRemove({_id: req.query.id}, (erro, dado) => {
-            res.send('Produto excluído com sucesso');
-          });
-        }); */
-
-        this.router.get('/detalhesProduto', (req, res, next) => {
-          this.ProdutoController.findOne({_id: req.query.id}, (erro, dado) => {
-            res.render('detalhesProduto', {produto: dado});
-          });
-        });
 
         /* ******************************************** */
         /* ***************MISSÃO DADA PELO RAFAEL****** */
@@ -106,7 +72,13 @@ está a codificação do que eu fiz. Eu não tirei porque ainda está funcionand
         // POST /produto/deletar
         // Apagar um produto do banco (DEVE receber um id!)
         this.router.post("/produto/deletar", this.produtoController.excluir.bind(this.produtoController)); //eu tive que colocar o this porque virou propriedade agora.
+
         this.router.post("/produto/:id", this.produtoController.alterar.bind(this.produtoController));
+
+        // Ver detalhes do produto
+        this.router.get("/detalhesProduto/:id", this.produtoController.verProduto.bind(this.produtoController));
+
+
 
         /* ********************* */
 

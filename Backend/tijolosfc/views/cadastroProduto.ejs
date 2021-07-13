@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/estilo.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
     <script>
         function cadastrar() {
             $.post('/produto', {
@@ -22,7 +23,6 @@
                     $('#precoProduto').val('');
                     $('#ativoProduto').val('');
                     $('#imagemProduto').val('');
-
                     $("#resposta").html('O produto foi cadastrado com sucesso!');
                 });
         return false;
@@ -32,8 +32,12 @@
 </head>
 
 <body>
-
-    <h1 class="titulo-form">Cadastro de Produtos - Tijolo</h1>
+    <div class=cabec>
+        <img src="../images/logo.svg" width=10% alt="Tijolo" />
+        <p class=titulo>Área do Administrador *** Menu</p>
+    </div>
+    <div class=container>
+    <p class="idProduto-form">Cadastrar produtos</p>    
     <div id="resposta" ></div>
     <form method="post" onsubmit="return cadastrar()">
         <div class="linha-form">
@@ -75,14 +79,15 @@
             <label for="imagemProduto">Imagem :</label>
             <input class="enderecoImagem" placeholder="informe o endereço http da imagem" style="width:400px" type="url" required="required" id="imagemProduto">
         </div>
-
+        <br>
         <div class="linha-form">
-            <input style="font-size: 16px; font-family: Arial" type="reset" />
-            <input style="font-size: 16px; font-family: Arial" type="submit" />
+            <label>Salvar? </label>
+            <input type="reset" />
+            <input type="submit" />
         </div>
-
+        <br>
     </form>
-
+    </div>
 </body>
 
 </html>

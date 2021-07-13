@@ -12,12 +12,9 @@
         <p class=titulo>Área do Administrador *** Menu</p>
     </div>
     <div class=container>
-        <p class="idProduto-form">Editar produtos</p>
- <!--       <form action="/produto/<%= produto._id %>" method="post">
-            <input type="hidden" name="_method" value="put" />
-            <input type="hidden" name="idProduto" value="<%= produto._id %>" /> -->
+        <p class="idProduto-form">Detalhes do produto</p>
         
-            <form method="POST">
+            <form method="get">
                 <input type="hidden" name="idProduto" value="<%= produto._id %>" />
 
             <div class="linha-form">
@@ -71,8 +68,7 @@
             </div>
             <br>
             <div class="linha-form">
-                <label>Salvar alteração? </label>
-                <input type="reset" />
+                <label>Retornar</label>
                 <input type="submit" />
             </div>
 

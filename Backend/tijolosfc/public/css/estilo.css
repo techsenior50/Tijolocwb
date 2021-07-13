@@ -1,0 +1,341 @@
+@media (min-width: 600px) {
+    html {
+        font-size: 1em;
+    }
+    .secao {
+        width: 50%;
+        float: left;
+    }
+}
+
+@media (min-width: 1000px) {
+    html {
+        font-size: 1.25em;
+    }
+    .secao {
+        width: 33.333%;
+    }
+}
+
+
+.cabec{
+    display: inline-block;
+    width:100%;
+    background-color: rgb(230, 226, 222);
+    vertical-align: top;
+    position: 0;
+    position: fixed;
+}
+
+.container {
+    display: inline-block;
+    width: 80%;
+    margin-top:8%;
+    margin-bottom: 5%;
+    vertical-align: top;
+    margin-left: 10%;
+    border-style:solid;
+    border-radius: 1px;  	
+    text-align:left;
+    background-color: rgb(230, 226, 222);
+    border-color :#92867f;
+}
+.titulo {
+    display: inline-block;
+    font-size:1.3em;
+    font-family: Helvetica;
+    width:60%;
+    margin:2%;
+    text-align: center;
+    vertical-align: top;
+}
+.idProduto-form {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.3em;
+    text-align:center;
+}
+.resposta{
+    margin-left: 10%;
+    font-weight: bold;
+}
+
+.linha-form {
+    margin-top: 10px;
+}
+
+.container1 {
+    display: inline-block;
+    width: 90%;
+    margin-top:8%;
+    margin-bottom: 2%;
+    vertical-align: top;
+    margin-left: 5%;
+    border-style:solid;
+    border-radius: 1px;  	
+    text-align:left;
+    background-color: rgb(230, 226, 222);
+    border-color :#92867f;
+}
+
+.formlista{
+    display: inline;
+    padding: 0 20px 0 20px;
+    font-size:1.3em;
+    font-family: Helvetica;
+}
+
+.titulista{
+    background-color: rgb(230, 226, 222);
+}
+
+.titulopr {
+    font-size:1.3em;
+    text-align: center;
+}
+.titulopr1 {
+    font-size:1.3em;
+    text-align: center;
+}
+.containerlista{
+    display: inline-block;
+    width:100%;
+
+}
+.containercampo{
+    display: inline-block;
+    width:22%;
+    text-align: center;
+    margin:1%;
+}
+
+label {
+    float: left;
+    width: 160px;
+    font-family: Helvetica;
+    margin-left:10%;
+   font-size: 1em;
+}
+.areatexto{
+    width:60%;
+}
+.entradatexto{
+    width:60%;
+}
+
+
+ 
+
+
+
+
+
+/* .containera {
+    display: inline-block;
+    width: 45%;
+    margin-top:10%;
+    margin-bottom: 10%;
+    vertical-align: top;
+    margin-left: 6%;
+}
+.container2 {
+   display: inline-block;
+   width: 40%;
+   margin-top:10%;
+   margin-bottom:10%;
+   margin-left: 3%;
+   vertical-align: top;
+}
+
+.panel-Modelo1 {
+    display: block;
+    text-align: center;
+   
+    width: 100%;
+    vertical-align: top;
+} 
+
+.panel-Modelo1 .title {
+	color :#C55A11;
+	font-style: italic;
+	font-family: Helvetica;
+    font-size: 2.0em;
+    margin-bottom: 7%;
+}
+.panel-Modelo1 .parag {
+    color :#000000;
+    font-family: montserrat;
+    font-size: 1.0em;
+    margin-bottom: 4%;
+}
+.panel-Modelo1 .Modelo1-description {
+	font-family: Helvetica;
+	font-size: 1em;
+    line-height: 0.5;
+}
+
+
+.panel-Modelo2 {
+    display: inline-block;
+    text-align: left;
+    top:30%;
+    right: 1%;
+    width: 100%;
+    vertical-align: top;
+} 
+.panel-Modelo2 .title {
+	color :#C55A11;
+	font-style: italic;
+	font-family: Helvetica;
+    font-size: 2.0em;
+    margin-bottom: 7%;
+}
+.panel-Modelo2 .parag {
+    color :#000000;
+    font-family: montserrat;
+    font-size: 1.0em;
+    margin-bottom: 4%;
+}
+.panel-Modelo2 .Modelo2-description {
+	font-family: Helvetica;
+	font-size: 1em;
+    line-height: 0.5;
+}
+
+
+.panel-Modelo3 {
+    text-align: center;
+    display: inline-block;
+    width: 100%;
+    vertical-align: top;
+    background: url(../img/fundoclaro.png) no-repeat ;
+    background-size: cover;
+} 
+.panel-Modelo3 .title {
+	color :#000000;
+	font-style: italic;
+	font-family: Helvetica;
+    font-size: 2.0em;
+    margin-bottom: 7%;
+}
+.panel-Modelo3 .parag {
+    color :#000000;
+    font-family: montserrat;
+    font-size: 1.0em;
+    margin-bottom: 4%;
+}
+.panel-Modelo3 .Modelo3-description {
+	font-family: Helvetica;
+	color :#000000;
+	font-size: 1em;
+    line-height: 0.5;
+}
+
+.panel-Modelo4 {
+    text-align: center;
+    display: inline-block;
+    width: 100%;
+    vertical-align: top;
+    background: url(../img/fundomaisclaro.png) no-repeat ;
+    background-size: cover;
+ }
+
+.panel-Modelo4 .title {
+	color :#000000;
+	font-style: italic;
+	font-family: Helvetica;
+    font-size: 2.0em;
+    margin-bottom: 7%;
+}
+.panel-Modelo4 .parag {
+    color :#000000;
+    font-family: montserrat;
+    font-size: 1.0em;
+    margin-bottom: 4%;
+}
+.panel-Modelo4 .Modelo4-description {
+	font-family: Helvetica;
+	color :#000000;
+	font-size: 1em;
+    line-height: 0.5;
+}
+.panel-Modelo5 {
+    text-align: center;
+    display: inline-block;
+    width: 100%;
+    vertical-align: top;
+    background: linear-gradient(to bottom, rgba(0.1,0.1,0.1,0.1) 0%,rgba(0.6,0.6,0.6,0.6) 100%),url(../img/fundoorigcortado.jpg) no-repeat ;
+    background-size: cover;
+    
+ }
+
+
+.panel-Modelo5 .title {
+	color :#ffffff;
+	font-family: montserrat;
+    font-size: 2.0em;
+    margin-bottom: 7%;
+}
+.panel-Modelo5 .parag {
+    color :#ffffff;
+    font-family: montserrat;
+    font-size: 1.0em;
+    margin-bottom: 4%;
+}
+.panel-Modelo5 .Modelo5-description {
+	font-family: montserrat;
+	color :#ffffff;
+	font-size: 1em;
+}
+
+.panel-Modelo6 {
+    text-align: center;
+    display: inline-block;
+    width: 100%;
+    vertical-align: top;
+    background: url(../img/fundotransp.jpg) no-repeat ;
+    background-size: cover;
+ }
+
+
+.panel-Modelo6 .title {
+	color :#000000;
+	font-style: italic;
+	font-family: Helvetica;
+    font-size: 2.0em;
+    margin-bottom: 7%;
+}
+.panel-Modelo6 .parag {
+    color :#000000;
+    font-family: montserrat;
+    font-size: 1.0em;
+    margin-bottom: 4%;
+}
+.panel-Modelo6 .Modelo6-description {
+	font-family: Helvetica;
+	color :#000000;
+	font-size: 1em;
+    line-height: 0.5;
+}
+
+
+.mapa {
+    padding: 2em 0;
+
+    
+}
+.mapa-conteudo {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.whats {
+  position: relative;
+  vertical-align: middle;
+  background-size:cover;
+}
+.email {
+  position: relative;  
+  vertical-align: middle;
+  background-size:cover;
+ 
+} */

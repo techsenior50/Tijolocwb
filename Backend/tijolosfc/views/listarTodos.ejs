@@ -1,49 +1,75 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" type="text/css" href="/css/style.css">
-  
+  <link rel="stylesheet" type="text/css" href="/css/estilo.css">
 </head>
 
-<body style="margin-left: 20px;">
-  <h1 class="titulo-form">Relação de produtos - Tijolo</h1>
-<table border="1" cellspacing="0" width="80%">
+<body>
+  <div class=cabec>
+    <img src="images/logo.svg" width=10% alt="Tijolo" />
+    <p class=titulo>Área do Administrador *** Menu</p>
+  </div>
+  <div class=container1></div>
+
+  <div>
+    <form class=formlista action="/produto/novo" method="get"> 
+      <input type="submit" style="color:blue; font-size:20px" value="[ Novo Produto ]"/>
+    </form>
+
+    <form class=formlista action="/produto" method="get"> 
+      <input type="submit" style="color:blue; font-size:20px" value="[ Recarregar Lista]"/>
+    </form>
+  </div>
+  <br><br>
+  <table border="1" cellspacing="0" width="80%">
     <thead>
-      <tr>
-         <th width="30%">Categoria</th>
-         <th>Nome</th>
-         <th>Preço</th>
-         <th>Situação</th>
-         <th>Detalhes</th>
+      <tr class=titulista>
+        <th width="10%">Categoria</th>
+        <th width="30%">Nome</th>
+        <th width="30%">Descrição</th>
+        <th>Preço</th>
+        <th>Situação</th>
+        <th>Procedimentos</th>
       </tr>
     </thead>
-  <tbody>
-    <% for (var i = 0; i < produtos.length; i++) {
-    %>
-    <tr>
-      <td><%= produtos[i].categoriaProduto %></td>
-      <td><%= produtos[i].nomeProduto %></td>
-      <td><%= produtos[i].precoProduto %></td>
-      <td><%= produtos[i].ativoProduto %></td>
-    
-      <td><a href="/detalhesProduto?id=<%= produtos[i]._id %>"> <img src="images/detalhes.jpg" title="Ver"/></a>
-          <a href="/produto/<%= produtos[i]._id %>"> <img src="images/edicao.jpg" title="Editar"/></a>
-          <!-- <a href="/produto/editarProduto?id=<%= produtos[i]._id %>"> <img src="images/edicao.jpg" title="Editar"/></a> -->
-          <form method="post" action="/produto/deletar">
-            <input type="hidden" name="idProduto" value="<%= produtos[i]._id %>" />
-            <input type="submit" value="Excluir" />
-          </form>
-          <!-- <a href="javascript:confirm('Tem certeza que deseja excluir?') ?
+    <tbody>
+      <% for (var i=0; i < produtos.length; i++) { %>
+        <tr>
+          <td>
+            <%= produtos[i].categoriaProduto %>
+          </td>
+          <td>
+            <%= produtos[i].nomeProduto %>
+          </td>
+          <td>
+            <%= produtos[i].descricaoProduto %>
+          </td>
+          <td>
+            <%= produtos[i].precoProduto %>
+          </td>
+          <td>
+            <%= produtos[i].ativoProduto %>
+          </td>
+
+          <td>
+          <a href="/detalhesProduto/<%= produtos[i]._id %>"> <img src="images/detalhes.jpg" title="Ver" /></a>
+          <!--  <a href="/detalhesProduto?id=<%= produtos[i]._id %>"> <img src="images/detalhes.jpg" title="Ver" /></a> -->
+            <a href="/produto/<%= produtos[i]._id %>"> <img src="images/edicao.jpg" title="Editar" /></a>
+            <!-- <a href="/produto/editarProduto?id=<%= produtos[i]._id %>"> <img src="images/edicao.jpg" title="Editar"/></a> -->
+            <form method="post" action="/produto/deletar">
+              <input type="hidden" name="idProduto" value="<%= produtos[i]._id %>" />
+              <input type="submit" value="Excluir" />
+            </form>
+            <!-- <a href="javascript:confirm('Tem certeza que deseja excluir?') ?
           window.location='/excluirProduto?id=<%= produtos[i]._id %>' : void(0)"> 
           <img src="images/delete.jpg" title="Excluir"/></a> -->
-      </td>
-    </tr>
-      
-    <%
-    }
-    %>
-  </tbody> 
-</table>
+          </td>
+        </tr>
+
+        <% } %>
+    </tbody>
+  </table>
 </body>

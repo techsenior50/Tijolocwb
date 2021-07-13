@@ -43,10 +43,6 @@ class ProdutoRepositoryMongo{
           
     }
 
-    buscar(nomeProduto){
-
-    }
-
     buscarTodos(){
        /* return this.model.find({}); não posso retornar diretamente o this.model.find(0 porque é uma query)*/
     //    const query = this.model.find({}); //primeiro eu guardo a query em uma constante
@@ -62,6 +58,7 @@ class ProdutoRepositoryMongo{
      //    return promise; //retorno a promise que é uma json
          return this.model.findById(idProduto).lean().exec();
      }
+
 }
 
 module.exports = ProdutoRepositoryMongo;

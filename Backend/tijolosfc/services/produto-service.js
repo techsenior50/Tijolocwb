@@ -36,6 +36,7 @@ class ProdutoService{
         return this.produtoRepository.buscarProduto(idProduto);
     }
 
+
     buscarTodos(){
         return this.produtoRepository.buscarTodos();
     }
