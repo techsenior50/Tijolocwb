@@ -17,6 +17,7 @@
                 imagemProduto: $('#imagemProduto').val()
             }, (retorno) => {
             /* pesquisar como melhor o alert */
+            
                 alert("O produto foi cadastrado com sucesso");
    
                     $('#categoriaProduto').val('');
@@ -69,8 +70,8 @@
         </div>
         <div class="linha-form">
             <label>Situação :</label>
-            <input type="checkbox" id="ativoProduto_true" name="ativoProduto" checked />
-            <span for="ativoProduto_true">Ativo</span>
+            <input type="checkbox" id="ativoProduto" name="ativoProduto" checked value="true" />
+            <span for="ativoProduto">Ativo</span>
           <!--  <fieldset style="width:380px" >						
                 <label for="ativoProduto"> <input type="radio" name="ativoProduto" value="true" id="ativoProduto"> Ativo</label>
                 <label for="ativoProduto"> <input type="radio" name="ativoProduto" value="false" id="ativoProduto"> Inativo</label>
@@ -84,8 +85,8 @@
         <br>
         <div class="linha-form">
             <label>Salvar? </label>
-            <input type="reset" />
-            <input type="submit" />
+            <input type="submit" value="Sim" />
+            <input type="reset" value="Não" />
         </div>
         <br>
     </form>
