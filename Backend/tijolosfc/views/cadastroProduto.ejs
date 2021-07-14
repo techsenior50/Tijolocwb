@@ -16,14 +16,16 @@
                 ativoProduto: $('#ativoProduto').val(),
                 imagemProduto: $('#imagemProduto').val()
             }, (retorno) => {
-    
+            /* pesquisar como melhor o alert */
+                alert("O produto foi cadastrado com sucesso");
+   
                     $('#categoriaProduto').val('');
                     $('#nomeProduto').val('');
                     $('#descricaoProduto').val('');
                     $('#precoProduto').val('');
-                    $('#ativoProduto').val('');
                     $('#imagemProduto').val('');
-                    $("#resposta").html('O produto foi cadastrado com sucesso!');
+                    /* a mensagem aqui aparece na própria tela 
+                     $('#resposta').html('O produto foi cadastrado com sucesso!') */                    
                 });
         return false;
         }
@@ -38,7 +40,7 @@
     </div>
     <div class=container>
     <p class="idProduto-form">Cadastrar produtos</p>    
-    <div id="resposta" ></div>
+    <div class=resposta id="resposta" ></div>
     <form method="post" onsubmit="return cadastrar()">
         <div class="linha-form">
             <label for="categoriaProduto">Categoria :</label>
@@ -65,14 +67,14 @@
             <label for="precoProduto">Preço :</label>
             <input id="precoProduto" type="number" step=".01" required="required" />
         </div>
-
-
         <div class="linha-form">
             <label>Situação :</label>
-            <fieldset style="width:380px" >						
+            <input type="checkbox" id="ativoProduto_true" name="ativoProduto" checked />
+            <span for="ativoProduto_true">Ativo</span>
+          <!--  <fieldset style="width:380px" >						
                 <label for="ativoProduto"> <input type="radio" name="ativoProduto" value="true" id="ativoProduto"> Ativo</label>
                 <label for="ativoProduto"> <input type="radio" name="ativoProduto" value="false" id="ativoProduto"> Inativo</label>
-            </fieldset>
+            </fieldset> -->
         </div>
 
         <div class="linha-form">
