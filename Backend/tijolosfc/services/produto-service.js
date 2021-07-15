@@ -25,7 +25,8 @@ class ProdutoService{
     }
 
     alterar(idProduto, produto){
-        if (typeof produto.ativoProduto !== 'boolean') {
+        console.log(produto.ativoProduto);
+        if (typeof produto.ativoProduto != 'boolean') {
             produto.ativoProduto = false
         }
 

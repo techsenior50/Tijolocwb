@@ -41,6 +41,7 @@ class ProdutoController{
         if (produtoExistente != null) { 
             await this.produtoService.alterar(id, req.body);
             //await this.produtoService.alterar(req.body);
+            //colocar um alert()
             res.send("Alterado com sucesso");
  
         }

@@ -23,11 +23,11 @@
             <div class="linha-form">
                 <label for="categoriaProduto">Categoria :</label>
                 <select name="categoriaProduto">
-                    <option value="Salgado" <%=produto.categoriaProduto=='Salgado' ? "selected" : "" %> >Salgado
+                    <option value="Salgado" <%= produto.categoriaProduto=='Salgado' ? "selected" : "" %> >Salgado
                     </option>
-                    <option value="Doce" <%=produto.categoriaProduto=='Doce' ? "selected" : "" %> >Doce</option>
-                    <option value="Bebida" <%=produto.categoriaProduto=='Bebida' ? "selected" : "" %> >Bebida</option>
-                    <option value="Acessorios" <%=produto.categoriaProduto=='Acessorios' ? "selected" : "" %>
+                    <option value="Doce" <%= produto.categoriaProduto=='Doce' ? "selected" : "" %> >Doce</option>
+                    <option value="Bebida" <%= produto.categoriaProduto=='Bebida' ? "selected" : "" %> >Bebida</option>
+                    <option value="Acessorios" <%= produto.categoriaProduto=='Acessorios' ? "selected" : "" %>
                         >Acessorios</option>
                 </select>
             </div>
@@ -52,9 +52,8 @@
 
             <div class="linha-form">
                 <label>Situação :</label>
-                <input type="checkbox" id="ativoProduto_true" name="ativoProduto" value="true" <%=produto.ativoProduto
-                    ? "checked" : "" %> />
-                <span for="ativoProduto_true">Ativo</span>
+                <input type="checkbox" id="ativoProduto" name="ativoProduto" value="true" <%= produto.ativoProduto ? "checked" : "" %> />
+                <span for="ativoProduto">Ativo</span>
                 <!-- <br/>
             <input type="radio" id="ativoProduto_false" name="ativoProduto" value="false" <%= produto.ativoProduto ? "checked" : "" %> />
             <span for="ativoProduto_false">Inativo</span> -->

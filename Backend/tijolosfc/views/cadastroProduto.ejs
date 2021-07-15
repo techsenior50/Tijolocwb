@@ -16,10 +16,8 @@
                 ativoProduto: $('#ativoProduto').val(),
                 imagemProduto: $('#imagemProduto').val()
             }, (retorno) => {
-            /* pesquisar como melhor o alert */
-            
+                /* pesquisar se é melhor o alert */
                 alert("O produto foi cadastrado com sucesso");
-   
                     $('#categoriaProduto').val('');
                     $('#nomeProduto').val('');
                     $('#descricaoProduto').val('');
@@ -91,6 +89,12 @@
         <br>
     </form>
     </div>
+    <div>
+        <form class=formvoltar action="/produto" method="get">
+            <input type="submit" style="color:blue; font-size:20px" value="[ Home ]"/>
+        </form>
+    </div>
+    <br>
 </body>
 
 </html>
