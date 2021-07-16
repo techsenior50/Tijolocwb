@@ -76,7 +76,7 @@ class ProdutoRoutes{
         this.router.post("/produto/:id", this.produtoController.alterar.bind(this.produtoController));
 
         // Ver detalhes do produto
-        this.router.get("/detalhesProduto/:id", this.produtoController.verProduto.bind(this.produtoController));
+        this.router.get("/verProduto/:id", this.produtoController.verProduto.bind(this.produtoController));
 
 
 

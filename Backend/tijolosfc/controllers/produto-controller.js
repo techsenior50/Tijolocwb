@@ -41,9 +41,8 @@ class ProdutoController{
         if (produtoExistente != null) { 
             await this.produtoService.alterar(id, req.body);
             //await this.produtoService.alterar(req.body);
-            //colocar um alert()
-            res.send("Alterado com sucesso");
- 
+            const produtos = await this.produtoService.buscarProduto(req.id);
+            res.render('produtoAlteradoSucesso', {produto: produtos}); 
         }
         else {
             console.log("entrou no else");
@@ -69,7 +68,7 @@ class ProdutoController{
         console.log("passei ver Produto" + req.id);
         const produtos = await this.produtoService.buscarProduto(req.id);
         console.log(produtos);
-        res.render('detalhesProduto', {produto: produtos}); 
+        res.render('verProduto', {produto: produtos}); 
     }
 }
 

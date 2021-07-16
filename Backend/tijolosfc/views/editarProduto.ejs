@@ -52,7 +52,7 @@
 
             <div class="linha-form">
                 <label>Situação :</label>
-                <input type="checkbox" id="ativoProduto" name="ativoProduto" value="true" <%= produto.ativoProduto ? "checked" : "" %> />
+                <input type="checkbox" id="ativoProduto" name="ativoProduto" value='true' <%= produto.ativoProduto ? "checked" : "" %> />
                 <span for="ativoProduto">Ativo</span>
                 <!-- <br/>
             <input type="radio" id="ativoProduto_false" name="ativoProduto" value="false" <%= produto.ativoProduto ? "checked" : "" %> />
@@ -75,6 +75,11 @@
                 <input type="reset" value="Não" />
             </div>
 
+        </form>
+    </div>
+    <div>
+        <form class="formvoltar" action="/produto" method="get">
+            <input type="submit" style="font-size:20px; color: blue" value="[ Home ]"/>
         </form>
     </div>
 </body>
