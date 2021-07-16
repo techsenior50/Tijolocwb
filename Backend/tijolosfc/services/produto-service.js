@@ -26,10 +26,12 @@ class ProdutoService{
     }
 
     alterar(idProduto, produto){
+        console.log(produto);
         console.log(produto.ativoProduto);
-        //if (typeof produto.ativoProduto != 'boolean') {
-        //    produto.ativoProduto = false
-        //}
+         if ( typeof produto.ativoProduto === "undefined" ) {
+            produto.ativoProduto = false
+        }
+        console.log(produto.ativoProduto);
 
         return this.produtoRepository.alterar(idProduto, produto);
 
