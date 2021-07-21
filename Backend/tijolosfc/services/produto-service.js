@@ -1,6 +1,7 @@
 //Deveria ser o cara que faz as validações relacionadas à regras de negócios, se for o tipo
 const ProdutoRepoArray = require("../repositories/produto-repo-array");
 const ProdutoRepoMongo = require("../repositories/produtos-repo-mongo");
+const Produto = require("../domain/produto-domain"); //representa o nosso modelo
 
 class ProdutoService{
 
@@ -11,7 +12,14 @@ class ProdutoService{
     //vou criar os métodos do CRUD
 
     adicionar(produto){
-        console.log(produto.ativoProduto);
+/*         let ativoProduto = true;
+        console.log(req.body);
+        console.log(ativoProduto);
+        if ( typeof req.body.ativoProduto === "undefined" ) {
+            ativoProduto = false;
+        }
+        let produto = new Produto(req.body.categoriaProduto, req.body.nomeProduto, req.body.descricaoProduto, req.body.precoProduto, ativoProduto, req.body.imagemProduto, req.requestTime); //para que o nodejs entenda o body do json preciso inicializar antes com o comando app.use(express.json())
+ */
     /*    if produto.ativoProduto "true") {
             produto.ativoProduto = false
         } */

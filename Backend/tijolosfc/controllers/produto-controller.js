@@ -12,13 +12,22 @@ class ProdutoController{
 
 
     adicionar(req, res) {
-        let produto = new Produto(req.body.categoriaProduto, req.body.nomeProduto, req.body.descricaoProduto, req.body.precoProduto, req.body.ativoProduto, req.body.imagemProduto, req.requestTime); //para que o nodejs entenda o body do json preciso inicializar antes com o comando app.use(express.json())
-        this.produtoService.adicionar(produto);
-        
+        console.log("INCLUIR");
+        console.log(req.body);
+        let ativoProduto = true;
+        if ( typeof req.body.ativoProduto === "undefined" ) {
+            ativoProduto = false;
+        }
+        let produto = new Produto(req.body.categoriaProduto, req.body.nomeProduto, req.body.descricaoProduto, req.body.precoProduto, ativoProduto, req.body.imagemProduto, req.requestTime); //para que o nodejs entenda o body do json preciso inicializar antes com o comando app.use(express.json())
+
+    //    let produto = new Produto(req.body.categoriaProduto, req.body.nomeProduto, req.body.descricaoProduto, req.body.precoProduto, req.body.ativoProduto, req.body.imagemProduto, req.requestTime); //para que o nodejs entenda o body do json preciso inicializar antes com o comando app.use(express.json())
+    //    this.produtoService.adicionar(produto);
+        this.produtoService.adicionar(produto)
         //res.send('chamou pelo meu método Post' + produto);
         //se eu quiser mostrar a mensagem como json:
         //res.json(produto);
-        res.render('cadastroProdutoSucesso', { u: produto });
+        res.render('produtoAlteradoSucesso', {produto: produto});
+        //res.render('cadastroProdutoSucesso', { u: produto });
             
     }
     

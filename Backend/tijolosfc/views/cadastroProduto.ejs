@@ -6,7 +6,7 @@
     <link rel="stylesheet" type="text/css" href="/css/estilo.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-    <script>
+<!--     <script>
         function cadastrar() {
             $.post('/produto', {
                 categoriaProduto: $('#categoriaProduto').val(),
@@ -29,7 +29,7 @@
         return false;
         }
     </script>
-
+ -->
 </head>
 
 <body>
@@ -40,10 +40,12 @@
     <div class=container>
     <p class="idProduto-form">Cadastrar produtos</p>    
     <div class=resposta id="resposta" ></div>
-    <form method="post" onsubmit="return cadastrar()">
+    <!-- <form method="post" onsubmit="return cadastrar()"> -->
+    <form method="POST" action="/produto">
+
         <div class="linha-form">
             <label for="categoriaProduto">Categoria :</label>
-            <select id="categoriaProduto">
+            <select id="categoriaProduto" name="categoriaProduto">
                 <option value="">Selecione...</option>
                 <option value="Salgado">Salgado</option>
                 <option value="Doce">Doce</option>
@@ -54,21 +56,21 @@
 
         <div class="linha-form">
             <label for="nomeProduto">Nome :</label>
-            <input id="nomeProduto" type="text" required="required" />
+            <input id="nomeProduto" name="nomeProduto" type="text" required="required" />
         </div>
 
         <div class="linha-form">
             <label for="descricaoProduto">Descrição :</label>
-            <textarea id="descricaoProduto" style="width:400px" required="required"></textarea>
+            <textarea id="descricaoProduto" name="descricaoProduto" style="width:400px" required="required"></textarea>
         </div>
 
         <div class="linha-form">
             <label for="precoProduto">Preço :</label>
-            <input id="precoProduto" type="number" step=".01" required="required" />
+            <input id="precoProduto" name="precoProduto" type="number" step=".01" required="required" />
         </div>
         <div class="linha-form">
             <label>Situação :</label>
-            <input type="checkbox" id="ativoProduto" name="ativoProduto" checked value="true" />
+            <input type="checkbox" id="ativoProduto" name="ativoProduto" value="true" checked/>
             <span for="ativoProduto">Ativo</span>
           <!--  <fieldset style="width:380px" >						
                 <label for="ativoProduto"> <input type="radio" name="ativoProduto" value="true" id="ativoProduto"> Ativo</label>
@@ -78,7 +80,7 @@
 
         <div class="linha-form">
             <label for="imagemProduto">Imagem :</label>
-            <input class="enderecoImagem" placeholder="informe o endereço http da imagem" style="width:400px" type="url" required="required" id="imagemProduto">
+            <input class="enderecoImagem" placeholder="informe o endereço http da imagem" style="width:400px" type="url" required="required" id="imagemProduto" name="imagemProduto">
         </div>
         <br>
         <div class="linha-form">
