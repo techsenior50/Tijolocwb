@@ -38,24 +38,25 @@ class ProdutoRepositoryMongo{
           res.send('Produto alterado com sucesso'); */
 
           produto.precoProduto =Math.max(1, produto.precoProduto);
-          //const query = {_id: idProduto};
           return this.model.findOneAndUpdate({_id: idProduto}, produto);
           
     }
 
     buscarTodos(){
-       /* return this.model.find({}); não posso retornar diretamente o this.model.find(0 porque é uma query)*/
-    //    const query = this.model.find({}); //primeiro eu guardo a query em uma constante
-    //    const promise = query.lean().exec(); // executo a query e guardo em uma promise - eu posso usar com o sem o lean, sem o lean além dos campos, vai trazer mais um monte de propriedades que pode não me interessar.
-    //    return promise; //retorno a promise que é uma json
         return this.model.find({}).lean().exec();
     }
 
+    buscarTodosPaginado(p, l){
+    return this.model.find({})
+    .limit(l *1)
+    .skip((p -1) *l)
+    .sort({"_id":-1})
+    .lean()
+    .exec();
+
+    }
+
     buscarProduto(idProduto){
-        /* return this.model.find({}); não posso retornar diretamente o this.model.find(0 porque é uma query)*/
-     //    const query = this.model.find({}); //primeiro eu guardo a query em uma constante
-     //    const promise = query.lean().exec(); // executo a query e guardo em uma promise - eu posso usar com o sem o lean, sem o lean além dos campos, vai trazer mais um monte de propriedades que pode não me interessar.
-     //    return promise; //retorno a promise que é uma json
          return this.model.findById(idProduto).lean().exec();
      }
 

@@ -41,6 +41,13 @@ class ProdutoRoutes{
         // Lista com todos os produtos
         this.router.get("/produto", this.produtoController.buscarTodos.bind(this.produtoController)); //aqui eu estou informando qual o this que deve ser utilizado para não pegar qualquer this.
 
+        /* TESTANDO a PAGINAÇÃO*/
+
+        this.router.get("/produtoPaginado", this.produtoController.buscarTodosPaginado.bind(this.produtoController)); //aqui eu estou informando qual o this que deve ser utilizado para não pegar qualquer this.
+
+        this.router.post("/produtoPaginado", this.produtoController.buscarTodosPaginado.bind(this.produtoController)); //aqui eu estou informando qual o this que deve ser utilizado para não pegar qualquer this.
+        /********************************************** */
+
         // GET /produto/novo
         // Tela para criar um novo produto (faz POST para /produto)
         this.router.get("/produto/novo", (req, res, next) => {
@@ -73,6 +80,7 @@ class ProdutoRoutes{
         // Apagar um produto do banco (DEVE receber um id!)
         this.router.post("/produto/deletar", this.produtoController.excluir.bind(this.produtoController)); //eu tive que colocar o this porque virou propriedade agora.
 
+        //POST para Alterar
         this.router.post("/produto/:id", this.produtoController.alterar.bind(this.produtoController));
 
         // Ver detalhes do produto

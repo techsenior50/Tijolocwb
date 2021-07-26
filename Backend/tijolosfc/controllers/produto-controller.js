@@ -68,6 +68,23 @@ class ProdutoController{
         res.render('listarTodos', { produtos });
     }
 
+            
+    async buscarTodosPaginado(req, res){
+        // destructure page and limit and set default values
+        console.log("BuscarTodospaginado : pagina =" + req.query.page);
+        const { page = 1, limit = 5 } = req.query;
+
+        try {
+          const produtos = await this.produtoService.buscarTodosPaginado(page, limit); //preciso colocar this.produtoService porque é uma propriedade, mas esse this pode dar conflito, pois ele varia de acordo com o escopo. Quando um método get chama essa função ele pode entender que esse this é de quem chamou e não é do produtoController. Para que não ocorra essa confusão e dê erro "Cannot read property 'produtoService' of undefined, quando chamo a função, preciso passar de que this se trata especificamente que no caso é do produtoController"
+          const totalItens =  Object.keys(produtos).length;
+          res.render('listarTodosPaginado', { produtos, totalPages: Math.ceil(totalItens / limit),
+            currentPage: page})
+        } catch (err) {
+          console.error(err.message);
+        }
+      }
+
+
     async buscarProduto(req, res) {
         const produtos = await this.produtoService.buscarProduto(req.id);
         res.render('editarProduto', {produto: produtos});

@@ -52,6 +52,11 @@ class ProdutoService{
     buscarTodos(){
         return this.produtoRepository.buscarTodos();
     }
+
+    buscarTodosPaginado(page, limit){
+        return this.produtoRepository.buscarTodosPaginado(page, limit);
+
+    }
 }
 
 module.exports = ProdutoService;
