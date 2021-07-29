@@ -32,12 +32,16 @@
     <form class=formlista action="/produtoPaginado" method="get"> 
       <input type="submit" style="color:blue; font-size:20px" value="[ Recarregar Lista]"/>
     </form>
-    <form class=formlista action="/produtoPaginado?page=<%=currentPage-1%>" method="post">
-        <input type="submit" style="color:blue; font-size:20px" value="[ANT]"/>
+  </div>
+  <br>
+  <div>
+    <form class="paginacao" action="/produtoPaginado?page=<%=currentPage-1%>" method="post">
+        <input type="submit" style="color:blue; font-size:20px" value="<"/>
     </form>
-    <div id="pageAtual" name="pageAtual" value="<%=currentPage%>"><%=currentPage%></div>
-    <form class=formlista action="/produtoPaginado?page=<%=parseInt(currentPage)+1%>" method="post"> 
-      <input type="submit" style="color:blue; font-size:20px" value="[PROX]"/>
+    <%= currentPage %> 
+    <!--<div id="pageAtual" name="pageAtual" value="<%=currentPage%>"><%=currentPage%></div> -->
+    <form class="paginacao1" action="/produtoPaginado?page=<%=parseInt(currentPage)+1%>" method="post"> 
+      <input type="submit" style="color:blue; font-size:20px" value=">"/>
     </form>
   </div>
   <br><br>

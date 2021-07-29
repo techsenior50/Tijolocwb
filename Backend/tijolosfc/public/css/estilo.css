@@ -116,12 +116,30 @@
     margin:1%;
 }
 
+.paginacao {
+    margin-top:8%;
+    width: 50%;
+    margin-left: 10%;
+    display: inline;
+    font-family: Helvetica;
+}
+
+.paginacao1 {
+    display: inline;
+    font-family: Helvetica;
+}
+
+
+.labelpagina {
+    text-align:right;
+}
+
 label {
     float: left;
     width: 160px;
     font-family: Helvetica;
     margin-left:10%;
-   font-size: 1em;
+    font-size: 1em;
 }
 .areatexto{
     width:60%;
