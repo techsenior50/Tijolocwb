@@ -5,16 +5,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="/css/estilo.css">
-  <script>
-    function prox() {
-      document.getElementById('page').value = document.getElementById('page').value+1;
-      console.log("prox");
-    }
-    function ant() {
-      document.getElementById('page').value = document.getElementById('page').value-1;
-      console.log("ant");
-    }
-  </script>
 </head>
 
 <body>
@@ -60,7 +50,8 @@
         </thead>
         <tbody>
           <% for (var i=0; i < produtos.length; i++) { %>
-            <tr>
+            <tr class="produto">
+              
               <td>
                 <%= produtos[i].categoriaProduto %>
               </td>
@@ -70,32 +61,95 @@
               <td>
                 <%= produtos[i].descricaoProduto %>
               </td>
-              <td>
+              <td class="precoProduto">
                 <%= produtos[i].precoProduto %>
               </td>
               <td>
                 <%= produtos[i].ativoProduto %>
               </td>
 
+              
+
               <td>
               <a href="/verProduto/<%= produtos[i]._id %>"> <img src="images/detalhes.jpg" title="Ver" /></a>
               <!--  <a href="/detalhesProduto?id=<%= produtos[i]._id %>"> <img src="images/detalhes.jpg" title="Ver" /></a> -->
                 <a href="/produto/<%= produtos[i]._id %>"> <img src="images/edicao.jpg" title="Editar" /></a>
                 <!-- <a href="/produto/editarProduto?id=<%= produtos[i]._id %>"> <img src="images/edicao.jpg" title="Editar"/></a> -->
-                <form method="post" action="/produto/deletar">
-                  <input type="hidden" name="idProduto" value="<%= produtos[i]._id %>" />
-                  <input type="submit" value="Excluir" />
-                </form>
-                <!-- <a href="javascript:confirm('Tem certeza que deseja excluir?') ?
-              window.location='/excluirProduto?id=<%= produtos[i]._id %>' : void(0)"> 
-              <img src="images/delete.jpg" title="Excluir"/></a> -->
-              </td>
-            </tr>
+                <button value="<%= produtos[i]._id %>" id="myBtn" onclick="abrir()">excluir</button>
 
+
+                <div class="modal <%= produtos[i]._id %>">
+
+                  <div class="modal-content">
+                    <span class="close" onclick="fechar()">&times;</span>
+                    <h1>Tem certeza que deseja excluir?</h1>
+                    <p><%= produtos[i].nomeProduto %></p>
+                    <div id="buttons">
+                      <form method="post" action="/produto/deletar" >
+                        <input id="idProduto" type="hidden" name="idProduto" value="<%= produtos[i]._id %>"/>
+                        <input type="submit" value="Excluir" id="excluirProduto"/>
+
+                      </form>
+                      <button onclick="fechar()" id="cancelExcluirProduto">Cancelar</button>
+                    </div>
+                    
+                  </div>
+                
+                </div>
+
+                <form method="post" action="/produto/deletar">
+
+                  <input type="hidden" name="idProduto" value="<%= produtos[i]._id %>" />
+                  <input type="submit" value="Excluir" id="excluirProduto"/>
+          
+                </form>
+              </td>
+
+              
+
+            </tr>
             <% } %>
         </tbody>
       </table>
     </div>
 
   </section>
+
+  <script>
+    function prox() {
+      document.getElementById('page').value = document.getElementById('page').value+1;
+      console.log("prox");
+    }
+    function ant() {
+      document.getElementById('page').value = document.getElementById('page').value-1;
+      console.log("ant");
+    }   
+
+    let precoProduto = document.getElementsByClassName("precoProduto");
+
+    console.log(precoProduto);
+
+    let idProduto = document.getElementById("idProduto");
+
+    // let modalAberto = document.getElementById("myModal")
+
+    let modalAbertoClass = document.getElementsByClassName("modal")
+
+    let btn = document.getElementById("myBtn");
+    let span = document.getElementsByClassName("close")[0];
+    
+    function abrir(){
+      console.log(idProduto.value);
+      modalAbertoClass[0].style.display = "block";
+    }
+
+
+
+    function fechar(){
+      modalAbertoClass[0].style.display = "none";
+      // modalAberto.style.display = "none";
+    }
+
+  </script>
 </body>
+</html>
