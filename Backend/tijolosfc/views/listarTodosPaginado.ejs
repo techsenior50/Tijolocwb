@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="/css/estilo.css">
+</head>
+
+<body>
+  <div class=cabec>
+    <img src="images/logo.svg" width=10% alt="Tijolo" />
+    <p class=titulo>Área do Administrador *** Menu</p>
+  </div>
+  <div class=container1></div>
+
+  <div>
+    <form class=formlista action="/produto/novo" method="get"> 
+      <input type="submit" style="color:blue; font-size:20px" value="[ Novo Produto ]"/>
+    </form>
+
+    <form class=formlista action="/produtoPaginado" method="get"> 
+      <input type="submit" style="color:blue; font-size:20px" value="[ Recarregar Lista]"/>
+    </form>
+  </div>
+  <br>
+  <div>
+    <form class="paginacao" action="/produtoPaginado?page=<%=currentPage-1%>" method="post">
+        <input type="submit" style="color:blue; font-size:20px" value="<"/>
+    </form>
+    <%= currentPage %> 
+    <!--<div id="pageAtual" name="pageAtual" value="<%=currentPage%>"><%=currentPage%></div> -->
+    <form class="paginacao1" action="/produtoPaginado?page=<%=parseInt(currentPage)+1%>" method="post"> 
+      <input type="submit" style="color:blue; font-size:20px" value=">"/>
+    </form>
+  </div>
+  <br><br>
+  <section id="paginate" >
+    <div class="lista" >
+      <table border="1" cellspacing="0" width="80%" align="center">
+        <thead>
+          <tr class=titulista>
+            <th width="10%">Categoria</th>
+            <th width="30%">Nome</th>
+            <th width="30%">Descrição</th>
+            <th>Preço</th>
+            <th>Situação</th>
+            <th>Procedimentos</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for (var i=0; i < produtos.length; i++) { %>
+            <tr class="produto">
+              
+              <td>
+                <%= produtos[i].categoriaProduto %>
+              </td>
+              <td>
+                <%= produtos[i].nomeProduto %>
+              </td>
+              <td>
+                <%= produtos[i].descricaoProduto %>
+              </td>
+              <td class="precoProduto">
+                <%= produtos[i].precoProduto %>
+              </td>
+              <td>
+                <%= produtos[i].ativoProduto %>
+              </td>
+
+              
+
+              <td>
+              <a href="/verProduto/<%= produtos[i]._id %>"> <img src="images/detalhes.jpg" title="Ver" /></a>
+              <!--  <a href="/detalhesProduto?id=<%= produtos[i]._id %>"> <img src="images/detalhes.jpg" title="Ver" /></a> -->
+                <a href="/produto/<%= produtos[i]._id %>"> <img src="images/edicao.jpg" title="Editar" /></a>
+                <!-- <a href="/produto/editarProduto?id=<%= produtos[i]._id %>"> <img src="images/edicao.jpg" title="Editar"/></a> -->
+                <button value="<%= produtos[i]._id %>" id="myBtn" onclick="abrir()">excluir</button>
+
+
+                <div class="modal <%= produtos[i]._id %>">
+
+                  <div class="modal-content">
+                    <span class="close" onclick="fechar()">&times;</span>
+                    <h1>Tem certeza que deseja excluir?</h1>
+                    <p><%= produtos[i].nomeProduto %></p>
+                    <div id="buttons">
+                      <form method="post" action="/produto/deletar" >
+                        <input id="idProduto" type="hidden" name="idProduto" value="<%= produtos[i]._id %>"/>
+                        <input type="submit" value="Excluir" id="excluirProduto"/>
+
+                      </form>
+                      <button onclick="fechar()" id="cancelExcluirProduto">Cancelar</button>
+                    </div>
+                    
+                  </div>
+                
+                </div>
+
+                <form method="post" action="/produto/deletar">
+
+                  <input type="hidden" name="idProduto" value="<%= produtos[i]._id %>" />
+                  <input type="submit" value="Excluir" id="excluirProduto"/>
+          
+                </form>
+              </td>
+
+              
+
+            </tr>
+            <% } %>
+        </tbody>
+      </table>
+    </div>
+
+  </section>
+
+  <script>
+    function prox() {
+      document.getElementById('page').value = document.getElementById('page').value+1;
+      console.log("prox");
+    }
+    function ant() {
+      document.getElementById('page').value = document.getElementById('page').value-1;
+      console.log("ant");
+    }   
+
+    let precoProduto = document.getElementsByClassName("precoProduto");
+
+    console.log(precoProduto);
+
+    let idProduto = document.getElementById("idProduto");
+
+    // let modalAberto = document.getElementById("myModal")
+
+    let modalAbertoClass = document.getElementsByClassName("modal")
+
+    let btn = document.getElementById("myBtn");
+    let span = document.getElementsByClassName("close")[0];
+    
+    function abrir(){
+      console.log(idProduto.value);
+      modalAbertoClass[0].style.display = "block";
+    }
+
+
+
+    function fechar(){
+      modalAbertoClass[0].style.display = "none";
+      // modalAberto.style.display = "none";
+    }
+
+  </script>
+</body>
+</html>

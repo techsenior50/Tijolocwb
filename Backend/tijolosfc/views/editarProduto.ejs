@@ -1,0 +1,87 @@
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/css/estilo.css">
+</head>
+
+<body>
+    <div class=cabec>
+        <img src="../images/logo.svg" width=10% alt="Tijolo" />
+        <p class=titulo>Área do Administrador *** Menu</p>
+    </div>
+    <div class=container>
+        <p class="idProduto-form">Editar produtos</p>
+ <!--       <form action="/produto/<%= produto._id %>" method="post">
+            <input type="hidden" name="_method" value="put" />
+            <input type="hidden" name="idProduto" value="<%= produto._id %>" /> -->
+        
+            <form method="POST">
+                <input type="hidden" name="idProduto" value="<%= produto._id %>" />
+
+            <div class="linha-form">
+                <label for="categoriaProduto">Categoria :</label>
+                <select name="categoriaProduto">
+                    <option value="Salgado" <%= produto.categoriaProduto=='Salgado' ? "selected" : "" %> >Salgado
+                    </option>
+                    <option value="Doce" <%= produto.categoriaProduto=='Doce' ? "selected" : "" %> >Doce</option>
+                    <option value="Bebida" <%= produto.categoriaProduto=='Bebida' ? "selected" : "" %> >Bebida</option>
+                    <option value="Acessorios" <%= produto.categoriaProduto=='Acessorios' ? "selected" : "" %>
+                        >Acessorios</option>
+                </select>
+            </div>
+
+            <div class="linha-form">
+                <label for="nomeProduto">Nome :</label>
+                <input name="nomeProduto" value="<%= produto.nomeProduto %>" type="text" style="width:400px"
+                    required="required" />
+            </div>
+
+            <div class="linha-form">
+                <label for="descricaoProduto">Descrição :</label>
+                <input name="descricaoProduto" value="<%= produto.descricaoProduto %>" type="text" style="width:400px"
+                    required="required"></input>
+            </div>
+
+            <div class="linha-form">
+                <label for="precoProduto">Preço :</label>
+                <input name="precoProduto" value="<%= produto.precoProduto %>" type="number" step=".01"
+                    required="required" />
+            </div>
+
+            <div class="linha-form">
+                <label>Situação :</label>
+                <input type="checkbox" id="ativoProduto" name="ativoProduto" value="true" <%= produto.ativoProduto ? "checked" : "" %> />
+                <span for="ativoProduto">Ativo</span>
+                <!-- <br/>
+            <input type="radio" id="ativoProduto_false" name="ativoProduto" value="false" <%= produto.ativoProduto ? "checked" : "" %> />
+            <span for="ativoProduto_false">Inativo</span> -->
+                <!-- <select name="ativoProduto">
+                <option value="true" <%= produto.ativoProduto=='true' ? "selected" : "" %> >Ativo</option>
+                <option value="false" <%= produto.ativoProduto=='false' ? "selected" : "" %> >Inativo</option>
+            </select> -->
+            </div>
+
+            <div class="linha-form">
+                <label for="imagemProduto">Imagem :</label>
+                <input name="imagemProduto" value="<%= produto.imagemProduto %>" type="url" style="width:400px"
+                    required="required"></input>
+            </div>
+            <br>
+            <div class="linha-form">
+                <label>Salvar alteração? </label>
+                <input type="submit" value="Sim" />
+                <input type="reset" value="Não" />
+            </div>
+
+        </form>
+    </div>
+    <div>
+        <form class="formvoltar" action="/produtoPaginado" method="get">
+            <input type="submit" style="font-size:20px; color: blue" value="[ Home ]"/>
+        </form>
+    </div>
+</body>
+
+</html>
