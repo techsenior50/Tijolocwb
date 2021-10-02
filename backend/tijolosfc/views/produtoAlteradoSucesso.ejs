@@ -1,0 +1,42 @@
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/css/estilo.css">
+</head>
+
+<body>
+    <div class=cabec>
+        <img src="../images/logo.svg" width=10% alt="Tijolo" />
+        <p class=titulo>Área do Administrador *** Menu</p>
+    </div>
+    <div class=container>
+        <p class="idProduto-form">Produto Alterado com Sucesso</p>
+        
+            <form method="get">
+                <input type="hidden" name="idProduto" value="<%= produto._id %>" />
+            <div>
+                <pre>
+                    ID do Produto:  <%= produto._id %>
+                    Categoria:      <%= produto.categoriaProduto %>
+                    Nome:           <%= produto.nomeProduto %>
+                    Descrição:      <%= produto.descricaoProduto %>
+                    Preço:          <%= produto.precoProduto %>
+                    Situação:       <%= produto.ativoProduto %>
+                    Imagem:         <%= produto.imagemProduto %>
+                    Criado em:      <%= produto.createdAt %>
+                    Atualizado em:  <%= produto.updatedAt %>                    
+                </pre>
+
+            </div>
+            </form>        
+    </div>
+    <div>
+        <form class="formvoltar" action="/produtoPaginado" method="get">
+            <input type="submit" style="font-size:20px; color: blue" value="[ Home ]"/>
+        </form>
+    </div>
+</body>
+
+</html>
