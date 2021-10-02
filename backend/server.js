@@ -1,4 +1,5 @@
 import Server from './server-config.js'
+import ProdutoApi from './api/ProdutoApi.js'
 
 const log = (...m) => console.log('[Servidor]', ...m)
 const port = process.env.PORT || 5000
@@ -11,6 +12,8 @@ const port = process.env.PORT || 5000
 //
 // app.delete('/', routes.deleteAllTodos)
 // app.delete('/:id', routes.deleteTodo)
+
+ProdutoApi()
 
 if (process.env.NODE_ENV !== 'test') {
     log('Iniciando banco de dados...')

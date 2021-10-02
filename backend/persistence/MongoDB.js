@@ -9,32 +9,38 @@ const MongoDB = () => {
     const maxDisconnectCount = 10
     let disconnectCount = 0
 
-    const connect = () =>
+    const connect = () => {
+        log('Tentando conexão com o MongoDB...')
+
         mongoose.connect(CONN_STRING, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
             useFindAndModify: false,
             useCreateIndex: true,
         }).then(() => {
+            disconnectCount = 0
             log('Conectado ao MongoDB.')
         }).catch(err => {
-            error('Falha ao conectar ao MongoDB. Finalizando servidor com código 10.', err)
-            process.exit(10)
+            if (disconnectCount >= maxDisconnectCount) {
+                error('Falha ao conectar ao MongoDB. Finalizando servidor com código 10.', err)
+                process.exit(10)
+            }
         })
+    }
 
     mongoose.connection.on('error', err => {
         error('Erro de comunicação com MongoDB:', err)
     })
 
-    mongoose.connection.on('disconnected', err => {
+    mongoose.connection.on('disconnected', (err) => {
         disconnectCount++
 
-        if (disconnectCount < maxDisconnectCount) {
-            error('Desconectado. Tentando reconectar. Erro:', err)
+        if (disconnectCount <= maxDisconnectCount) {
+            error(`Desconectado. Tentando reconectar: ${disconnectCount}/${maxDisconnectCount}. Erro:`, err)
             connect()
         }
         else {
-            error('Falha ao conectar ao MongoDB. Finalizando servidor com código 15.', err)
+            error('Falha ao conectar ao MongoDB. Finalizando servidor com código 15. Erro: ', err)
             process.exit(15)
         }
     })

@@ -1,12 +1,12 @@
 import mongoose from 'mongoose'
 
 const ProdutoSchema = new mongoose.Schema({
-                                              categoria: {type: String, required: true},
-                                              nome: {type: String, required: true},
-                                              descricao: {type: String, required: true},
-                                              preco: {type: Number, required: true},
-                                              ativo: {type: Boolean, required: true},
-                                              imagem: String,
+                                              categoriaProduto: {type: String, required: true},
+                                              nomeProduto: {type: String, required: true},
+                                              descricaoProduto: {type: String, required: true},
+                                              precoProduto: {type: Number, required: true},
+                                              ativoProduto: {type: Boolean, required: true},
+                                              imagemProduto: String,
                                           })
 
 const ProdutoEntity = mongoose.model('Produto', ProdutoSchema)
