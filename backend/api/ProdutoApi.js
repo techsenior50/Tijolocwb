@@ -26,6 +26,22 @@ const ProdutoApi = () => {
                .then(produto => res.send(produto))
                .catch(() => res.status(404).send(''))
     })
+
+    Server.app.post(`${endpoint}/`, (req, res) => {
+        const novoProduto = req.body
+        service.salvar(novoProduto)
+               .then(produto => res.send(produto))
+               .catch(erro => {
+                   if (erro.erros) {
+                       res.status(400)
+                          .send(erro.erros)
+                   }
+                   else {
+                       res.status(500)
+                          .send(erro)
+                   }
+               })
+    })
 }
 
 export default ProdutoApi

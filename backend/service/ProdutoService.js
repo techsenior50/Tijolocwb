@@ -1,6 +1,6 @@
 import ProdutoEntity from '../persistence/ProdutoEntity.js'
 import ProdutoDto from '../dto/ProdutoDto.js'
-import {emBranco, ehNumero, formatarMoeda, urlValida} from '../util.js'
+import {ehNumero, emBranco, formatarMoeda, urlValida} from '../util.js'
 
 /**
  * Classe de Serviço para Produtos. Ela lida com buscas e cadastros dos Produtos, fazendo validações e conversões entre
@@ -43,6 +43,10 @@ class ProdutoService {
     validar(produto) {
         let errosValidacao = []
 
+        if (produto === undefined || produto == null || typeof produto !== 'object') {
+            errosValidacao.push({campo: 'produto', erro: 'Produto inválido'})
+        }
+
         if (emBranco(produto.categoria)) {
             errosValidacao.push({campo: 'categoria', erro: 'Categoria não pode ficar em branco'})
         }
@@ -61,7 +65,8 @@ class ProdutoService {
                 errosValidacao.push({campo: 'preco', erro: `Preço não pode ser menor ou igual a ${formatarMoeda(0)}`})
             }
             else if (preco >= 100000) {
-                errosValidacao.push({campo: 'preco', erro: `Preço não pode ser maior ou igual a ${formatarMoeda(100000)}`})
+                errosValidacao.push(
+                    {campo: 'preco', erro: `Preço não pode ser maior ou igual a ${formatarMoeda(100000)}`})
             }
         }
         else {
@@ -75,6 +80,10 @@ class ProdutoService {
             errosValidacao.push({campo: 'imagem', erro: 'Imagem deve ser um endereço de uma imagem'})
         }
 
+        if (errosValidacao.length > 0) {
+            this.#log('Produto inválido! Produto:', produto, '- Erros de Validação:', errosValidacao)
+        }
+
         return errosValidacao
     }
 
@@ -82,22 +91,21 @@ class ProdutoService {
         return new Promise((resolve, reject) => {
             const errosValidacao = this.validar(novoProduto)
 
-            if (errosValidacao.length > 0) {
+            if (errosValidacao.length === 0) {
                 const produto = novoProduto.toEntity()
 
-                produto.save()
-                             .exec((err, produto) => {
-                                 if (err || !produto) {
-                                     reject(err)
-                                 }
-                                 else {
-                                     resolve(new ProdutoDto(produto, true))
-                                 }
-                             })
-                resolve()
+                produto.save((err) => {
+                    if (err) {
+                        reject({erros: {banco: err}})
+                    }
+                    else {
+                        resolve(new ProdutoDto(produto, true))
+                    }
+                })
+                resolve(new ProdutoDto(produto, true))
             }
             else {
-                reject(errosValidacao)
+                reject({erros: {validacao: errosValidacao}})
             }
         })
     }
