@@ -1,45 +1,30 @@
 import Server from '../server-config.js'
-import ProdutoEntity from '../persistence/ProdutoEntity.js'
+import ProdutoService from '../service/ProdutoService.js'
 
 const endpoint = '/produto'
 
 const listParams = (req) => {
     return {
-        page: Math.max(req.get('p'), 0) || 0,
-        pageSize: Math.max(0, Math.min(req.get('ps') || 25, 100)),
+        page: Math.max(req.params.p || 0, 0),
+        pageSize: Math.max(0, Math.min(req.params.ps || 25, 100)),
+        ord: req.params.ord || '-createdAt',
     }
 }
 
 const ProdutoApi = () => {
+    const service = new ProdutoService()
+
     Server.app.get(`${endpoint}/`, (req, res) => {
         const params = listParams(req)
-        ProdutoEntity.find({})
-                     .limit(params.pageSize)
-                     .skip(params.page * params.pageSize)
-                     .sort('-createdAt')
-                     .exec((err, produtos) => {
-                         if (err) {
-                             res.status(404).send('')
-                         }
-                         else {
-                             res.send({
-                                 ...params,
-                                 data: produtos
-                             })
-                         }
-                     })
+        service.buscarTodos(params.page, params.pageSize, params.ord)
+               .then(data => res.send({...params, data}))
+               .catch(() => res.status(404).send(''))
     })
 
     Server.app.get(`${endpoint}/:id`, (req, res) => {
-        ProdutoEntity.findById(req.params.id)
-                     .exec((err, produto) => {
-                         if (err || !produto) {
-                             res.status(404).send('')
-                         }
-                         else {
-                             res.send(produto)
-                         }
-                     })
+        service.buscarPorId(req.params.id)
+               .then(produto => res.send(produto))
+               .catch(() => res.status(404).send(''))
     })
 }
 
