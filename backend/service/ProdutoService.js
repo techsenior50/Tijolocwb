@@ -9,12 +9,58 @@ import {ehNumero, emBranco, formatarMoeda, urlValida} from '../util.js'
 class ProdutoService {
     #log = (...m) => console.log('[ProdutoService]', ...m)
 
+    // Valida e aceita apenas os campos da entidade como válidos para ordenação. Por padrão usa '-createdAt'
+    #ordenacao = (ord) => {
+        if (typeof ord === 'string' &&
+            /^[-+](categoriaProduto|nomeProduto|descricaoProduto|precoProduto|ativoProduto|imagemProduto|createdAt|updatedAt)?$/.test(
+                ord)) {
+            return ord
+        }
+        else {
+            return '-createdAt'
+        }
+    }
+
+    /**
+     * Retorna quantos produtos existem no banco de dados.
+     * @returns {Promise<Number>} Promessa com a quantidade de produtos
+     */
+    contarProdutos(ativo) {
+        return new Promise((resolve, reject) => {
+            const callback = (err, count) => {
+                if (err) {
+                    reject(err)
+                }
+                else {
+                    resolve(count)
+                }
+            }
+
+            if (typeof ativo === 'boolean') {
+                return ProdutoEntity.where({ativoProduto: ativo})
+                                    .countDocuments(callback)
+            }
+            else {
+                return ProdutoEntity.estimatedDocumentCount()
+                                    .exec(callback)
+            }
+        })
+    }
+
+    /**
+     * Busca todos os Produtos, sem filtro. Suporta paginação.
+     * @param pagina Página sendo visualizada. Começa em zero. Padrão: 0.
+     * @param tamanhoPagina Tamanho de cada página. Padrão: 25.
+     * @param ordenacao Ordenação e campo para ordenar. Padrão: '-createdAt' (campo 'createdAt' em ordem decrescente).
+     * @returns {Promise<ProdutoDto[]>} Promessa com a lista de produtos
+     */
     buscarTodos(pagina = 0, tamanhoPagina = 25, ordenacao = '-createdAt') {
         return new Promise((resolve, reject) => {
             ProdutoEntity.find({})
                          .limit(tamanhoPagina)
                          .skip(pagina * tamanhoPagina)
-                         .sort(ordenacao)
+                         .sort(this.#ordenacao(ordenacao))
+                         .lean()
                          .exec((err, produtos) => {
                              if (err) {
                                  reject(err)
@@ -26,9 +72,15 @@ class ProdutoService {
         })
     }
 
+    /**
+     * Busca um Produto pelo ID.
+     * @param id ID do Produto sendo buscado
+     * @returns {Promise<ProdutoDto>} Promessa com o Produto
+     */
     buscarPorId(id) {
         return new Promise((resolve, reject) => {
             ProdutoEntity.findById(id)
+                         .lean()
                          .exec((err, produto) => {
                              if (err || !produto) {
                                  reject(err)
@@ -40,6 +92,11 @@ class ProdutoService {
         })
     }
 
+    /**
+     * Valida um Produto e retorna os erros de validação encontrados. Se nenhum erro foi encontrado, um array vazio é retornado.
+     * @param produto Produto a ser validado.
+     * @returns {*[]} Array com os erros. Cada erro é composto de um "campo" e um "erro".
+     */
     validar(produto) {
         let errosValidacao = []
 
@@ -74,38 +131,86 @@ class ProdutoService {
         }
 
         if (emBranco(produto.imagem)) {
-            errosValidacao.push({campo: 'imagem', erro: 'Imagem deve ser um número'})
+            errosValidacao.push({campo: 'imagem', erro: 'Imagem não pode ficar em branco'})
         }
         else if (!urlValida(produto.imagem)) {
             errosValidacao.push({campo: 'imagem', erro: 'Imagem deve ser um endereço de uma imagem'})
         }
 
-        if (errosValidacao.length > 0) {
-            this.#log('Produto inválido! Produto:', produto, '- Erros de Validação:', errosValidacao)
-        }
-
         return errosValidacao
     }
 
-    salvar(novoProduto) {
+    /**
+     * Salva um novo Produto no banco de dados.
+     *
+     * @param novoProduto Novo Produto (ProdutoDto)
+     * @returns {Promise<ProdutoDto>} Promessa com o novo produto cadastrado no banco, ou os erros de validação
+     */
+    novoProduto(novoProduto) {
+        this.#log('Cadastrando novo produto:', novoProduto)
+
         return new Promise((resolve, reject) => {
-            const errosValidacao = this.validar(novoProduto)
+            try {
+                const errosValidacao = this.validar(novoProduto)
 
-            if (errosValidacao.length === 0) {
-                const produto = novoProduto.toEntity()
+                if (errosValidacao.length === 0) {
+                    const produto = ProdutoDto.toEntity(novoProduto)
 
-                produto.save((err) => {
-                    if (err) {
-                        reject({erros: {banco: err}})
-                    }
-                    else {
-                        resolve(new ProdutoDto(produto, true))
-                    }
-                })
-                resolve(new ProdutoDto(produto, true))
+                    this.#log('Salvando novo ProdutoEntity:', produto)
+
+                    produto.save(err => {
+                        if (err) {
+                            this.#log('Erro ao cadastrar novo produto:', err)
+                            reject({erros: {banco: err}})
+                        }
+                        else {
+                            this.#log('Novo produto cadastrado com sucesso:', produto)
+                            resolve(new ProdutoDto(produto, true))
+                        }
+                    })
+                }
+                else {
+                    this.#log('Erros de validação!', errosValidacao)
+                    reject({erros: {validacao: errosValidacao}})
+                }
+            } catch (e) {
+                this.#log('Exceção ao criar novo produto', e)
+                reject({erros: {ex: e}})
             }
-            else {
-                reject({erros: {validacao: errosValidacao}})
+        })
+    }
+
+    apagar(produto) {
+        this.#log('Apagar produto:', novoProduto)
+
+        return new Promise((resolve, reject) => {
+            try {
+                const errosValidacao = this.validar(novoProduto)
+
+                if (errosValidacao.length === 0) {
+                    const produto = ProdutoDto.toEntity(novoProduto)
+                    produto.ativoProduto = true
+
+                    this.#log('Salvando novo ProdutoEntity:', produto)
+
+                    produto.save(err => {
+                        if (err) {
+                            this.#log('Erro ao cadastrar novo produto:', err)
+                            reject({erros: {banco: err}})
+                        }
+                        else {
+                            this.#log('Novo produto cadastrado com sucesso:', produto)
+                            resolve(new ProdutoDto(produto, true))
+                        }
+                    })
+                }
+                else {
+                    this.#log('Erros de validação!', errosValidacao)
+                    reject({erros: {validacao: errosValidacao}})
+                }
+            } catch (e) {
+                this.#log('Exceção ao criar novo produto', e)
+                reject({erros: {ex: e}})
             }
         })
     }

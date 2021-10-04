@@ -5,9 +5,9 @@ const endpoint = '/produto'
 
 const listParams = (req) => {
     return {
-        page: Math.max(req.params.p || 0, 0),
-        pageSize: Math.max(0, Math.min(req.params.ps || 25, 100)),
-        ord: req.params.ord || '-createdAt',
+        pagina: Math.max(req.query.p || 0, 0),
+        tamanhoPagina: Math.max(0, Math.min(req.query.ps || 25, 100)),
+        ordenacao: req.query.ord,
     }
 }
 
@@ -16,8 +16,11 @@ const ProdutoApi = () => {
 
     Server.app.get(`${endpoint}/`, (req, res) => {
         const params = listParams(req)
-        service.buscarTodos(params.page, params.pageSize, params.ord)
-               .then(data => res.send({...params, data}))
+        Promise.all([
+                        service.contarProdutos(),
+                        service.buscarTodos(params.pagina, params.tamanhoPagina, params.ordenacao),
+                    ])
+               .then(data => res.send({...params, total: data[0], tamanhoLista: data[1].length, produtos: data[1]}))
                .catch(() => res.status(404).send(''))
     })
 
@@ -29,7 +32,7 @@ const ProdutoApi = () => {
 
     Server.app.post(`${endpoint}/`, (req, res) => {
         const novoProduto = req.body
-        service.salvar(novoProduto)
+        service.novoProduto(novoProduto)
                .then(produto => res.send(produto))
                .catch(erro => {
                    if (erro.erros) {

@@ -18,14 +18,14 @@ class ProdutoDto {
         this.dataUltimaAtualizacao = format ? formatarData(produtoEntity.updatedAt) : produtoEntity.updatedAt
     }
 
-    toEntity() {
+    static toEntity(prod) {
         return new ProdutoEntity({
-                                     categoriaProduto: this.categoria,
-                                     nomeProduto: this.nome,
-                                     descricaoProduto: this.descricao,
-                                     precoProduto: this.preco,
-                                     ativoProduto: this.ativo,
-                                     imagemProduto: this.imagem,
+                                     categoriaProduto: prod.categoria,
+                                     nomeProduto: prod.nome,
+                                     descricaoProduto: prod.descricao,
+                                     precoProduto: prod.preco,
+                                     ativoProduto: typeof prod.ativo === 'boolean' ? prod.ativo : false,
+                                     imagemProduto: prod.imagem,
                                  })
     }
 }

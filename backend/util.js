@@ -28,7 +28,7 @@ export const ehNumero = (num) => (typeof num === 'number') || /^(\d*\.)?\d+$/.te
 export const urlValida = (url) => {
     try {
         const validUrl = new URL(url)
-        return (validUrl.protocol === 'http' || validUrl.protocol === 'https') && validUrl.host !== 'localhost'
+        return (validUrl.protocol === 'http:' || validUrl.protocol === 'https:') && validUrl.hostname !== 'localhost'
     } catch (e) {
         return false
     }
