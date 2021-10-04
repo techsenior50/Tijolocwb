@@ -2,11 +2,7 @@ import {formatarData, formatarMoeda} from '../util.js'
 import ProdutoEntity from '../persistence/ProdutoEntity.js'
 
 class ProdutoDto {
-    #format = false
-
     constructor(produtoEntity, format = false) {
-        this.#format = format
-
         this.id = produtoEntity._id
         this.categoria = produtoEntity.categoriaProduto
         this.nome = produtoEntity.nomeProduto
