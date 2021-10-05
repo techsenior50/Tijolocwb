@@ -180,34 +180,19 @@ class ProdutoService {
         })
     }
 
-    apagar(produto) {
-        this.#log('Apagar produto:', novoProduto)
+    apagarPorId(id) {
+        this.#log('Apagar produto:', id)
 
         return new Promise((resolve, reject) => {
             try {
-                const errosValidacao = this.validar(novoProduto)
-
-                if (errosValidacao.length === 0) {
-                    const produto = ProdutoDto.toEntity(novoProduto)
-                    produto.ativoProduto = true
-
-                    this.#log('Salvando novo ProdutoEntity:', produto)
-
-                    produto.save(err => {
-                        if (err) {
-                            this.#log('Erro ao cadastrar novo produto:', err)
-                            reject({erros: {banco: err}})
-                        }
-                        else {
-                            this.#log('Novo produto cadastrado com sucesso:', produto)
-                            resolve(new ProdutoDto(produto, true))
-                        }
-                    })
-                }
-                else {
-                    this.#log('Erros de validação!', errosValidacao)
-                    reject({erros: {validacao: errosValidacao}})
-                }
+                ProdutoEntity.updateOne({_id: id}, {ativoProduto: false}, {}, (error, result) => {
+                    if (error) {
+                        reject(error)
+                    }
+                    else {
+                        resolve(result)
+                    }
+                })
             } catch (e) {
                 this.#log('Exceção ao criar novo produto', e)
                 reject({erros: {ex: e}})
