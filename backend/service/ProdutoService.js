@@ -1,13 +1,18 @@
 import ProdutoEntity from '../persistence/ProdutoEntity.js'
 import ProdutoDto from '../dto/ProdutoDto.js'
 import {ehNumero, emBranco, formatarMoeda, urlValida} from '../util.js'
+import Log from '../util/Log.js'
 
 /**
  * Classe de Serviço para Produtos. Ela lida com buscas e cadastros dos Produtos, fazendo validações e conversões entre
  * tipos e objetos que vêm da tela e vão para o banco e vice-versa.
  */
 class ProdutoService {
-    #log = (...m) => console.log('[ProdutoService]', ...m)
+    #log
+
+    constructor(log = new Log('ProdutoService')) {
+        this.#log = log
+    }
 
     // Valida e aceita apenas os campos da entidade como válidos para ordenação. Por padrão usa '-createdAt'
     #ordenacao = (ord) => {
@@ -147,7 +152,7 @@ class ProdutoService {
      * @returns {Promise<ProdutoDto>} Promessa com o novo produto cadastrado no banco, ou os erros de validação
      */
     novoProduto(novoProduto) {
-        this.#log('Cadastrando novo produto:', novoProduto)
+        this.#log.info('Cadastrando novo produto:', novoProduto)
 
         return new Promise((resolve, reject) => {
             try {
@@ -156,32 +161,32 @@ class ProdutoService {
                 if (errosValidacao.length === 0) {
                     const produto = ProdutoDto.toEntity(novoProduto)
 
-                    this.#log('Salvando novo ProdutoEntity:', produto)
+                    this.#log.info('Salvando novo ProdutoEntity:', produto)
 
                     produto.save(err => {
                         if (err) {
-                            this.#log('Erro ao cadastrar novo produto:', err)
+                            this.#log.error('Erro ao cadastrar novo produto:', err)
                             reject({erros: {banco: err}})
                         }
                         else {
-                            this.#log('Novo produto cadastrado com sucesso:', produto)
+                            this.#log.info('Novo produto cadastrado com sucesso:', produto)
                             resolve(new ProdutoDto(produto, true))
                         }
                     })
                 }
                 else {
-                    this.#log('Erros de validação!', errosValidacao)
+                    this.#log.error('Erros de validação!', errosValidacao)
                     reject({erros: {validacao: errosValidacao}})
                 }
             } catch (e) {
-                this.#log('Exceção ao criar novo produto', e)
+                this.#log.error('Exceção ao criar novo produto', e)
                 reject({erros: {ex: e}})
             }
         })
     }
 
     apagarPorId(id) {
-        this.#log('Apagar produto:', id)
+        this.#log.info('Apagar produto:', id)
 
         return new Promise((resolve, reject) => {
             try {
@@ -194,7 +199,7 @@ class ProdutoService {
                     }
                 })
             } catch (e) {
-                this.#log('Exceção ao criar novo produto', e)
+                this.#log.error('Exceção ao criar novo produto', e)
                 reject({erros: {ex: e}})
             }
         })

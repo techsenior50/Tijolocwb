@@ -16,5 +16,5 @@ app.use((req, res, next) => {
 
 export default {
     app,
-    db: MongoDB(),
+    db: new MongoDB(),
 }

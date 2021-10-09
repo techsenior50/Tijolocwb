@@ -1,0 +1,21 @@
+version: "3.1"
+
+services:
+  mongodb:
+    image: mongo:5.0.3
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: tijolo
+      MONGO_INITDB_ROOT_PASSWORD: Tijol0
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - "8081:8081"
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: tijolo
+      ME_CONFIG_MONGODB_ADMINPASSWORD: Tijol0
+      ME_CONFIG_MONGODB_URL: mongodb://tijolo:Tijol0@mongodb:27017/
