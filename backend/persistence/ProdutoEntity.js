@@ -7,6 +7,8 @@ const ProdutoSchema = new mongoose.Schema({
                                               precoProduto: {type: Number, required: true},
                                               ativoProduto: {type: Boolean, required: true},
                                               imagemProduto: String,
+                                              dataCriacao: {type: Date, required: true},
+                                              dataUltimaAtualizacao: {type: Date, required: false},
                                           })
 
 const ProdutoEntity = mongoose.model('Produto', ProdutoSchema)

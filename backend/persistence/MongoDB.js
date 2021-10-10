@@ -16,7 +16,7 @@ class MongoDB {
         host = process.env.TIJOLO_DB_HOST || 'localhost',
         port = process.env.TIJOLO_DB_PORT || '27017',
         schema = process.env.TIJOLO_DB_SCHEMA || 'tijolo',
-        log = new Log('Database'),
+        log = new Log('Banco de Dados'),
     ) {
         this.#log = log
         this.#connectionString = `mongodb://${host}:${port}/${schema}?appName=tijoloApi`
@@ -33,7 +33,7 @@ class MongoDB {
             keepAliveInitialDelay: 300000,
             user: this.#user,
             pass: this.#pass,
-            authSource: 'admin',
+            authSource: this.#authSource,
         }
 
         return mongoose.connect(this.#connectionString, options)

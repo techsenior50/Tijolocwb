@@ -25,6 +25,8 @@ a [instalação e configuração do Docker](https://docs.docker.com/engine/insta
 Assumindo que o docker esteja instalado e configurado, basta executar o comando `docker-compose up` na raíz do projeto
 para inicializar o MongoDB local para desenvolvimento. Para pará-lo, basta executar `docker-compose down`.
 
+>**Nota:** O ambiente de desenvolvimento continuará ativo mesmo após reiniciar o computador!
+
 ## Deploy
 
 A fazer.

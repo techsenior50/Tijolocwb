@@ -15,14 +15,14 @@ class ProdutoService {
     }
 
     // Valida e aceita apenas os campos da entidade como válidos para ordenação. Por padrão usa '-createdAt'
-    #ordenacao = (ord) => {
+    static #ordenacao(ord) {
         if (typeof ord === 'string' &&
-            /^[-+](categoriaProduto|nomeProduto|descricaoProduto|precoProduto|ativoProduto|imagemProduto|createdAt|updatedAt)?$/.test(
+            /^[-+](categoriaProduto|nomeProduto|descricaoProduto|precoProduto|ativoProduto|imagemProduto|dataCriacao|dataUltimaAtualizacao)?$/.test(
                 ord)) {
             return ord
         }
         else {
-            return '-createdAt'
+            return '-dataCriacao'
         }
     }
 
@@ -64,7 +64,7 @@ class ProdutoService {
             ProdutoEntity.find({})
                          .limit(tamanhoPagina)
                          .skip(pagina * tamanhoPagina)
-                         .sort(this.#ordenacao(ordenacao))
+                         .sort(ProdutoService.#ordenacao(ordenacao))
                          .lean()
                          .exec((err, produtos) => {
                              if (err) {
@@ -152,8 +152,6 @@ class ProdutoService {
      * @returns {Promise<ProdutoDto>} Promessa com o novo produto cadastrado no banco, ou os erros de validação
      */
     novoProduto(novoProduto) {
-        this.#log.info('Cadastrando novo produto:', novoProduto)
-
         return new Promise((resolve, reject) => {
             try {
                 const errosValidacao = this.validar(novoProduto)
@@ -161,15 +159,14 @@ class ProdutoService {
                 if (errosValidacao.length === 0) {
                     const produto = ProdutoDto.toEntity(novoProduto)
 
-                    this.#log.info('Salvando novo ProdutoEntity:', produto)
-
                     produto.save(err => {
                         if (err) {
                             this.#log.error('Erro ao cadastrar novo produto:', err)
                             reject({erros: {banco: err}})
                         }
                         else {
-                            this.#log.info('Novo produto cadastrado com sucesso:', produto)
+                            this.#log.info('Novo produto cadastrado com sucesso: id =', produto._id.toString(),
+                                           '- nomeProduto =', produto.nomeProduto)
                             resolve(new ProdutoDto(produto, true))
                         }
                     })
@@ -190,16 +187,20 @@ class ProdutoService {
 
         return new Promise((resolve, reject) => {
             try {
-                ProdutoEntity.updateOne({_id: id}, {ativoProduto: false}, {}, (error, result) => {
-                    if (error) {
-                        reject(error)
-                    }
-                    else {
-                        resolve(result)
-                    }
-                })
+                ProdutoEntity.updateOne(
+                    {_id: id},
+                    {ativoProduto: false, dataUltimaAtualizacao: new Date()},
+                    {},
+                    (error, result) => {
+                        if (error) {
+                            reject(error)
+                        }
+                        else {
+                            resolve(result)
+                        }
+                    })
             } catch (e) {
-                this.#log.error('Exceção ao criar novo produto', e)
+                this.#log.error('Exceção ao apagar produto por ID', e)
                 reject({erros: {ex: e}})
             }
         })

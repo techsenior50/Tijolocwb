@@ -1,5 +1,6 @@
 import {formatarData, formatarMoeda} from '../util.js'
 import ProdutoEntity from '../persistence/ProdutoEntity.js'
+import Log from '../util/Log.js'
 
 class ProdutoDto {
     constructor(produtoEntity, format = false) {
@@ -10,8 +11,9 @@ class ProdutoDto {
         this.preco = format ? formatarMoeda(produtoEntity.precoProduto) : produtoEntity.precoProduto
         this.ativo = produtoEntity.ativoProduto
         this.imagem = produtoEntity.imagemProduto
-        this.dataCriacao = format ? formatarData(produtoEntity.createdAt) : produtoEntity.createdAt
-        this.dataUltimaAtualizacao = format ? formatarData(produtoEntity.updatedAt) : produtoEntity.updatedAt
+        this.dataCriacao = format ? formatarData(produtoEntity.dataCriacao) : produtoEntity.dataCriacao
+        this.dataUltimaAtualizacao = format ? formatarData(produtoEntity.dataUltimaAtualizacao)
+            : produtoEntity.dataUltimaAtualizacao
     }
 
     static toEntity(prod) {
@@ -22,6 +24,8 @@ class ProdutoDto {
                                      precoProduto: prod.preco,
                                      ativoProduto: typeof prod.ativo === 'boolean' ? prod.ativo : false,
                                      imagemProduto: prod.imagem,
+                                     dataCriacao: prod.dataCriacao || new Date(),
+                                     dataUltimaAtualizacao: prod.dataUltimaAtualizacao || new Date(),
                                  })
     }
 }
