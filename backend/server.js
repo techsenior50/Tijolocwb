@@ -1,22 +1,17 @@
 import Server from './server-config.js'
 import ProdutoApi from './api/ProdutoApi.js'
+import Log from './util/Log.js'
 
-const log = (...m) => console.log('[Servidor]', ...m)
+const log = new Log('Servidor')
 const port = process.env.PORT || 5000
 
-// app.get('/', routes.getAllTodos)
-// app.get('/:id', routes.getTodo)
-//
-// app.post('/', routes.postTodo)
-// app.patch('/:id', routes.patchTodo)
-//
-// app.delete('/', routes.deleteAllTodos)
-// app.delete('/:id', routes.deleteTodo)
-
-ProdutoApi()
-
 if (process.env.NODE_ENV !== 'test') {
-    log('Iniciando banco de dados...')
-    Server.db.connect()
-    Server.app.listen(port, () => log(`Servidor iniciado na porta ${port}`))
+    log.info('Iniciando Banco de Dados...')
+    Server.db.connect().then(() => {
+        const apis = [new ProdutoApi(Server.app)]
+
+        Server.app.listen(port, () => {
+            log.info('Servidor iniciado na porta', port, 'expondo', apis.length, 'controllers.')
+        })
+    })
 }
