@@ -2,7 +2,7 @@ import Server from '../server-config.js'
 import ProdutoService from '../service/ProdutoService.js'
 
 class ProdutoApi {
-    #endpoint = '/produto'
+    #endpoint = '/v1/produto'
 
     #listParams(req) {
         return {
