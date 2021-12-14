@@ -74,16 +74,12 @@ const ProdutosListagem = () => {
 
         <Navbar bg="light" className="rounded-top mt-3">
             <Container>
-                <Navbar.Brand>Produtos</Navbar.Brand>
+                <Navbar.Brand>Lista de Produtos</Navbar.Brand>
                 <Nav className="me-auto">
                     <Button size="sm" onClick={atualizarLista} className="me-2" disabled={carregando}>Atualizar</Button>
                     <NavLink to="/produtos/novo" className="btn btn-primary btn-sm">Novo Produto</NavLink>
                 </Nav>
-                <div className={classNames('justify-content-end', {'d-none': carregando})}>
-                    <Navbar.Text>
-                        <b>{dados.total}</b> produtos cadastrados
-                    </Navbar.Text>
-                </div>
+                <Navbar.Text>Produtos</Navbar.Text>
             </Container>
         </Navbar>
 

@@ -33,3 +33,11 @@ export const urlValida = (url) => {
         return false
     }
 }
+
+export const criarOnChange = (setFunc, setValidated = () => {}) => {
+    return (evt) => {
+        evt.preventDefault()
+        setFunc(evt.target.value)
+        setValidated(false)
+    }
+}

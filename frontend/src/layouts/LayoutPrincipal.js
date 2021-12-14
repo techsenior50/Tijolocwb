@@ -3,6 +3,7 @@ import {Route, Switch, useLocation} from 'react-router-dom'
 import Navegacao from '../components/Navegacao.js'
 import Rodape from '../components/Rodape.js'
 import ProdutosListagem from '../paginas/ProdutosListagem.js'
+import ProdutosNovo from '../paginas/ProdutosNovo.js'
 
 const LayoutPrincipal = () => {
     const location = useLocation()
@@ -20,7 +21,7 @@ const LayoutPrincipal = () => {
                 <ProdutosListagem/>
             </Route>
             <Route path="/produtos/novo" exact>
-                {/*<AdminDashboard/>*/}Novo produto
+                <ProdutosNovo/>
             </Route>
 
             {/* Any other route goes to home */}
