@@ -48,6 +48,12 @@ class ProdutoApi {
                        }
                    })
         })
+
+        app.delete(`${endpoint}/:id`, (req, res) => {
+            service.apagarPorId(req.params.id)
+                   .then(produto => res.send(produto))
+                   .catch(() => res.status(404).send(''))
+        })
     }
 }
 

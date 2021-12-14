@@ -53,34 +53,36 @@ const ProdutosNovo = () => {
         else {
             setCarregando(true)
 
-            TijoloApi.produtos.cadastrar(produto())
-                     .then(res => {
-                         if (res.status === 200) {
-                             if (cadastrarOutroProduto) {
-                                 setProdutosCadastrados(produtosCadastrados.concat(res.data))
-                                 setProdutoNome('')
-                                 setProdutoCategoria('')
-                                 setProdutoDescricao('')
-                                 setProdutoPreco('0')
-                                 setProdutoAtivo(true)
-                                 setProdutoImagem('')
-                                 setValidated(false)
-                             }
-                             else {
-                                 // Vai para tela de detalhes
-                             }
-                         }
-                         else {
-                             console.log('Produto cadastrado', res)
-                         }
-                     })
-                     .catch(ex => {
-                         console.error('Erro ao cadastrar produto', ex)
-                         setMensagemErro(true)
-                     })
-                     .finally(() => {
-                         setCarregando(false)
-                     })
+            setTimeout(() =>
+                TijoloApi.produtos.cadastrar(produto())
+                        .then(res => {
+                            if (res.status === 200) {
+                                if (cadastrarOutroProduto) {
+                                    setProdutosCadastrados(produtosCadastrados.concat(res.data))
+                                    //  setProdutoNome('')
+                                    //  setProdutoCategoria('')
+                                    //  setProdutoDescricao('')
+                                    //  setProdutoPreco('0')
+                                    //  setProdutoAtivo(true)
+                                    //  setProdutoImagem('')
+                                    setValidated(false)
+                                }
+                                else {
+                                    // Vai para tela de detalhes
+                                }
+                            }
+                            else {
+                                console.log('Produto cadastrado', res)
+                            }
+                        })
+                        .catch(ex => {
+                            console.error('Erro ao cadastrar produto', ex)
+                            setMensagemErro(true)
+                        })
+                        .finally(() => {
+                            setCarregando(false)
+                        })
+                        , 1000 + (Math.random() * 1000))
         }
     }
 

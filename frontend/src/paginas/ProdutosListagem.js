@@ -42,6 +42,7 @@ const DadosListagem = ({dados = []}) =>
 const ProdutosListagem = () => {
     const [carregando, setCarregando] = useState(true)
     const [mensagemErro, setMensagemErro] = useState(false)
+    const [paginaAtual, setPaginaAtual] = useState(0)
     const [dados, setDados] = useState({
                                            pagina: 0,
                                            tamanhoPagina: 25,
@@ -52,7 +53,7 @@ const ProdutosListagem = () => {
 
     const atualizarLista = () => {
         setCarregando(true)
-        TijoloApi.produtos.getLista()
+        TijoloApi.produtos.getLista(paginaAtual)
                  .then(res => {
                      setMensagemErro(false)
                      setCarregando(false)
@@ -64,6 +65,11 @@ const ProdutosListagem = () => {
     useEffect(() => {
         atualizarLista()
     }, [])
+
+    const trocarPagina = (pag) => {
+        setPaginaAtual(pag)
+        atualizarLista()
+    }
 
     return <Container>
         <Alert show={mensagemErro} className="mt-3" variant="danger" onClose={() => setMensagemErro(false)} dismissible>
@@ -116,7 +122,7 @@ const ProdutosListagem = () => {
                     <Pagination.Prev disabled={carregando || dados.pagina === 0}/>
                     {Array.from({length: Math.ceil(dados.total / dados.tamanhoLista)})
                           .map((_, index) =>
-                                   <Pagination.Item key={index} active={dados.pagina === index}>
+                                   <Pagination.Item key={index} active={dados.pagina === index} onClick={() => trocarPagina(index)}>
                                        {index + 1}
                                    </Pagination.Item>)
                     }
