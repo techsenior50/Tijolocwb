@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 export const API_URL = {
-    prod: 'https://www.tijolo.com.br',
+    prod: 'https://api.tijolo.com.br',
     local: 'http://localhost:5000',
 }
 
@@ -10,10 +10,11 @@ const isLocalhost = () => (window.location.hostname === 'localhost' || window.lo
 const api = (baseUrl, basePath = '/v1') => {
     const endpoints = {
         produtosListar: '/produto',
+        produtosCadastrar: '/produto',
+        produtosGet: '/produto',
     }
 
     const conf = (extraConfs) => {
-        // const token = getCookieValue(MINIMMO_TOKEN)
         const token = ''
         const headers = token != null && token.length > 0 ? {
             headers: {'Authorization': `Bearer ${token}`},
@@ -40,6 +41,10 @@ const api = (baseUrl, basePath = '/v1') => {
                                    },
                                }),
                 ),
+            cadastrar: (novoProduto) =>
+                axios.post(`${basePath}${endpoints.produtosCadastrar}`, novoProduto, conf()),
+            carregar: (id) =>
+                axios.get(`${basePath}${endpoints.produtosGet}/${id}`, conf()),
         },
     }
 }

@@ -4,7 +4,7 @@ import ProdutoService from '../service/ProdutoService.js'
 class ProdutoApi {
     #endpoint = '/v1/produto'
 
-    #listParams(req) {
+    static #listParams(req) {
         return {
             pagina: Math.max(req.query.p || 0, 0),
             tamanhoPagina: Math.max(0, Math.min(req.query.ps || 25, 100)),
@@ -18,7 +18,7 @@ class ProdutoApi {
         endpoint = this.#endpoint,
     ) {
         app.get(`${endpoint}/`, (req, res) => {
-            const params = this.#listParams(req)
+            const params = ProdutoApi.#listParams(req)
             Promise.all([
                             service.contarProdutos(),
                             service.buscarTodos(params.pagina, params.tamanhoPagina, params.ordenacao),

@@ -4,6 +4,7 @@ import Navegacao from '../components/Navegacao.js'
 import Rodape from '../components/Rodape.js'
 import ProdutosListagem from '../paginas/ProdutosListagem.js'
 import ProdutosNovo from '../paginas/ProdutosNovo.js'
+import ProdutosDetalhe from '../paginas/ProdutosDetalhe.js'
 
 const LayoutPrincipal = () => {
     const location = useLocation()
@@ -22,6 +23,9 @@ const LayoutPrincipal = () => {
             </Route>
             <Route path="/produtos/novo" exact>
                 <ProdutosNovo/>
+            </Route>
+            <Route path="/produtos/:id">
+                <ProdutosDetalhe/>
             </Route>
 
             {/* Any other route goes to home */}

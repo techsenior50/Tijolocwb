@@ -30,7 +30,7 @@ class ProdutoService {
      * Retorna quantos produtos existem no banco de dados.
      * @returns {Promise<Number>} Promessa com a quantidade de produtos
      */
-    contarProdutos(ativo) {
+    contarProdutos(ativo = undefined) {
         return new Promise((resolve, reject) => {
             const callback = (err, count) => {
                 if (err) {

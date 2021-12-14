@@ -1,69 +1,93 @@
-import React, {useEffect, useState} from 'react'
-import TijoloApi from '../components/TijoloApi.js'
+import React, {useState} from 'react'
 import Container from 'react-bootstrap/Container'
 import Alert from 'react-bootstrap/Alert'
 import Form from 'react-bootstrap/Form'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Navbar from 'react-bootstrap/Navbar'
-import Nav from 'react-bootstrap/Nav'
 import Button from 'react-bootstrap/Button'
-import {NavLink} from 'react-router-dom'
-import classNames from 'classnames'
-import Collapse from 'react-bootstrap/Collapse'
-import {criarOnChange} from '../util.js'
+import Spinner from 'react-bootstrap/Spinner'
+import ListGroup from 'react-bootstrap/ListGroup'
+import Badge from 'react-bootstrap/Badge'
 import CurrencyInput from 'react-currency-input-field'
+import {criarOnChange, criarOnChangeCheck} from '../util.js'
+import TijoloApi from '../components/TijoloApi.js'
+import {Collapse} from 'react-bootstrap'
 
 const ProdutosNovo = () => {
-    const [carregando, setCarregando] = useState(true)
+    const [carregando, setCarregando] = useState(false)
     const [mensagemErro, setMensagemErro] = useState(false)
-    const [erros, setErros] = useState([])
+    // const [erros, setErros] = useState([])
     const [validated, setValidated] = useState(false)
+    const [cadastrarOutroProduto, setCadastrarOutroProduto] = useState(true)
 
-    /*
-    {
-        "categoria": "Frutos do Mar",
-        "nome": "Ceviche de Salmão",
-        "descricao": "Ceviche de Salmão com o tradicional Leite de Tigre",
-        "preco": 123.45,
-        "ativo": true,
-        "imagem": "https://amora.love/fotos/foto-0001.jpg"
-    }
-     */
-    const [produtoNome, setProdutoNome] = useState("")
-    const [produtoCategoria, setProdutoCategoria] = useState("")
-    const [produtoDescricao, setProdutoDescricao] = useState("")
-    const [produtoPreco, setProdutoPreco] = useState("0.00")
+    const [produtoNome, setProdutoNome] = useState('')
+    const [produtoCategoria, setProdutoCategoria] = useState('')
+    const [produtoDescricao, setProdutoDescricao] = useState('')
+    const [produtoPreco, setProdutoPreco] = useState('0')
     const [produtoAtivo, setProdutoAtivo] = useState(true)
-    const [produtoImagem, setProdutoImagem] = useState("")
+    const [produtoImagem, setProdutoImagem] = useState('')
+
+    const [produtosCadastrados, setProdutosCadastrados] = useState([])
 
     const produto = () => {
         return {
             nome: produtoNome,
             categoria: produtoCategoria,
             descricao: produtoDescricao,
-            preco: Number.parseFloat(produtoPreco),
+            preco: Number.parseFloat(produtoPreco.replace(/,/g, '.')),
             ativo: produtoAtivo,
-            imagem: produtoImagem
+            imagem: produtoImagem,
         }
     }
 
     const handleSubmit = (evt) => {
-        evt.preventDefault();
+        evt.preventDefault()
 
-        const form = evt.currentTarget;
+        const form = evt.currentTarget
 
         if (form.checkValidity() === false) {
-            evt.stopPropagation();
+            evt.stopPropagation()
+            setValidated(true)
         }
+        else {
+            setCarregando(true)
 
-        setValidated(true);
+            TijoloApi.produtos.cadastrar(produto())
+                     .then(res => {
+                         if (res.status === 200) {
+                             if (cadastrarOutroProduto) {
+                                 setProdutosCadastrados(produtosCadastrados.concat(res.data))
+                                 setProdutoNome('')
+                                 setProdutoCategoria('')
+                                 setProdutoDescricao('')
+                                 setProdutoPreco('0')
+                                 setProdutoAtivo(true)
+                                 setProdutoImagem('')
+                                 setValidated(false)
+                             }
+                             else {
+                                 // Vai para tela de detalhes
+                             }
+                         }
+                         else {
+                             console.log('Produto cadastrado', res)
+                         }
+                     })
+                     .catch(ex => {
+                         console.error('Erro ao cadastrar produto', ex)
+                         setMensagemErro(true)
+                     })
+                     .finally(() => {
+                         setCarregando(false)
+                     })
+        }
     }
 
     return <Container>
         <Alert show={mensagemErro} className="mt-3" variant="danger" onClose={() => setMensagemErro(false)} dismissible>
             <Alert.Heading>Erro!</Alert.Heading>
-            <p className="mb-0">Erro ao carregar lista de Produtos. Por favor, aguarde alguns instantes e tente
+            <p className="mb-0">Erro ao se comunicar com o Servidor. Por favor, aguarde alguns instantes e tente
                 novamente.</p>
         </Alert>
 
@@ -80,10 +104,10 @@ const ProdutosNovo = () => {
                     Nome: *
                 </Form.Label>
                 <Col sm="10">
-                    <Form.Control type="text" required autofocus aria-required={true} autoCapitalize={true}
+                    <Form.Control type="text" required autoFocus aria-required={true} autoCapitalize="true"
                                   placeholder="Nome do Produto"
-                                  value={produtoNome}
-                                  onChange={criarOnChange(setProdutoNome)} />
+                                  value={produtoNome} disabled={carregando}
+                                  onChange={criarOnChange(setProdutoNome)}/>
                     <Form.Control.Feedback type="invalid">
                         Por favor, preencha este campo.
                     </Form.Control.Feedback>
@@ -95,10 +119,10 @@ const ProdutosNovo = () => {
                     Categoria: *
                 </Form.Label>
                 <Col sm="10">
-                    <Form.Control type="text" required aria-required={true} autoCapitalize={true}
+                    <Form.Control type="text" required aria-required={true} autoCapitalize="true"
                                   placeholder="Categoria"
-                                  value={produtoCategoria}
-                                  onChange={criarOnChange(setProdutoCategoria)} />
+                                  value={produtoCategoria} disabled={carregando}
+                                  onChange={criarOnChange(setProdutoCategoria)}/>
                     <Form.Control.Feedback type="invalid">
                         Por favor, preencha este campo.
                     </Form.Control.Feedback>
@@ -110,10 +134,10 @@ const ProdutosNovo = () => {
                     Descrição: *
                 </Form.Label>
                 <Col sm="10">
-                    <Form.Control as="textarea" required aria-required={true} autoCapitalize={true}
+                    <Form.Control as="textarea" required aria-required={true} autoCapitalize="true"
                                   placeholder="Descrição do Produto"
-                                  value={produtoDescricao}
-                                  onChange={criarOnChange(setProdutoDescricao)} />
+                                  value={produtoDescricao} disabled={carregando}
+                                  onChange={criarOnChange(setProdutoDescricao)}/>
                     <Form.Control.Feedback type="invalid">
                         Por favor, preencha este campo.
                     </Form.Control.Feedback>
@@ -127,9 +151,37 @@ const ProdutosNovo = () => {
                 <Col sm="10">
                     <CurrencyInput id="produtoPreco" className="form-control" required aria-required
                                    placeholder="Preço do Produto"
-                                   intlConfig={{ locale: 'pt-BR', currency: 'BRL' }}
-                                   allowNegativeValue={false}
-                                   onValueChange={(value) => setProdutoPreco(value.replace(/,/g, "."))}/>
+                                   intlConfig={{locale: 'pt-BR', currency: 'BRL'}}
+                                   value={produtoPreco}
+                                   allowNegativeValue={false} disabled={carregando}
+                                   onValueChange={value => setProdutoPreco(value)}/>
+                    <Form.Control.Feedback type="invalid">
+                        Por favor, preencha este campo.
+                    </Form.Control.Feedback>
+                </Col>
+            </Form.Group>
+
+            <Form.Group as={Row} className="mb-3" controlId="produtoAtivo">
+                <Form.Label column sm="2">
+                    Ativo?
+                </Form.Label>
+                <Col sm="10">
+                    <Form.Check type="checkbox" id="produtoAtivo" className="mt-2"
+                                label="Exibir produto nas listagens e permitir venda do mesmo"
+                                checked={produtoAtivo} disabled={carregando}
+                                onChange={criarOnChangeCheck(setProdutoAtivo)}/>
+                </Col>
+            </Form.Group>
+
+            <Form.Group as={Row} className="mb-3" controlId="produtoImagem">
+                <Form.Label column sm="2">
+                    Link da Imagem: *
+                </Form.Label>
+                <Col sm="10">
+                    <Form.Control type="text" required aria-required={true} autoCapitalize="true"
+                                  placeholder="Link da Imagem"
+                                  value={produtoImagem} disabled={carregando}
+                                  onChange={criarOnChange(setProdutoImagem)}/>
                     <Form.Control.Feedback type="invalid">
                         Por favor, preencha este campo.
                     </Form.Control.Feedback>
@@ -137,57 +189,47 @@ const ProdutosNovo = () => {
             </Form.Group>
 
 
-
             <Form.Group as={Row}>
                 <Col sm={{span: 10, offset: 2}}>
-                    <Button type="submit">Criar Produto</Button>
-                    <Button type="button" variant="secondary" size="sm" className="ms-2">Cancelar</Button>
+                    <Button type="submit" disabled={carregando}>
+                        {carregando ? <><Spinner animation="border" size="sm"/> Cadastrando...</> : <>Cadastrar
+                            Produto</>}
+                    </Button>
+                    <Button type="button" variant="secondary" size="sm" className="ms-2"
+                            disabled={carregando}>Cancelar</Button>
+                    <Form.Check type="checkbox" id="cadastrarOutroProduto" className="mt-2"
+                                label="Cadastrar outro produto em seguida"
+                                checked={cadastrarOutroProduto} disabled={carregando}
+                                onChange={criarOnChangeCheck(setCadastrarOutroProduto)}/>
                 </Col>
             </Form.Group>
+        </Form>
 
+        <Collapse in={produtosCadastrados.length > 0}>
             <Row>
                 <Col sm={{span: 10, offset: 2}} className="mt-2">
                     <hr/>
-                    Produtos Cadastrados: abc
+                    <h5>Produtos Cadastrados:</h5>
+
+                    <ListGroup>
+                        {produtosCadastrados.map(prod => {
+                            return <ListGroup.Item className="d-flex justify-content-between align-items-start"
+                                                   key={prod.id}>
+                                <div className="ms-2 me-auto">
+                                    <div className="fs-5"><a href={`/produto/${prod.id}`}
+                                                             className="fw-bold">{prod.nome}</a> {prod.ativo ? '(Ativo)'
+                                        : '(Inativo)'}</div>
+                                    <span className="fs-6">{prod.categoria}</span>
+                                </div>
+                                <Badge variant="primary" pill>
+                                    {prod.preco}
+                                </Badge>
+                            </ListGroup.Item>
+                        })}
+                    </ListGroup>
                 </Col>
             </Row>
-            {/*
-            if (emBranco(produto.categoria)) {
-            errosValidacao.push({campo: 'categoria', erro: 'Categoria não pode ficar em branco'})
-        }
-
-        if (emBranco(produto.nome)) {
-            errosValidacao.push({campo: 'nome', erro: 'Nome não pode ficar em branco'})
-        }
-
-        if (emBranco(produto.descricao)) {
-            errosValidacao.push({campo: 'descricao', erro: 'Descrição não pode ficar em branco'})
-        }
-
-        if (ehNumero(produto.preco)) {
-            const preco = produto.preco
-            if (preco <= 0) {
-                errosValidacao.push({campo: 'preco', erro: `Preço não pode ser menor ou igual a ${formatarMoeda(0)}`})
-            }
-            else if (preco >= 100000) {
-                errosValidacao.push(
-                    {campo: 'preco', erro: `Preço não pode ser maior ou igual a ${formatarMoeda(100000)}`})
-            }
-        }
-        else {
-            errosValidacao.push({campo: 'preco', erro: 'Preço deve ser um número'})
-        }
-
-        if (emBranco(produto.imagem)) {
-            errosValidacao.push({campo: 'imagem', erro: 'Imagem não pode ficar em branco'})
-        }
-        else if (!urlValida(produto.imagem)) {
-            errosValidacao.push({campo: 'imagem', erro: 'Imagem deve ser um endereço de uma imagem'})
-        }
-            */}
-        </Form>
-
-        Produto = {JSON.stringify(produto())}
+        </Collapse>
     </Container>
 }
 

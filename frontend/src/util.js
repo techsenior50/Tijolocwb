@@ -41,3 +41,10 @@ export const criarOnChange = (setFunc, setValidated = () => {}) => {
         setValidated(false)
     }
 }
+
+export const criarOnChangeCheck = (setFunc, setValidated = () => {}) => {
+    return (evt) => {
+        setFunc(evt.target.checked)
+        setValidated(false)
+    }
+}
