@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/css/estilo.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!--     <script>
+        function cadastrar() {
+            $.post('/produto', {
+                categoriaProduto: $('#categoriaProduto').val(),
+                nomeProduto: $('#nomeProduto').val(),
+                descricaoProduto: $('#descricaoProduto').val(),
+                precoProduto: $('#precoProduto').val(),
+                ativoProduto: $('#ativoProduto').val(),
+                imagemProduto: $('#imagemProduto').val()
+            }, (retorno) => {
+                /* pesquisar se é melhor o alert */
+                alert("O produto foi cadastrado com sucesso");
+                    $('#categoriaProduto').val('');
+                    $('#nomeProduto').val('');
+                    $('#descricaoProduto').val('');
+                    $('#precoProduto').val('');
+                    $('#imagemProduto').val('');
+                    /* a mensagem aqui aparece na própria tela 
+                     $('#resposta').html('O produto foi cadastrado com sucesso!') */                    
+                });
+        return false;
+        }
+    </script>
+ -->
+</head>
+
+<body>
+    <div class=cabec>
+        <img src="../images/logo.svg" width=10% alt="Tijolo" />
+        <p class=titulo>Área do Administrador *** Menu</p>
+    </div>
+    <div class=container>
+    <p class="idProduto-form">Cadastrar produtos</p>    
+    <div class=resposta id="resposta" ></div>
+    <!-- <form method="post" onsubmit="return cadastrar()"> -->
+    <form method="POST" action="/produto">
+
+        <div class="linha-form">
+            <label for="categoriaProduto">Categoria :</label>
+            <select id="categoriaProduto" name="categoriaProduto">
+                <option value="">Selecione...</option>
+                <option value="Salgado">Salgado</option>
+                <option value="Doce">Doce</option>
+                <option value="Bebida">Bebida</option>
+                <option value="Acessorios">Acessorios</option>
+            </select>
+        </div>
+
+        <div class="linha-form">
+            <label for="nomeProduto">Nome :</label>
+            <input id="nomeProduto" name="nomeProduto" type="text" required="required" />
+        </div>
+
+        <div class="linha-form">
+            <label for="descricaoProduto">Descrição :</label>
+            <textarea id="descricaoProduto" name="descricaoProduto" style="width:400px" required="required"></textarea>
+        </div>
+
+        <div class="linha-form">
+            <label for="precoProduto">Preço :</label>
+            <input id="precoProduto" name="precoProduto" type="number" step=".01" required="required" />
+        </div>
+        <div class="linha-form">
+            <label>Situação :</label>
+            <input type="checkbox" id="ativoProduto" name="ativoProduto" value="true" checked/>
+            <span for="ativoProduto">Ativo</span>
+          <!--  <fieldset style="width:380px" >						
+                <label for="ativoProduto"> <input type="radio" name="ativoProduto" value="true" id="ativoProduto"> Ativo</label>
+                <label for="ativoProduto"> <input type="radio" name="ativoProduto" value="false" id="ativoProduto"> Inativo</label>
+            </fieldset> -->
+        </div>
+
+        <div class="linha-form">
+            <label for="imagemProduto">Imagem :</label>
+            <input class="enderecoImagem" placeholder="informe o endereço http da imagem" style="width:400px" type="url" required="required" id="imagemProduto" name="imagemProduto">
+        </div>
+        <br>
+        <div class="linha-form">
+            <label>Salvar? </label>
+            <input type="submit" value="Sim" />
+            <input type="reset" value="Não" />
+        </div>
+        <br>
+    </form>
+    </div>
+    <div>
+        <form class="formvoltar" action="/produtoPaginado" method="get">
+            <input type="submit" style="font-size:20px; color: blue" value="[ Home ]"/>
+        </form>
+    </div>
+    <br>
+</body>
+
+</html>
